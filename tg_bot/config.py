@@ -11,12 +11,12 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "935479156:AAEkylmMX6SMu2-J8eYiI8uj1W9LnFlOsv4"
+    API_KEY = "750944856:AAFWhF4v9xQ8Ri9pOs6ETZOQWi8yN0q9nJE"
     OWNER_ID = "716243352"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "Skuzzy_xD"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://xvjywybe:9DjulzF95pFZ93XiCbz-kwEVhyDl3n7O@drona.db.elephantsql.com:5432/xvjywybe'  # needed for any database modules
+    SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:zN3ate2ltVBqClVXG3M2M17SoxdlFYA8@motty.db.elephantsql.com:5432/dxcucqwe'  # needed for any database modules
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP
     LOAD = []
