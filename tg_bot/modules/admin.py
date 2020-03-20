@@ -276,16 +276,9 @@ def adminlist(bot: Bot, update: Update):
     user = update.effective_user
 
     chat_id = chat.id
-    update_chat_title = chat.title
-    message_chat_title = update.effective_message.chat.title
-
     administrators = bot.getChatAdministrators(chat_id)
 
-    if update_chat_title == message_chat_title:
-        chat_name = "this chat"
-    else:
-        chat_name = update_chat_title
-
+    chat_name = chat.title
     text = f"Admins in *{chat_name}*:"
 
     for admin in administrators:
