@@ -5,7 +5,7 @@ import requests
 from telegram import Bot, Update, ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, Filters, run_async
-from telegram.utils.helpers import mention_html
+from telegram.utils.helpers import mention_html, escape_markdown
 
 from tg_bot import dispatcher, TOKEN
 from tg_bot.modules.disable import DisableAbleCommandHandler
