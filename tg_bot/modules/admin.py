@@ -322,9 +322,9 @@ def adminlist(bot: Bot, update: Update):
             curr_chat = bot.getChat(chat.chat_id)
             bot_member = curr_chat.get_member(bot.id)
             chat_members = curr_chat.get_members_count(bot.id)
-            members = "\n\n 👶 *Members*:\n{}".format(chat_members)
+            members = "\n\n 👶 *Members*:\n{} Users".format(chat_members)
         except:
-            members = "Could not fetch members, maybe report it support!"
+            members = "\n\n 👶 *Members*:\nCould not fetch members, maybe report it to support!"
             pass
 
     msg.reply_text(text + members, parse_mode=ParseMode.MARKDOWN)
