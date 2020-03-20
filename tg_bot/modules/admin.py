@@ -7,6 +7,8 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler, Filters, run_async
 from telegram.utils.helpers import mention_html, escape_markdown
 
+import tg_bot.modules.sql.users_sql as sql
+
 from tg_bot import dispatcher, TOKEN
 from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import bot_admin, can_promote, user_admin, can_pin, connection_status
@@ -292,6 +294,7 @@ def adminlist(bot: Bot, update: Update):
 @run_async
 @connection_status
 def adminlist(bot: Bot, update: Update):
+    all_chats = sql.get_all_chats() or []
     administrators = update.effective_chat.get_administrators()
     msg = update.effective_message
     text = "Admins in *{}*:".format(update.effective_chat.title or "this chat")
@@ -314,8 +317,17 @@ def adminlist(bot: Bot, update: Update):
         if status == "administrator":
             text += "\n• {}".format(name)
 
+    for chat in all_chats:
+        try:
+            curr_chat = bot.getChat(chat.chat_id)
+            bot_member = curr_chat.get_member(bot.id)
+            chat_members = curr_chat.get_members_count(bot.id)
+            members = "\n\n 👶 *Members*:\n{}".format(chat_members)
+        except:
+            members = "Could not fetch members, maybe report it support!"
+            pass
 
-    msg.reply_text(text, parse_mode=ParseMode.MARKDOWN)
+    msg.reply_text(text + members, parse_mode=ParseMode.MARKDOWN)
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
