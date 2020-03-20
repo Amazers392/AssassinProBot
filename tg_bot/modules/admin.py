@@ -317,17 +317,6 @@ def adminlist(bot: Bot, update: Update):
         if status == "administrator":
             text += "\n• {}".format(name)
 
-'''
-    for chat in all_chats:
-        try:
-            curr_chat = bot.getChat(chat.chat_id)
-            bot_member = curr_chat.get_member(bot.id)
-            chat_members = curr_chat.get_members_count(bot.id)
-            members = "\n\n 👶 *Members*:\n{} Users".format(chat_members)
-        except:
-            members = "\n\n 👶 *Members*:\nCould not fetch members, maybe report it to support!"
-            pass
-'''
 
     msg.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
