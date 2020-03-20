@@ -64,7 +64,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
 
     elif rules:
         keyboard = InlineKeyboardMarkup(
-            [{InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id)), InlineKeyboardButton(text="Read\nRules", url="t.me/{}?start={}".format(bot.username, chat.id))}])
+            [{InlineKeyboardButton("Remove warn ❌", callback_data="rm_warn({})".format(user.id)), InlineKeyboardButton(text="Read Rules", url="t.me/{}?start={}".format(bot.username, chat.id))}])
 
         reply = f"{mention_html(user.id, user.first_name)} has {num_warns}/{limit} warnings... watch out!"
 
@@ -82,7 +82,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                                                                   reason, num_warns, limit)
     else:
         keyboard = InlineKeyboardMarkup(
-            [{InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id))}])
+            [{InlineKeyboardButton("Remove warn ❌", callback_data="rm_warn({})".format(user.id))}])
 
         reply = "{} has {}/{} warnings... watch out!".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)

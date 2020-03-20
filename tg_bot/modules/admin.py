@@ -314,6 +314,7 @@ def adminlist(bot: Bot, update: Update):
         if status == "administrator":
             text += "\n {}".format(name)
 
+
     msg.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 def __chat_settings__(chat_id, user_id):
