@@ -271,6 +271,7 @@ def invite(bot: Bot, update: Update):
 
 @run_async
 @connection_status
+
 def adminlist(bot: Bot, update: Update):
     chat = update.effective_chat
     user = update.effective_user
@@ -290,14 +291,11 @@ def adminlist(bot: Bot, update: Update):
 
     for admin in administrators:
         user = admin.user
-        status = admin.status
-        if status == "creator":
-            name = user.first_name + (user.last_name or "") + tld(chat.id, " (Creator)")
-        else:
-            name = user.first_name + (user.last_name or "")
-        text += f"\n• `{name}`"
+        name = f"{user.first_name + (user.last_name or '')}"
+        text += f"\n - {name}"
 
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
+
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
