@@ -271,31 +271,22 @@ def invite(bot: Bot, update: Update):
 
 @run_async
 @connection_status
-
 def adminlist(bot: Bot, update: Update):
     chat = update.effective_chat
     user = update.effective_user
 
     chat_id = chat.id
-    update_chat_title = chat.title
-    message_chat_title = update.effective_message.chat.title
-
     administrators = bot.getChatAdministrators(chat_id)
 
-    if update_chat_title == message_chat_title:
-        chat_name = "this chat"
-    else:
-        chat_name = update_chat_title
-
+    chat_name = chat.title
     text = f"Admins in *{chat_name}*:"
 
     for admin in administrators:
         user = admin.user
         name = f"{user.first_name + (user.last_name or '')}"
-        text += f"\n - {name}"
+        text += f"\n - `{name}`"
 
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
-
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
