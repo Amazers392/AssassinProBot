@@ -269,7 +269,6 @@ def invite(bot: Bot, update: Update):
         update.effective_message.reply_text("I can only give you invite links for supergroups and channels, sorry!")
 
 
-'''
 @run_async
 @connection_status
 def adminlist(bot: Bot, update: Update):
@@ -292,37 +291,9 @@ def adminlist(bot: Bot, update: Update):
     for admin in administrators:
         user = admin.user
         name = f"{user.first_name + (user.last_name or '')}"
-        text += f"\n - {name}"
+        text += f"\n - `{name}`"
 
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
-'''
-
-@run_async
-def adminlist(bot: Bot, update: Update):
-    administrators = update.effective_chat.get_administrators()
-    msg = update.effective_message
-    text = "Admins in *{}*:".format(update.effective_chat.title or "this chat")
-    for admin in administrators:
-        user = admin.user
-        status = admin.status
-        name = "[{}](tg://user?id={})".format(user.first_name + " " + (user.last_name or ""), user.id)
-        if user.username:
-            name = name = escape_markdown("@" + user.username)
-        if status == "creator":
-            text += "\n  Creator:"
-            text += "\n • {} \n\n • *Administrators*:".format(name)
-    for admin in administrators:
-        user = admin.user
-        status = admin.status
-        chat = update.effective_chat
-        name = "[{}](tg://user?id={})".format(user.first_name + " " + (user.last_name or ""), user.id)
-        if user.username:
-            name = escape_markdown("@" + user.username)
-            
-        if status == "administrator":
-            text += "\n {}".format(name)
-            
-    msg.reply_text(text + members, parse_mode=ParseMode.MARKDOWN)
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
