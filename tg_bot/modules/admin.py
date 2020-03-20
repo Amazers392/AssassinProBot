@@ -317,6 +317,7 @@ def adminlist(bot: Bot, update: Update):
         if status == "administrator":
             text += "\n• {}".format(name)
 
+'''
     for chat in all_chats:
         try:
             curr_chat = bot.getChat(chat.chat_id)
@@ -326,8 +327,9 @@ def adminlist(bot: Bot, update: Update):
         except:
             members = "\n\n 👶 *Members*:\nCould not fetch members, maybe report it to support!"
             pass
+'''
 
-    msg.reply_text(text + members, parse_mode=ParseMode.MARKDOWN)
+    msg.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
