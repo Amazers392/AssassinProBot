@@ -311,11 +311,11 @@ def adminlist(bot: Bot, update: Update):
         name = "[{}](tg://user?id={})".format(user.first_name + " " + (user.last_name or ""), user.id)
         if user.username:
             name = escape_markdown("@" + user.username)
-
         if status == "administrator":
             text += "\n {}".format(name)
 
-    msg.reply_text(text + members, parse_mode=ParseMode.MARKDOWN)
+
+    msg.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
