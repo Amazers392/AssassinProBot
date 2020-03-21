@@ -23,11 +23,11 @@ Click Help button to find out more about how to use me, so you can get helped!
 For more commands click /help...
 
 Join [Support Channel](https://t.me/DraXRoBots) if you you want to check bot status!
-Want to add me to your group? [Click here!](t.me/HitmanAgent47_Bot?startgroup=true)
-"""
+Want to add me to your group? [Click here!](t.me/{}?startgroup=true)
+""".format(dispatcher.first_name, dispatcher.bot.first_name, dispatcher.bot.username)
 
 HELP_STRINGS = """
-Hey there! My name is *{}*.
+Hey {}! My name is *{}*.
 I'm here to help you manage your groups! \
 Click Help button to find out more about how to use me, so you can get helped! \
 Have a look at the following for an idea of some of \
@@ -44,7 +44,7 @@ the things I can help you with.
 
 {}
 And the following:
-""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+""".format(dispatcher.first_name, dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 {} is hosted on Heroku Free Servers and it would be really helpful if you can donate \
@@ -140,7 +140,7 @@ def start(bot: Bot, update: Update, args: List[str]):
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
             keyboard += [[InlineKeyboardButton(text="❔ Help", url="http://t.me/{}?start=help".format(bot.username)), InlineKeyboardButton(text="Donate", url="http://t.me/{}?start=donate".format(bot.username))]]
             first_name = update.effective_user.first_name
-            update.effective_message.reply_text(PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID), reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+            update.effective_message.reply_text(PM_START_TEXT, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
         update.effective_message.reply_text("Wassup? I'm here")
 
