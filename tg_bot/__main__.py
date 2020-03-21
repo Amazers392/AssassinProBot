@@ -24,7 +24,7 @@ For more commands click /help...
 
 Join [Support Channel](https://t.me/DraXRoBots) if you you want to check bot status!
 Want to add me to your group? [Click here!](t.me/HitmanAgent47_Bot?startgroup=true)
-"""
+""".format(first_name, bot.first_name)
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
@@ -140,9 +140,7 @@ def start(bot: Bot, update: Update, args: List[str]):
             #keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
             #keyboard += [[InlineKeyboardButton(text="❔ Help", url="http://t.me/{}?start=help".format(bot.username)), InlineKeyboardButton(text="Donate", url="http://t.me/{}?start=donate".format(bot.username))]]
             first_name = update.effective_user.first_name
-            update.effective_message.reply_text(
-                PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
-                parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True, reply_markup=keyboard)
+            update.effective_message.reply_text(PM_START_TEXT, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
         update.effective_message.reply_text("Wassup? I'm here")
 
