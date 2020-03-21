@@ -17,17 +17,17 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hi {}, my name is {}! - I'm here to help you manage your groups!
+Hi, my name is {}! - I'm here to help you manage your groups!
 Click Help button to find out more about how to use me, so you can get helped!
 
 For more commands click /help...
 
 Join [Support Channel](https://t.me/DraXRoBots) if you you want to check bot status!
 Want to add me to your group? [Click here!](t.me/{}?startgroup=true)
-""".format(dispatcher.first_name, dispatcher.bot.first_name, dispatcher.bot.username)
+""".format(dispatcher.bot.first_name, dispatcher.bot.username)
 
 HELP_STRINGS = """
-Hey {}! My name is *{}*.
+Hey There! My name is *{}*.
 I'm here to help you manage your groups! \
 Click Help button to find out more about how to use me, so you can get helped! \
 Have a look at the following for an idea of some of \
@@ -44,7 +44,7 @@ the things I can help you with.
 
 {}
 And the following:
-""".format(dispatcher.first_name, dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 {} is hosted on Heroku Free Servers and it would be really helpful if you can donate \
