@@ -136,7 +136,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/DraXRobots"), InlineKeyboardButton(text="Support Group", url="http://t.me/DraXRobotsSupport"]]
+            keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/DraXRobots"), InlineKeyboardButton(text="Support Group", url="http://t.me/DraXRobotsSupport")]]
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
             keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/SkuzzyBot")]]
             first_name = update.effective_user.first_name
