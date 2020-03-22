@@ -34,6 +34,8 @@ class Config(object):
     SUPPORT_USERS = get_user_list('elevated_users.json', 'supports')  # List of id's (not usernames) for users which are allowed to gban, but can also be banned.
     #WHITELIST_USERS = get_user_list('elevated_users.json', 'whitelists')  # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
     WHITELIST_USERS = []
+    SUDO_USERS.append(OWNER_ID)
+    DEV_USERS.append(OWNER_ID)
     for i in SUDO_USERS:
         WHITELIST_USERS.append(i)
     for i in SUPPORT_USERS:
