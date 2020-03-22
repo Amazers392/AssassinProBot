@@ -123,7 +123,7 @@ def whitelist_plus(func):
         if user and is_whitelist_plus(chat, user.id):
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("You don't have access to use this.\nVisit @DraXRobotsSupport)
+            update.effective_message.reply_text("You don't have access to use this.\nVisit @DraXRobotsSupport")
 
     return is_whitelist_plus_func
 
