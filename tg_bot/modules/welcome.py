@@ -117,7 +117,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                         bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id), parse_mode=ParseMode.HTML)
                     except BadRequest as excp:
                         log = bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
-                continue
+                        continue
                 update.effective_message.reply_text("Thanks for adding me into your group! Also check my Support @DraXRobots")
 
             else:
