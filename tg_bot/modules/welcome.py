@@ -232,7 +232,7 @@ def check_not_bot(member, chat_id, message_id,
 
     else:
         try:
-            bot.kick_chat_member(chat_id, member.id)
+            bot.unban_chat_member(chat_id, member.id)
         except:
             pass
 
