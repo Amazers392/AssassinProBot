@@ -329,7 +329,7 @@ def check_and_ban(update, user_id, should_message=True):
         if should_message:
             update.effective_message.reply_text("Alert: This user is globally banned.\n"
                                                 "*bans them from here*.\n"
-                                                "Appeal chat: @DraXRobotsSupport)
+                                                "Appeal chat: @DraXRobotsSupport")
 
 
 @run_async
@@ -387,7 +387,7 @@ def __user_info__(user_id):
         user = sql.get_gbanned_user(user_id)
         if user.reason:
             text += f"\n<b>Reason:</b> {html.escape(user.reason)}"
-        text += "\n<b>Appeal Chat:</b> @DraXRobots"
+        text += "\n<b>Appeal Chat:</b> @DraXRobotsSupport"
     else:
         text = text.format("No")
     return text
@@ -407,7 +407,7 @@ __help__ = """
 
 Antispam, also known as Anti-Spam Security bans, are used by the bot owners to ban spammers across all groups. This helps protect \
 you and your groups by removing spam flooders as quickly as possible. They can be disabled for you group by calling /antispam \
-Note: You can appeal Antispam Bans or ask Antispam Bans at @DraXRobots
+Note: You can appeal Antispam Bans or ask Antispam Bans at @DraXRobotsSupport
 """
 
 GBAN_HANDLER = CommandHandler("gban", gban, pass_args=True)
