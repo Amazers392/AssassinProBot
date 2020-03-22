@@ -180,7 +180,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
 
         if welc_mutes == "strong":
             new_join_mem = f"[{escape_markdown(new_mem.first_name)}](tg://user?id={user.id})"
-            message = msg.reply_text(f"{new_join_mem}, click the button below to prove you're human.\nYou have 120 seconds.",
+            message = msg.reply_text(f"{new_join_mem}, click the button below to prove you're human.\nYou have 30 seconds.",
                                      reply_markup=InlineKeyboardMarkup([{InlineKeyboardButton(
                                          text="Yes, I'm human.",
                                          callback_data=f"user_join_({new_mem.id})")}]),
