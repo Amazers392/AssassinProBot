@@ -195,7 +195,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                 partial(
                     check_not_bot, new_mem, chat.id, message.message_id,
                     update, res, keyboard, backup_message, should_welc
-                ), 10, name="wlcmute"
+                ), 30, name="wlcmute"
             )
 
         if welcome_log:
