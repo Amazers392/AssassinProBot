@@ -143,7 +143,6 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                         username = "@" + escape_markdown(new_mem.username)
                     else:
                         username = mention
-                    rules = "https://t.me/" + bot.username + "?start=" + str(chat.id)
 
                     valid_format = escape_invalid_curly_brackets(cust_welcome, VALID_WELCOME_FORMATTERS)
                     res = valid_format.format(first=escape_markdown(first_name),
