@@ -557,10 +557,7 @@ def user_button(bot: Bot, update: Update):
     if join_user == user.id:
         VERIFIED_USER_WAITLIST.add(user.id)
         query.answer(text="Yass! You're a human, unmuted!")
-        bot.restrict_chat_member(chat.id, user.id, can_send_messages=True,
-                                 can_send_media_messages=True,
-                                 can_send_other_messages=True,
-                                 can_add_web_page_previews=True)
+        bot.unban_chat_member(user_id)
         bot.deleteMessage(chat.id, message.message_id)
     else:
         query.answer(text="You're not allowed to do this!")
