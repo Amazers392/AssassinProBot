@@ -117,9 +117,8 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                         bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id), parse_mode=ParseMode.HTML)
                     except BadRequest as excp:
                         log = bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
-                        continue
                 update.effective_message.reply_text("Thanks for adding me into your group! Also check my Support @DraXRobots")
-
+                continue
             else:
                 # If welcome message is media, send with appropriate function
                 if welc_type not in (sql.Types.TEXT, sql.Types.BUTTON_TEXT):
