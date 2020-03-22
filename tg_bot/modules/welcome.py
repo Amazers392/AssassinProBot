@@ -310,8 +310,14 @@ def left_member(bot: Bot, update: Update):
 def welcome(bot: Bot, update: Update, args: List[str]):
     chat = update.effective_chat
     # if no args, show current replies.
-    if not args or args[0].lower() == "noformat":
+    if not args:
         noformat = True
+        pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
+        update.effective_message.reply_text(f"This chat has it's welcome setting set to: `{pref}`.\n"
+                                            f"*The welcome message (not filling the {{}}) is:*",
+                                            parse_mode=ParseMode.MARKDOWN)
+    elif args[0].lower() == "noformat":
+        noformat = False
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(f"This chat has it's welcome setting set to: `{pref}`.\n"
                                             f"*The welcome message (not filling the {{}}) is:*",
@@ -326,7 +332,6 @@ def welcome(bot: Bot, update: Update, args: List[str]):
             else:
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
-
                 send(update, welcome_m, keyboard, sql.DEFAULT_WELCOME)
 
         else:
