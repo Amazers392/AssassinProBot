@@ -18,7 +18,7 @@ class Config(object):
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:zN3ate2ltVBqClVXG3M2M17SoxdlFYA8@motty.db.elephantsql.com:5432/dxcucqwe'  # needed for any database modules
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
-    GBAN_LOGS = MESSAGE_DUMP
+    GBAN_LOGS = -1001236297460
     LOAD = []
     NO_LOAD = ['connection', 'bluetext_cleaner', 'feds', 'dev', 'reactions', 'shout', 'weebify']
     WEBHOOK = False
