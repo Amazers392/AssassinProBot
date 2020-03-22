@@ -143,6 +143,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                         username = "@" + escape_markdown(new_mem.username)
                     else:
                         username = mention
+                    rules = "https://t.me/" + bot.username + "?start=" + str(chat.id)
 
                     valid_format = escape_invalid_curly_brackets(cust_welcome, VALID_WELCOME_FORMATTERS)
                     res = valid_format.format(first=escape_markdown(first_name),
@@ -557,7 +558,7 @@ def user_button(bot: Bot, update: Update):
 
     if join_user == user.id:
         VERIFIED_USER_WAITLIST.add(user.id)
-        query.answer(text="Yeet! You're a human, unmuted!")
+        query.answer(text="Yass! You're a human, unmuted!")
         bot.restrict_chat_member(chat.id, user.id, can_send_messages=True,
                                  can_send_media_messages=True,
                                  can_send_other_messages=True,
