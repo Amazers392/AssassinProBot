@@ -65,7 +65,7 @@ def broadcast(bot: Bot, update: Update):
                 sleep(0.1)
                 bot.sendMessage(MESSAGE_DUMP, "Couldn't send broadcast to {}, group name {}".format(chat.chat_id, chat.chat_name))
         update.effective_message.reply_text(
-            f"Broadcast complete. {} groups failed to receive the message, probably due to being kicked.".format(failed))
+            f"Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
         bot.sendMessage(MESSAGE_DUMP, "Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
 
 @run_async
