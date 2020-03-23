@@ -97,23 +97,29 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
 
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
-                update.effective_message.reply_text("Whoa! A member of the Heroes Association just joined!")
+                update.effective_message.reply_text("Whoa‼️ One of my Developers just joined!")
 
             # Welcome Sudos
             elif new_mem.id in SUDO_USERS:
-                update.effective_message.reply_text("Huh! A Dragon disaster just joined! Stay Alert!")
+                update.effective_message.reply_text("Huh! A Sudo User just joined!💥\nStay Alert!")
 
             # Welcome Support
             elif new_mem.id in SUPPORT_USERS:
-                update.effective_message.reply_text("Huh! Someone with a Demon disaster level just joined!")
+                update.effective_message.reply_text("Huh! One of my Support Users just joined!")
 
             # Welcome Whitelisted
             elif new_mem.id in WHITELIST_USERS:
-                update.effective_message.reply_text("A disaster level Wolf just joined!")
+                update.effective_message.reply_text("Wew! A Whitelisted User just joined!")
 
             # Don't welcome yourself
             elif new_mem.id == bot.id:
-                update.effective_message.reply_text("Watashi wa kitaa!")
+                if MESSAGE_DUMP:
+                    try:
+                        bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id), parse_mode=ParseMode.HTML)
+                    except BadRequest as excp:
+                        #bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
+                        log = bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
+                update.effective_message.reply_text("Thanks for adding me into your group! Also check my Support @DraXRobots")
 
             else:
                 # If welcome message is media, send with appropriate function
@@ -246,7 +252,7 @@ def check_not_bot(member, chat_id, message_id,
             pass
 
         try:
-            bot.edit_message_text("User kicked.", chat_id=chat_id, message_id=message_id)
+            bot.edit_message_text("User Kicked.\nReason: User couldn't solve Challenge", chat_id=chat_id, message_id=message_id)
         except:
             pass
 
@@ -565,7 +571,7 @@ def user_button(bot: Bot, update: Update):
 
     if join_user == user.id:
         VERIFIED_USER_WAITLIST.add(user.id)
-        query.answer(text="Yeet! You're a human, unmuted!")
+        query.answer(text="Yass! You're a human, unmuted!")
         bot.restrict_chat_member(chat.id, user.id, can_send_messages=True,
                                  can_send_media_messages=True,
                                  can_send_other_messages=True,
