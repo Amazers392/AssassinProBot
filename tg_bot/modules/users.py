@@ -62,9 +62,10 @@ def broadcast(bot: Bot, update: Update):
             except TelegramError:
                 failed += 1
                 LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
-                bot.sendMessage(MESSAGE_DUMP, "Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
+                sleep(0.1)
+                bot.sendMessage(MESSAGE_DUMP, "Couldn't send broadcast to {}, group name {}".format(chat.chat_id, chat.chat_name))
         update.effective_message.reply_text(
-            f"Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
+            f"Broadcast complete. {} groups failed to receive the message, probably due to being kicked.".format(failed))
         bot.sendMessage(MESSAGE_DUMP, "Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
 
 @run_async
