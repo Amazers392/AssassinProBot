@@ -77,7 +77,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_id == bot.id:
-        message.reply_text("You uhh...want me to punch myself? Why would I give a ban to myself?")
+        message.reply_text("You uhh...want me to kick myself? Why would I give a ban to myself?")
         return
 
     try:

@@ -44,7 +44,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         sql.reset_warns(user.id, chat.id)
         if soft_warn:  # kick
             chat.unban_member(user.id)
-            reply = f"{limit} warnings, *Punches {mention_html(user.id, user.first_name)} with a normal punch!* "
+            reply = f"{limit} warnings, *Kicks {mention_html(user.id, user.first_name)} out of the chat* "
 
         else:  # ban
             chat.kick_member(user.id)
@@ -78,7 +78,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                      "\n<b>Reason:</b> {}"\
                      "\n<b>Counts:</b> <code>{}/{}</code>".format(html.escape(chat.title),
                                                                   warner_tag,
-                                                                  mention_html(user.id, user.first_name), 
+                                                                  mention_html(user.id, user.first_name),
                                                                   reason, num_warns, limit)
     else:
         keyboard = InlineKeyboardMarkup(
@@ -96,7 +96,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                      "\n<b>Reason:</b> {}"\
                      "\n<b>Counts:</b> <code>{}/{}</code>".format(html.escape(chat.title),
                                                                   warner_tag,
-                                                                  mention_html(user.id, user.first_name), 
+                                                                  mention_html(user.id, user.first_name),
                                                                   reason, num_warns, limit)
 
 
@@ -356,7 +356,7 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
             msg.reply_text("Too many warns will now result in a ban!")
             return (f"<b>{html.escape(chat.title)}:</b>\n"
                     f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                    f"Has enabled strong warns. Users will be seriously punched.")
+                    f"Has enabled strong warns. Users will be kicked.")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
@@ -408,7 +408,7 @@ __help__ = """
  - /warn <userhandle>: warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
  - /resetwarn <userhandle>: reset the warnings for a user. Can also be used as a reply.
  - /addwarn <keyword> <reply message>: set a warning filter on a certain keyword. If you want your keyword to \
-be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`. 
+be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
  - /nowarn <keyword>: stop a warning filter
  - /warnlimit <num>: set the warning limit
  - /strongwarn <on/yes/off/no>: If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
