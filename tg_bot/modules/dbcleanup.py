@@ -100,7 +100,8 @@ def dbcleanup(bot: Bot, update: Update):
 
         update.effective_message.reply_text(reply, reply_markup=InlineKeyboardMarkup(buttons))
     else:
-        update.effective_message.reply_text(reply)
+        reply_clear = "No invalid chats or gban."
+        update.effective_message.reply_text(reply_clear)
 
 def get_muted_chats(bot: Bot, update: Update, leave: bool = False):
     chat_id = update.effective_chat.id

@@ -170,22 +170,15 @@ def info(bot: Bot, update: Update, args: List[str]):
 
     if user.id == OWNER_ID:
         text += "\nThe Disaster level of this person is 'God', which means this is my Owner💥"
-        disaster_level_present = False
     elif user.id in DEV_USERS:
         text += "\nThis member is one of 'Hero Association', therefore one of my Developers ⚡️"
-        disaster_level_present = False
     elif user.id in SUDO_USERS:
         text += "\nThe Disaster level of this person is 'Dragon', he is one of the Sudo Users"
-        disaster_level_present = False
     elif user.id in SUPPORT_USERS:
         text += "\nThe Disaster level of this person is 'Demon', he is above all users!\nExcept Developers and Owner"
-        disaster_level_present = False
     elif user.id in WHITELIST_USERS:
         text += "\nThe Disaster level of this person is 'Wolf', they cannot be banned!"
-        disaster_level_present = False
 
-    if disaster_level_present:
-        text += ' [<a href="https://t.me/OnePunchSupport/18340">?</a>]'
     user_member = chat.get_member(user.id)
     if user_member.status == 'administrator':
         result = requests.post(f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}")
