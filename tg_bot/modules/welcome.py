@@ -116,7 +116,6 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
 
             # Welcome yourself
             elif new_mem.id == bot.id:
-                elif new_mem.id == bot.id:
                 if MESSAGE_DUMP:
                     try:
                         bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id), parse_mode=ParseMode.HTML)
