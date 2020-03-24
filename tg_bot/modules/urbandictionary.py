@@ -20,14 +20,12 @@ def ud(bot: Bot, update: Update):
 
 __help__ = """
  - /ud <word>: Type the word or expression you want to search use.
- - /urban <word>: Same as /ud
- - /dict <word>: Same as /ud
 """
 
-UD_HANDLER = DisableAbleCommandHandler(["ud", "urban", "dict"], ud)
+UD_HANDLER = DisableAbleCommandHandler("ud", ud)
 
 dispatcher.add_handler(UD_HANDLER)
 
 __mod_name__ = "Urban dictionary"
-__command_list__ = ["ud", "urban","dict"]
+__command_list__ = ["ud"]
 __handlers__ = [UD_HANDLER]
