@@ -28,7 +28,7 @@ import tg_bot.modules.sql.feds_sql as sql
 
 from tg_bot.modules.connection import connected
 from tg_bot.modules.helper_funcs.alternate import send_message
-# Hello bot owner, I spent for feds many hours of my life, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
+# Hello bot owner, I spended for feds many hours of my life, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
 # Federation by MrYacha 2018-2019
 # Federation rework by Mizukito Akito 2019
 # Federation update v2 by Ayra Hikari 2019
@@ -544,6 +544,9 @@ def fed_ban(bot: Bot, update: Update, args: List[str]):
 
 	if fban:
 		fed_name = info['fname']
+		#https://t.me/DraXRobotsSupport/41606 // https://t.me/DraXRobotsSupport/41619
+		#starting = "The reason fban is replaced for {} in the Federation <b>{}</b>.".format(user_target, fed_name)
+		#send_message(update.effective_message, starting, parse_mode=ParseMode.HTML)
 
 		if reason == "":
 			reason = "No reason given."
@@ -1788,10 +1791,10 @@ def __user_info__(user_id, chat_id):
 			text = "This user is the admin of the current Federation: <b>{}</b>.".format(infoname)
 
 		elif fban:
-			text = "Prohibited in the current Federation: <b>Yes</b>"
+			text = "Banned in current Fed: <b>Yes</b>"
 			text += "\n<b>Reason:</b> {}".format(fbanreason)
 		else:
-			text = "Prohibited in the current Federation: <b>No</b>"
+			text = "Banned in current Fed: <b>No</b>"
 	else:
 		text = ""
 	return text

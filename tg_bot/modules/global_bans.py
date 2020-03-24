@@ -138,7 +138,6 @@ def gban(bot: Bot, update: Update, args: List[str]):
     if GBAN_LOGS:
         try:
             log = bot.send_message(GBAN_LOGS, log_message, parse_mode=ParseMode.HTML)
-            send_to_list(bot, SUDO_USERS + SUPPORT_USERS, log_message, html=True)
         except BadRequest as excp:
             log = bot.send_message(GBAN_LOGS,
                                    log_message + "\n\nFormatting has been disabled due to an unexpected error.")
@@ -170,7 +169,6 @@ def gban(bot: Bot, update: Update, args: List[str]):
                 if GBAN_LOGS:
                     bot.send_message(GBAN_LOGS, f"Could not gban due to {excp.message}",
                                      parse_mode=ParseMode.HTML)
-                    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, f"Could not gban due to: {excp.message}")
                 else:
                     send_to_list(bot, SUDO_USERS + SUPPORT_USERS, f"Could not gban due to: {excp.message}")
                 sql.ungban_user(user_id)
@@ -180,7 +178,6 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
     if GBAN_LOGS:
         log.edit_text(log_message + f"\n<b>Chats affected:</b> {gbanned_chats}", parse_mode=ParseMode.HTML)
-        send_to_list(bot, SUDO_USERS + SUPPORT_USERS, f"Gban complete! (User banned in {gbanned_chats} chats)")
     else:
         send_to_list(bot, SUDO_USERS + SUPPORT_USERS, f"Gban complete! (User banned in {gbanned_chats} chats)")
 
@@ -196,7 +193,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
     try:
         bot.send_message(user_id,
                          "You have been globally banned from all groups where I have administrative permissions."
-                         " If you think that this was a mistake, you may appeal your ban here: @SkuzzyBot",
+                         "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport",
                          parse_mode=ParseMode.HTML)
     except:
         pass  # bot probably blocked by user
@@ -246,7 +243,6 @@ def ungban(bot: Bot, update: Update, args: List[str]):
     if GBAN_LOGS:
         try:
             log = bot.send_message(GBAN_LOGS, log_message, parse_mode=ParseMode.HTML)
-            send_to_list(bot, SUDO_USERS + SUPPORT_USERS, log_message, html=True)
         except BadRequest as excp:
             log = bot.send_message(GBAN_LOGS,
                                    log_message + "\n\nFormatting has been disabled due to an unexpected error.")
@@ -287,7 +283,6 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     if GBAN_LOGS:
         log.edit_text(log_message + f"\n<b>Chats affected:</b> {ungbanned_chats}", parse_mode=ParseMode.HTML)
-        send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "un-gban complete!")
     else:
         send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "un-gban complete!")
 
@@ -360,7 +355,7 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
     if len(args) > 0:
         if args[0].lower() in ["on", "yes"]:
             sql.enable_gbans(update.effective_chat.id)
-            update.effective_message.reply_text("I've enabled gbans in this group. This will help protect you "
+            update.effective_message.reply_text("I've enabled antispam security in this group. This will help protect you "
                                                 "from spammers, unsavoury characters, and the biggest trolls.")
         elif args[0].lower() in ["off", "no"]:
             sql.disable_gbans(update.effective_chat.id)

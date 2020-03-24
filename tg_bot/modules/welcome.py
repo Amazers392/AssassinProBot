@@ -110,12 +110,21 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
             elif new_mem.id in SUPPORT_USERS:
                 update.effective_message.reply_text("Huh! One of my Support Users just joined!")
 
-            # Welcome Tigers
+            # Welcome Whitelisted
             elif new_mem.id in WHITELIST_USERS:
                 update.effective_message.reply_text("Oof! A Whitelisted User just joined!")
 
             # Welcome yourself
-            elif
+            elif new_mem.id == bot.id:
+                elif new_mem.id == bot.id:
+                if MESSAGE_DUMP:
+                    try:
+                        bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id), parse_mode=ParseMode.HTML)
+                    except BadRequest as excp:
+                        #bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
+                        log = bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
+                update.effective_message.reply_text("Thanks for adding me into your group! Also check my Support @DraXRobots")
+
             else:
                 # If welcome message is media, send with appropriate function
                 if welc_type not in (sql.Types.TEXT, sql.Types.BUTTON_TEXT):
@@ -279,12 +288,12 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("Oi! Genos! He left..")
+                update.effective_message.reply_text("Why did he leave?\nAlas will meet him soon....")
                 return
 
             # Give the devs a special goodbye
             elif left_mem.id in DEV_USERS:
-                update.effective_message.reply_text("See you later at the Hero's Association!")
+                update.effective_message.reply_text("See you later at my birthplace 😊")
                 return
 
             # if media goodbye, use appropriate function for it
