@@ -8,7 +8,7 @@ import pynewtonmath as newton
 import math
 
 @run_async
-def simplify(bot: Bot, update: Update, args: List[str]):
+def math(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
     message.reply_text(newton.simplify('{}'.format(args[0])))
 
@@ -84,7 +84,7 @@ def log(bot: Bot, update: Update, args):
 
 __help__ = """
 Solves complex math problems using https://newton.now.sh
- - /simplify: Simplify `/simplify 2^2+2(2)`
+ - /math: Math `/math 2^2+2(2)`
  - /factor: Factor `/factor x^2 + 2x`
  - /derive: Derive `/derive x^2+2x`
  - /integrate: Integrate `/integrate x^2+2x`
@@ -106,7 +106,7 @@ To compute fractions, enter expressions as numerator(over)denominator. For examp
 
 __mod_name__ = "Math"
 
-SIMPLIFY_HANDLER = DisableAbleCommandHandler("simplify", simplify, pass_args=True)
+MATH_HANDLER = DisableAbleCommandHandler("math", math, pass_args=True)
 FACTOR_HANDLER = DisableAbleCommandHandler("factor", factor, pass_args=True)
 DERIVE_HANDLER = DisableAbleCommandHandler("derive", derive, pass_args=True)
 INTEGRATE_HANDLER = DisableAbleCommandHandler("integrate", integrate, pass_args=True)
@@ -122,7 +122,7 @@ ARCTAN_HANDLER = DisableAbleCommandHandler("arctan", arctan, pass_args=True)
 ABS_HANDLER = DisableAbleCommandHandler("abs", abs, pass_args=True)
 LOG_HANDLER = DisableAbleCommandHandler("log", log, pass_args=True)
 
-dispatcher.add_handler(SIMPLIFY_HANDLER)
+dispatcher.add_handler(MATH_HANDLER)
 dispatcher.add_handler(FACTOR_HANDLER)
 dispatcher.add_handler(DERIVE_HANDLER)
 dispatcher.add_handler(INTEGRATE_HANDLER)
