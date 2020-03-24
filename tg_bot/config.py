@@ -5,7 +5,6 @@ def get_user_list(config, key):
     with open('{}/tg_bot/{}'.format(os.getcwd(), config), 'r') as json_file:
         return json.load(json_file)[key]
 
-
 # Create a new config.py or rename this to config.py file in same dir and import, then extend this class.class Config(object):
 class Config(object):
     LOGGER = True
@@ -18,7 +17,7 @@ class Config(object):
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:zN3ate2ltVBqClVXG3M2M17SoxdlFYA8@motty.db.elephantsql.com:5432/dxcucqwe'  # needed for any database modules
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
-    GBAN_LOGS = -1001236297460
+    GBAN_LOGS = MESSAGE_DUMP
     LOAD = []
     NO_LOAD = ['connection', 'bluetext_cleaner', 'feds', 'dev', 'reactions', 'shout']
     WEBHOOK = False
@@ -33,13 +32,7 @@ class Config(object):
     DEV_USERS = get_user_list('elevated_users.json', 'devs')  # List of id's - (not usernames) for developers who will have the same perms as the owner
     SUPPORT_USERS = get_user_list('elevated_users.json', 'supports')  # List of id's (not usernames) for users which are allowed to gban, but can also be banned.
     #WHITELIST_USERS = get_user_list('elevated_users.json', 'whitelists')  # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
-    WHITELIST_USERS = []
-    SUDO_USERS.append(OWNER_ID)
-    DEV_USERS.append(OWNER_ID)
-    for i in SUDO_USERS:
-        WHITELIST_USERS.append(i)
-    for i in SUPPORT_USERS:
-        WHITELIST_USERS.append(i)
+    WHITELIST_USERS = SUDO_USERS + DEV_USERS + SUPPRT_USERS
     SPAMMERS = []
     DONATION_LINK = ""  # EG, paypal
     CERT_PATH = None
