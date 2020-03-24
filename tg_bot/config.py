@@ -19,7 +19,7 @@ class Config(object):
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP
     LOAD = []
-    NO_LOAD = ['connection', 'bluetext_cleaner', 'feds', 'dev', 'reactions', 'shout']
+    NO_LOAD = ['connection', 'bluetext_cleaner', 'feds', 'dev', 'reactions', 'shout', 'speedtest', 'dbcleanup']
     WEBHOOK = False
     URL = None
     MAPS_API = ""
