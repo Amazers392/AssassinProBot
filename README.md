@@ -6,7 +6,7 @@ Originally a marie fork - Agent 47 has evolved further and was built to be more 
 
 Can be found on telegram as [Agent 47](https://t.me/HitmanAgent47_Bot).
 
-The Support group can be reached out to at [One Punch Support](https://t.me/DraXRobotsSupport), where you can ask for help setting up your bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available.
+The Support group can be reached out to at [DraX Robots Support](https://t.me/DraXRobotsSupport), where you can ask for help setting up your bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available.
 
 News channel as at [DraX Robots](https://t.me/DraXRoBots)
 
