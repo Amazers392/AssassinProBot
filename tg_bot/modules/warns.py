@@ -48,12 +48,12 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
 
         else:  # ban
             chat.kick_member(user.id)
-            reply = f"{limit} warnings, *Punches {mention_html(user.id, user.first_name)} with a Serious Punch* "
+            reply = f"{limit} warnings, *Bans {mention_html(user.id, user.first_name)} with a Serious Punch* "
 
         for warn_reason in reasons:
             reply += f"\n - {html.escape(warn_reason)}"
 
-        message.bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        #message.bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         keyboard = []
         log_reason = (f"<b>{html.escape(chat.title)}:</b>\n"
                       f"#WARN_BAN\n"
