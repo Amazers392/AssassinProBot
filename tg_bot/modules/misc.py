@@ -13,7 +13,7 @@ from telegram.utils.helpers import mention_html
 from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, DEV_USERS, WHITELIST_USERS, StartTime
 from tg_bot.__main__ import STATS, USER_INFO, TOKEN
 from tg_bot.modules.disable import DisableAbleCommandHandler
-from tg_bot.modules.helper_funcs.chat_status import dev_plus
+from tg_bot.modules.helper_funcs.chat_status import dev_plus, sudo_users
 from tg_bot.modules.helper_funcs.extraction import extract_user
 
 MARKDOWN_HELP = f"""
@@ -199,7 +199,7 @@ def info(bot: Bot, update: Update, args: List[str]):
 
 
 @run_async
-@dev_plus
+@sudo_plus
 def echo(bot: Bot, update: Update):
     args = update.effective_message.text.split(None, 1)
     message = update.effective_message
