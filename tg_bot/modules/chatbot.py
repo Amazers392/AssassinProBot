@@ -47,7 +47,7 @@ def remove_chat(bot: Bot, update: Update):
 
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
-    if message.text.lower() == "saitama":
+    if message.text.lower() == "agent":
         return True
     if reply_msg:
         if reply_msg.from_user.id == bot.get_me().id:
@@ -90,12 +90,12 @@ def chatbot(bot: Bot, update: Update):
 __mod_name__ = "Chatbot"
 
 __help__ = """
-Chatbot utilizes the CoffeeHouse API and allows Saitama to talk back making your chat more interactive.
-This is an ongoing upgrade and is only available in your chats if you reach out to @DraXRobotsSupport and ask for it. 
+Chatbot utilizes the CoffeeHouse API and allows Agent 47 to talk back making your chat more interactive.
+This is an ongoing upgrade and is only available in your chats if you reach out to @DraXRobotsSupport and ask for it.
 
 In future we might make it open for any chat and controllable by group admins.
 
-Commands: These only work for Saitama Staff users.
+Commands: These only work for Agent 47 Staff users.
  - /addchat : Enables Chatbot mode in the chat.
  - /rmchat  : Disables Chatbot mode in the chat.
 """
