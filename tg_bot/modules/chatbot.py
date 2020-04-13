@@ -31,8 +31,8 @@ def add_chat(bot: Bot, update: Update):
         msg.reply_text("AI successfully enabled for this chat!")
     else:
         msg.reply_text("AI is already enabled for this chat!")
-        
-        
+
+
 @run_async
 def remove_chat(bot: Bot, update: Update):
     msg = update.effective_message
@@ -43,8 +43,8 @@ def remove_chat(bot: Bot, update: Update):
     else:
         sql.rem_chat(chat_id)
         msg.reply_text("AI disabled successfully!")
-        
-        
+
+
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
     if message.text.lower() == "saitama":
@@ -54,8 +54,8 @@ def check_message(bot: Bot, message):
             return True
     else:
         return False
-                
-        
+
+
 @run_async
 def chatbot(bot: Bot, update: Update):
     global api_client
@@ -85,22 +85,21 @@ def chatbot(bot: Bot, update: Update):
             msg.reply_text(rep, timeout=60)
         except CFError as e:
             bot.send_message(OWNER_ID, f"Chatbot error: {e} occurred in {chat_id}!")
-                    
+
 
 __mod_name__ = "Chatbot"
 
 __help__ = """
 Chatbot utilizes the CoffeeHouse API and allows Saitama to talk back making your chat more interactive.
-This is an ongoing upgrade and is only available in your chats if you reach out to @OnePunchSupport and ask for it. 
+This is an ongoing upgrade and is only available in your chats if you reach out to @DraXRobotsSupport and ask for it. 
 
 In future we might make it open for any chat and controllable by group admins.
 
-Powered by CoffeeHouse (https://coffeehouse.intellivoid.net/) from @Intellivoid
-Commands: These only work for Saitama Staff users. 
+Commands: These only work for Saitama Staff users.
  - /addchat : Enables Chatbot mode in the chat.
  - /rmchat  : Disables Chatbot mode in the chat.
 """
-                  
+
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat, filters=CustomFilters.dev_filter)
 REMOVE_CHAT_HANDLER = CommandHandler("rmchat", remove_chat, filters=CustomFilters.dev_filter)
 CHATBOT_HANDLER = MessageHandler(Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
