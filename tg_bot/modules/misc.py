@@ -80,6 +80,14 @@ def leave(bot: Bot, update: Update, args: List[str]):
     else:
         update.effective_message.reply_text("Send a valid chat ID")
 
+@run_async
+def gifid(bot: Bot, update: Update):
+    msg = update.effective_message
+    if msg.reply_to_message and msg.reply_to_message.animation:
+        update.effective_message.reply_text(f"Gif ID:\n<code>{msg.reply_to_message.animation.file_id}</code>",
+                                            parse_mode=ParseMode.HTML)
+    else:
+        update.effective_message.reply_text("Please reply to a gif to get its ID.")
 
 @run_async
 @dev_plus
@@ -169,15 +177,15 @@ def info(bot: Bot, update: Update, args: List[str]):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\nThe Disaster level of this person is 'God', which means this is my Owner💥"
+        text += "\nThis person is 'God', which means this is my Owner💥"
     elif user.id in DEV_USERS:
-        text += "\nThis member is one of 'Hero Association', therefore one of my Developers ⚡️"
+        text += "\nThis member is one of 'Agent 47 Association', therefore one of my Developers ⚡️"
     elif user.id in SUDO_USERS:
-        text += "\nThe Disaster level of this person is 'Dragon', he is one of the Sudo Users"
+        text += "\nThe Power level of this person is 'Sudo'."
     elif user.id in SUPPORT_USERS:
-        text += "\nThe Disaster level of this person is 'Demon', he is above all users!\nExcept Developers and Owner"
+        text += "\nThe Power level of this person is 'Support User', he can give you a gban."
     elif user.id in WHITELIST_USERS:
-        text += "\nThe Disaster level of this person is 'Wolf', they cannot be banned!"
+        text += "\nThe Power level of this person is 'Whhitelist User', they cannot be banned!"
 
     user_member = chat.get_member(user.id)
     if user_member.status == 'administrator':
@@ -233,7 +241,8 @@ __help__ = """
  - /id: get the current group id. If used by replying to a message, gets that user's id.
  - /info: get information about a user.
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
- - /ping - get ping time of bot to telegram server
+ - /ping - get ping time of bot to telegram server.
+ - /gifid: reply to a gif to me to tell you its file ID.
 """
 
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True)
@@ -244,6 +253,7 @@ STATS_HANDLER = CommandHandler("stats", stats)
 LEAVE_HANDLER = CommandHandler("leavechat", leave, pass_args=True)
 PING_HANDLER = DisableAbleCommandHandler("ping", ping)
 UPTIME_HANDLER = CommandHandler("uptime", uptime)
+GIFID_HANDLER = DisableAbleCommandHandler("gifid", gifid)
 
 dispatcher.add_handler(ID_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
@@ -253,7 +263,8 @@ dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(LEAVE_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
 dispatcher.add_handler(UPTIME_HANDLER)
+dispatcher.add_handler(GIFID_HANDLER)
 
 __mod_name__ = "Misc"
-__command_list__ = ["id", "info", "echo", "ping", "uptime"]
+__command_list__ = ["id", "info", "echo", "ping", "uptime","gifid"]
 __handlers__ = [ID_HANDLER, INFO_HANDLER, ECHO_HANDLER, MD_HELP_HANDLER, STATS_HANDLER, LEAVE_HANDLER, UPTIME_HANDLER, PING_HANDLER]

@@ -16,8 +16,6 @@ from tg_bot.modules.helper_funcs.chat_status import user_admin
 from tg_bot.modules.helper_funcs.misc import build_keyboard, revert_buttons
 from tg_bot.modules.helper_funcs.msg_types import get_note_type
 
-from tg_bot.modules.connection import connected
-
 FILE_MATCHER = re.compile(r"^###file_id(!photo)?###:(.*?)(?:\s|$)")
 
 ENUM_FUNC_MAP = {
@@ -114,18 +112,18 @@ def get(bot, update, notename, show_none=True, no_format=False):
 @run_async
 def cmd_get(bot: Bot, update: Update, args: List[str]):
     if len(args) >= 2 and args[1].lower() == "noformat":
-        get(bot, update, args[0], show_none=True, no_format=True)
+        get(bot, update, args[0].lower(), show_none=True, no_format=True)
     elif len(args) >= 1:
-        get(bot, update, args[0], show_none=True)
+        get(bot, update, args[0].lower(), show_none=True)
     else:
-        update.effective_message.reply_text("Get what bish?")
+        update.effective_message.reply_text("Get what?")
 
 
 @run_async
 def hash_get(bot: Bot, update: Update):
     message = update.effective_message.text
     fst_word = message.split()[0]
-    no_hash = fst_word[1:]
+    no_hash = fst_word[1:].lower()
     get(bot, update, no_hash, show_none=False)
 
 
@@ -136,7 +134,7 @@ def save(bot: Bot, update: Update):
     msg = update.effective_message  # type: Optional[Message]
 
     note_name, text, data_type, content, buttons = get_note_type(msg)
-
+    note_name = note_name.lower()
     if data_type is None:
         msg.reply_text("Dude, there's no note")
         return
@@ -164,7 +162,7 @@ def save(bot: Bot, update: Update):
 def clear(bot: Bot, update: Update, args: List[str]):
     chat_id = update.effective_chat.id
     if len(args) >= 1:
-        notename = args[0]
+        notename = args[0].lower()
 
         if sql.rm_note(chat_id, notename):
             update.effective_message.reply_text("Successfully removed note.")
@@ -175,24 +173,9 @@ def clear(bot: Bot, update: Update, args: List[str]):
 @run_async
 def list_notes(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
-    chat = update.effective_chat  # type: Optional[Chat]
-    user = update.effective_user  # type: Optional[User]
-    conn = connected(bot, update, chat, user.id, need_admin=False)
-    if not conn == False:
-        chat_id = conn
-        chat_name = dispatcher.bot.getChat(conn).title
-        msg = "Notes in *{chat_name}*:\n".format(chat_name=chat_name)
-    else:
-        chat_id = update.effective_chat.id
-        if chat.type == "private":
-            chat_name = ""
-            msg = "*Local Notes:*\n"
-        else:
-            chat_name = chat.title
-            msg = "Notes in *{chat_name}*:\n".format(chat_name=chat_name)
-
     note_list = sql.get_all_chat_notes(chat_id)
 
+    msg = "Notes in *{chat_name}*:\n".format(chat_name=chat_name)
     for note in note_list:
         note_name = " • `#{}`\n".format(note.name)
         if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
@@ -256,6 +239,7 @@ A button can be added to a note by using standard markdown link syntax - the lin
 `buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. Check /markdownhelp for more info.
  - /save <notename>: save the replied message as a note with name notename
  - /clear <notename>: clear note with this name
+ Note: Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
 """
 
 __mod_name__ = "Notes"

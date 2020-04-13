@@ -17,5 +17,6 @@ Pillow>=4.2.0
 CurrencyConverter
 googletrans
 jikanpy
-tldextract
 speedtest-cli
+coffeehouse
+tldextract

@@ -26,7 +26,8 @@ def check_flood(bot: Bot, update: Update) -> str:
         return log_message
 
     # ignore admins and whitelists
-    if is_user_admin(chat, user.id) or user.id in WHITELIST_USERS:
+    if (is_user_admin(chat, user.id)
+            or user.id in WHITELIST_USERS:
         sql.update_flood(chat.id, None)
         return log_message
 
@@ -49,7 +50,7 @@ def check_flood(bot: Bot, update: Update) -> str:
         sql.set_flood(chat.id, 0)
         log_message = ("<b>{chat.title}:</b>\n"
                        "#INFO\n"
-                       "I Don't have kick permissions, so automatically disabled antiflood.")
+                       "Don't have kick permissions, so I've automatically disabled antiflood.")
 
         return log_message
 
@@ -130,8 +131,8 @@ def flood(bot: Bot, update: Update):
         update.effective_message.reply_text(f"I'm not currently enforcing flood control{chat_name}!",
                                             parse_mode=ParseMode.HTML)
     else:
-        update.effective_message.reply_text(f"I'm currently punching users if they send "
-                                            f"more than {limit} consecutive messages{chat_name}.",
+        update.effective_message.reply_text(f"I will mute users if they send "
+                                            f"more than {limit} messages at same time.{chat_name}.",
                                             parse_mode=ParseMode.HTML)
 
 
@@ -152,6 +153,8 @@ __help__ = """
 
 *Admin only:*
  - /setflood <int/'no'/'off'>: enables or disables flood control
+ Example: /setflood 10
+ This will mute users if they send more than 10 messages in a row, bots are ignored.
 """
 
 FLOOD_BAN_HANDLER = MessageHandler(Filters.all & ~Filters.status_update & Filters.group, check_flood)

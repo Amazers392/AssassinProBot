@@ -6,7 +6,7 @@ from tg_bot import dispatcher, DEL_CMDS, WHITELIST_USERS, SUPPORT_USERS, SUDO_US
 
 
 def is_whitelist_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    return user_id in WHITELIST_USERS or user_id in SUPPORT_USERS or user_id in SUDO_USERS or user_id in DEV_USERS
+    return any(user_id in user for user in [WHITELIST_USERS, SUPPORT_USERS, SUDO_USERS, DEV_USERS])
 
 
 def is_support_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
@@ -123,7 +123,7 @@ def whitelist_plus(func):
         if user and is_whitelist_plus(chat, user.id):
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("You don't have access to use this.\nVisit @DraXRobotsSupport")
+            update.effective_message.reply_text("You don't have access to use this.\nVisit @OnePunchSupport")
 
     return is_whitelist_plus_func
 

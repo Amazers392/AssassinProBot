@@ -84,7 +84,7 @@ def log(bot: Bot, update: Update, args):
 
 __help__ = """
 Solves complex math problems using https://newton.now.sh
- - /math: Simplify `/math 2^2+2(2)`
+ - /math: Simplify `/simplify 2^2+2(2)`
  - /factor: Factor `/factor x^2 + 2x`
  - /derive: Derive `/derive x^2+2x`
  - /integrate: Integrate `/integrate x^2+2x`
@@ -128,7 +128,7 @@ dispatcher.add_handler(FACTOR_HANDLER)
 dispatcher.add_handler(DERIVE_HANDLER)
 dispatcher.add_handler(INTEGRATE_HANDLER)
 dispatcher.add_handler(ZEROES_HANDLER)
-dispatcher.add_handler(TANGENT_HANDLER)
+dispatcher.add_handler(TANGENT_HANDLER) 
 dispatcher.add_handler(AREA_HANDLER)
 dispatcher.add_handler(COS_HANDLER)
 dispatcher.add_handler(SIN_HANDLER)
