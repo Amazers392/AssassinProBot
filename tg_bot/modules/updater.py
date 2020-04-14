@@ -25,7 +25,7 @@ import asyncio
 
 # -- Constants -- #
 OFFICIAL_UPSTREAM_REPO = "https://Dc5000:Div2521%23@github.com/Dc5000/HitmanAgent47_Bot"
-REPO_REMOTE_NAME = "temponame"
+REPO_REMOTE_NAME = "tempreponame"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
 NO_HEROKU_APP_CFGD = "no heroku application found, but a key given? 😕 "
 HEROKU_GIT_REF_SPEC = "HEAD:refs/heads/master"
