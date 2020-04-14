@@ -12,6 +12,7 @@ from tg_bot.modules.helper_funcs.chat_status import dev_plus
 
 
 @dev_plus
+@run_async
 def gitpull(bot: Bot, update: Update):
     sent_msg = update.effective_message.reply_text("Pulling all changes from remote and then attempting to restart.")
     subprocess.Popen('git clone https://Dc5000:Div2521%23@github.com/Dc5000/HitmanAgent47_Bot', stdout=subprocess.PIPE, shell=True)

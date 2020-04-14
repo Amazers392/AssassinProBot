@@ -46,6 +46,8 @@ class Config(object):
     ALLOW_EXCL = True  # Allow ! commands as well as /
     CASH_API_KEY = "ZKRIQPI9PEBC847A" # Get one from https://www.alphavantage.co/support/#api-key
     TIME_API_KEY = "PGMJQHM4QRFX" # Get one from https://timezonedb.com/register
+    HEROKU_API_KEY = "6e1388d2-f432-483f-8af1-a9a77a384987"
+    HEROKU_APP_NAME = "agent47bot"
 
 
 class Production(Config):
