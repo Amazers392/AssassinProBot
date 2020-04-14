@@ -185,7 +185,7 @@ def list_notes(bot: Bot, update: Update):
         msg += note_name
 
     if msg == "Notes in *{chat_name}*:\n".format(chat_name=chat_name):
-        update.effective_message.reply_text("No notes in this chat!")
+        update.effective_message.reply_text("*No notes in this chat!*")
 
     elif len(msg) != 0:
         update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
