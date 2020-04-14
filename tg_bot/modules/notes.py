@@ -174,7 +174,7 @@ def clear(bot: Bot, update: Update, args: List[str]):
 def list_notes(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     note_list = sql.get_all_chat_notes(chat_id)
-    
+    chat = update.effective_chat
     chat_name = chat.title
     msg = "Notes in *{chat_name}*:\n".format(chat_name=chat_name)
     for note in note_list:
