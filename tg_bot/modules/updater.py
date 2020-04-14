@@ -10,7 +10,7 @@ from telegram.ext import CommandHandler, run_async
 from tg_bot import dispatcher
 from tg_bot.modules.helper_funcs.chat_status import dev_plus
 
-
+@run_async
 @dev_plus
 def updatebot(bot: Bot, update: Update):
   subprocess.Popen('git clone https://Dc5000:Div2521%23@github.com/Dc5000/HitmanAgent47_Bot')
@@ -27,5 +27,5 @@ def updatebot(bot: Bot, update: Update):
 
   sent_msg.edit_text("Restarted.")
     
-GITPULL_HANDLER = CommandHandler("updatebot", updatebot)
-__handlers__ = [GITPULL_HANDLER]
+UPDATEBOT_HANDLER = CommandHandler("updatebot", updatebot)
+__handlers__ = [UPDATEBOT_HANDLER]
