@@ -12,6 +12,9 @@ from collections import deque
 
 import requests
 
+from telegram import Bot, Update, TelegramError
+from telegram.ext import CommandHandler, run_async
+
 from tg_bot import HEROKU_API_KEY, HEROKU_APP_NAME
 from tg_bot.modules.helper_funcs.chat_status import dev_plus
 
