@@ -21,11 +21,11 @@ def updatebot(bot: Bot, update: Update):
   sent_msg = update.effective_message.reply_text("Pulling all changes from remote and then attempting to restart.")
   sent_msg_text = sent_msg.text + "\n\nChanges pulled...I guess.. Restarting in "
 
-    for i in reversed(range(5)):
-        sent_msg.edit_text(sent_msg_text + str(i + 1))
-        sleep(1)
+  for i in reversed(range(5)):
+      sent_msg.edit_text(sent_msg_text + str(i + 1))
+      sleep(1)
 
-    sent_msg.edit_text("Restarted.")
+  sent_msg.edit_text("Restarted.")
     
 GITPULL_HANDLER = CommandHandler("updatebot", updatebot)
 __handlers__ = [GITPULL_HANDLER]
