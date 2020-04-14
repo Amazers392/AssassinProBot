@@ -80,6 +80,7 @@ def update(bot: Bot, update: Update):
                     remote.set_url(heroku_git_url)
                 else:
                     remote = repo.create_remote("heroku", heroku_git_url)
+                remote.push(refspec=refspec)
 
             else:
                 update.effective_message.reply_text("Please create the var `HEROKU_APP_NAME` as the key and the name of your bot in heroku as your value.")
