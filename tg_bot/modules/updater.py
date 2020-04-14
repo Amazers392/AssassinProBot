@@ -49,7 +49,7 @@ RESTARTING_APP = "re-starting heroku application"
 
 @dev_plus
 @run_async
-def gitpull(bot: Bot, update: Update):
+def update(bot: Bot, update: Update):
     try:
         repo = git.Repo()
     except git.exc.InvalidGitRepositoryError as e:
@@ -156,3 +156,9 @@ async def deploy_start(tgbot, message, refspec, remote):
     await remote.push(refspec=refspec)
     await tgbot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
+
+UPDATE_HANDLER = CommandHandler("update", update)
+
+dispatcher.add_handler(UPDATE_HANDLER)
+
+__handlers__ = [UPDATE_HANDLER]
