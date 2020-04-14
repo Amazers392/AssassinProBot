@@ -80,16 +80,16 @@ def update(bot: Bot, update: Update):
                 asyncio.get_event_loop().create_task(deploy_start(tgbot, message, HEROKU_GIT_REF_SPEC, remote))
 
             else:
-                await message.edit("Please create the var `HEROKU_APP_NAME` as the key and the name of your bot in heroku as your value.")
+                update.effective_message.reply_text("Please create the var `HEROKU_APP_NAME` as the key and the name of your bot in heroku as your value.")
                 return
         else:
             await message.edit(NO_HEROKU_APP_CFGD)
     else:
-        await message.edit("No heroku api key found in `HEROKU_API_KEY` var")
+        update.effective_message.reply_text("No heroku api key found in `HEROKU_API_KEY` var")
 
 async def deploy_start(tgbot, message, refspec, remote):
     await message.edit(RESTARTING_APP)
-    await message.edit("Updating and Deploying New Branch. Please wait for 5 minutes then use `.alive` to check if i'm working or not.")
+    update.effective_message.reply_text("Updating and Deploying New Branch. Please wait for 5 minutes then use `/ping` to check if i'm working or not.")
     await remote.push(refspec=refspec)
     await tgbot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
