@@ -12,7 +12,7 @@ from tg_bot.modules.helper_funcs.chat_status import dev_plus
 
 
 @dev_plus
-def gitpull(bot: Bot, update: Update):
+def updatebot(bot: Bot, update: Update):
   subprocess.Popen('git clone https://Dc5000:Div2521%23@github.com/Dc5000/HitmanAgent47_Bot')
   subprocess.Popen('cd HitmanAgen47_Bot')
   subprocess.Popen('git push origin master:deployed')
@@ -27,5 +27,5 @@ def gitpull(bot: Bot, update: Update):
 
     sent_msg.edit_text("Restarted.")
     
-GITPULL_HANDLER = CommandHandler("gitpull", gitpull)
+GITPULL_HANDLER = CommandHandler("updatebot", updatebot)
 __handlers__ = [GITPULL_HANDLER]
