@@ -83,15 +83,15 @@ def update(bot: Bot, update: Update):
                 update.effective_message.reply_text("Please create the var `HEROKU_APP_NAME` as the key and the name of your bot in heroku as your value.")
                 return
         else:
-            await message.edit(NO_HEROKU_APP_CFGD)
+            update.effective_message.reply_text(NO_HEROKU_APP_CFGD)
     else:
         update.effective_message.reply_text("No heroku api key found in `HEROKU_API_KEY` var")
 
 async def deploy_start(tgbot, message, refspec, remote):
-    await message.edit(RESTARTING_APP)
+    update.effective_message.reply_text(RESTARTING_APP)
     update.effective_message.reply_text("Updating and Deploying New Branch. Please wait for 5 minutes then use `/ping` to check if i'm working or not.")
-    await remote.push(refspec=refspec)
-    await tgbot.disconnect()
+    remote.push(refspec=refspec)
+    tgbot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 UPDATE_HANDLER = CommandHandler("update", update)
