@@ -441,7 +441,7 @@ def main():
     else:
         LOGGER.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4)
-        LOGGER.info("Agent 47 Started Successfull ;)")
+        LOGGER.info("Group Bot Started Successfull ;)/nPlease wait upto 2 minutes for bot to work.")
     updater.idle()
 
 if __name__ == '__main__':
