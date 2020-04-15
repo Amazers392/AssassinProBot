@@ -179,7 +179,7 @@ def info(bot: Bot, update: Update, args: List[str]):
     if user.id == OWNER_ID:
         text += "\nThis person is 'God', which means this is my Owner💥"
     elif user.id in DEV_USERS:
-        text += "\nThis member is one of 'Agent 47 Association', therefore one of my Developers ⚡️"
+        text += "\nThis member is one of my Developers ⚡️"
     elif user.id in SUDO_USERS:
         text += "\nThe Power level of this person is 'Sudo'."
     elif user.id in SUPPORT_USERS:
