@@ -40,6 +40,7 @@ def update(bot: Bot, update: Update):
         repo = git.Repo()
     except git.exc.InvalidGitRepositoryError as e:
         repo = git.Repo.init()
+        repo.remove_remote(REPO_REMOTE_NAME)
         origin = repo.create_remote(REPO_REMOTE_NAME, OFFICIAL_UPSTREAM_REPO)
         origin.fetch()
         repo.create_head(IFFUCI_ACTIVE_BRANCH_NAME, origin.refs.master)
