@@ -15,10 +15,9 @@ from tg_bot.modules.helper_funcs.chat_status import dev_plus
 @run_async
 def gitpull(bot: Bot, update: Update):
     sent_msg = update.effective_message.reply_text("Pulling all changes from remote and then attempting to restart.")
-    subprocess.Popen('git clone https://Dc5000:Div2521%23@github.com/Dc5000/HitmanAgent47_Bot')
-    subprocess.Popen('cd HitmanAgent47_Bot/')
-    subprocess.Popen('git init')
-    subprocess.Popen('git push origin master:deployed')
+    subprocess.Popen('git clone https://Dc5000:Div2521%23@github.com/Dc5000/HitmanAgent47_Bot', shell=True)
+    subprocess.Popen('cd HitmanAgent47_Bot/', shell=True)
+    subprocess.Popen('git push origin master:deployed', shell=True)
     sent_msg_text = sent_msg.text + "\n\nChanges pulled...I guess.. Restarting in "
 
     for i in reversed(range(5)):
