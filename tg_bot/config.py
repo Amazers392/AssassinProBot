@@ -13,6 +13,8 @@ class Config(object):
     API_KEY = "750944856:AAHc-0wVffY0LKDGJydOkr6IQ4so6bZ19aA"
     OWNER_ID = "716243352"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "Skuzzy_xD"
+    SUPPORT_GROUP = "DraXRoBotsSupport"
+    SUPPORT_CHANNEL = "DraXRoBots"
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:zN3ate2ltVBqClVXG3M2M17SoxdlFYA8@motty.db.elephantsql.com:5432/dxcucqwe'  # needed for any database modules
