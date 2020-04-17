@@ -45,6 +45,7 @@ def paste(bot: Bot, update: Update, args: List[str]):
         reply = f'{BASE_URL}/{key}'
     update.effective_message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
+"""
 @run_async
 def get_paste_content(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
@@ -114,20 +115,23 @@ def get_paste_stats(bot: Bot, update: Update, args: List[str]):
     views = document['viewCount']
     reply = f'Stats for **[/{key}]({BASE_URL}/{key})**:\nViews: `{views}`'
     update.effective_message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
-
+"""
 
 __help__ = """
  - /paste: Create a paste or a shortened url using [dogbin](https://del.dog)
+"""
+#Extra Commands
+"""
  - /getpaste: Get the content of a paste or shortened url from [dogbin](https://del.dog)
  - /pastestats: Get stats of a paste or shortened url from [dogbin](https://del.dog)
-"""
+ """
 
 __mod_name__ = "Dogbin"
 
 PASTE_HANDLER = DisableAbleCommandHandler("paste", paste, pass_args=True)
-GET_PASTE_HANDLER = DisableAbleCommandHandler("getpaste", get_paste_content, pass_args=True)
-PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, pass_args=True)
+"""GET_PASTE_HANDLER = DisableAbleCommandHandler("getpaste", get_paste_content, pass_args=True)
+PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, pass_args=True)"""
 
 dispatcher.add_handler(PASTE_HANDLER)
-dispatcher.add_handler(GET_PASTE_HANDLER)
-dispatcher.add_handler(PASTE_STATS_HANDLER)
+"""dispatcher.add_handler(GET_PASTE_HANDLER)
+dispatcher.add_handler(PASTE_STATS_HANDLER)"""

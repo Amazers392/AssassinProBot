@@ -276,7 +276,7 @@ def export_data(bot: Bot, update: Update, chat_data):
     # Backing up
     backup[chat_id] = {'bot': bot.id, 'hashes': {'info': {'rules': rules}, 'extra': notes, 'blacklist': bl, 'disabled': disabledcmd, 'locks': locked}}
     baccinfo = json.dumps(backup, indent=4)
-    f=open("Agent47Bk{}.backup".format(chat_id), "w")
+    f=open("{}Bk{}.backup".format(dispather.bot.username ,chat_id), "w")
     f.write(str(baccinfo))
     f.close()
     bot.sendChatAction(current_chat_id, "upload_document")
@@ -285,9 +285,8 @@ def export_data(bot: Bot, update: Update, chat_data):
         bot.sendMessage(MESSAGE_DUMP, "*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(chat.title, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
     except BadRequest:
         pass
-    bot.sendDocument(current_chat_id, document=open('Agent47Bk{}.backup'.format(chat_id), 'rb'), caption="*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `Agent47Bk` file is specially made for notes.".format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
-    #bot.sendDocument(MESSAGE_DUMP, document=open('Agent47Bk{}.backup'.format(chat_id), 'rb'), caption="*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `Agent47Bk` file is specially made for notes.".format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
-    os.remove("Agent47Bk{}.backup".format(chat_id)) # Cleaning file
+    bot.sendDocument(current_chat_id, document=open('{}Bk{}.backup'.format(dispather.bot.username ,chat_id), 'rb'), caption="*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `Backup File` is specially made for notes.".format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
+    os.remove("{}Bk{}.backup".format(dispather.bot.username ,chat_id)) # Cleaning file
 
 
 # Temporary data

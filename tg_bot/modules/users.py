@@ -49,9 +49,7 @@ def get_user_id(username):
 @run_async
 @dev_plus
 def broadcast(bot: Bot, update: Update):
-
     to_send = update.effective_message.text.split(None, 1)
-
     if len(to_send) >= 2:
         chats = sql.get_all_chats() or []
         failed = 0
@@ -65,7 +63,7 @@ def broadcast(bot: Bot, update: Update):
                 bot.sendMessage(MESSAGE_DUMP, "Couldn't send broadcast to {}, group name {}".format(chat.chat_id, chat.chat_name))
         update.effective_message.reply_text(
             f"Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
-        bot.sendMessage(MESSAGE_DUMP, "Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
+        bot.sendMessage(MESSAGE_DUMP, f"Broadcast complete. {failed} groups failed to receive the message, probably due to being kicked.")
 
 @run_async
 def log_user(bot: Bot, update: Update):
@@ -111,7 +109,7 @@ def chats(bot: Bot, update: Update):
     with BytesIO(str.encode(chatfile)) as output:
         output.name = "chatlist.txt"
         update.effective_message.reply_document(document=output, filename="chatlist.txt", caption="Here is the list of chats in my Hit List.")
- 
+
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
@@ -130,7 +128,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 __help__ = ""  # no help string
 
-BROADCAST_HANDLER = CommandHandler("broadcast", broadcast)
+BROADCAST_HANDLER = CommandHandler(["broadcast", "sbroadcast"], broadcast)
 USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
 CHATLIST_HANDLER = CommandHandler(["chatlist", "listchats"], chats)
 

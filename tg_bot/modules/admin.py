@@ -44,7 +44,7 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
         return log_message
 
     if user_member.status == 'administrator' :
-        message.reply_text("How dump are you, the person is already an admin!")
+        message.reply_text("How dumb are you, the person is already an admin!")
         return log_message
 
     if user_id == bot.id:
@@ -106,7 +106,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
         return log_message
 
     if user_member.status == 'creator':
-        message.reply_text("This person CREATED the chat, how would I demote them?")
+        message.reply_text("This person CREATED the chat, how can I demote them?")
         return log_message
 
     if not user_member.status == 'administrator':
@@ -180,7 +180,7 @@ def set_title(bot: Bot, update: Update, args: List[str]):
         return
 
     if len(title) > 16:
-        message.reply_text("The title length is longer than 16 characters.\nTruncating it to 16 characters.")
+        message.reply_text("The Title for the User is longer than 16 characters.\nTruncating it to 16 characters.")
 
     result = requests.post(f"https://api.telegram.org/bot{TOKEN}/setChatAdministratorCustomTitle"
                            f"?chat_id={chat.id}"
@@ -270,27 +270,6 @@ def invite(bot: Bot, update: Update):
     else:
         update.effective_message.reply_text("I can only give you invite links for supergroups and channels, sorry!")
 
-'''
-@run_async
-@connection_status
-def adminlist(bot: Bot, update: Update):
-    chat = update.effective_chat
-    user = update.effective_user
-
-    chat_id = chat.id
-    administrators = bot.getChatAdministrators(chat_id)
-
-    chat_name = chat.title
-    text = f"Admins in *{chat_name}*:"
-
-    for admin in administrators:
-        user = admin.user
-        name = f"{user.first_name + (user.last_name or '')}"
-        text += f"\n - `{name}`"
-
-    update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
-'''
-
 @run_async
 @connection_status
 def adminlist(bot: Bot, update: Update):
@@ -336,7 +315,7 @@ __help__ = """
  - /settitle: sets a custom title for an admin that the bot promoted
 """
 
-ADMINLIST_HANDLER = DisableAbleCommandHandler(["adminlist", "admins"], adminlist)
+ADMINLIST_HANDLER = DisableAbleCommandHandler("adminlist", adminlist)
 
 PIN_HANDLER = CommandHandler("pin", pin, pass_args=True, filters=Filters.group)
 UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
@@ -357,6 +336,6 @@ dispatcher.add_handler(DEMOTE_HANDLER)
 dispatcher.add_handler(SET_TITLE_HANDLER)
 
 __mod_name__ = "Admin"
-__command_list__ = ["adminlist", "admins", "invitelink"]
+__command_list__ = ["adminlist", "invitelink"]
 __handlers__ = [ADMINLIST_HANDLER, PIN_HANDLER, UNPIN_HANDLER,
                 INVITE_HANDLER, PROMOTE_HANDLER, DEMOTE_HANDLER, SET_TITLE_HANDLER]

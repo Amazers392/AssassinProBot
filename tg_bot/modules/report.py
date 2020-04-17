@@ -64,17 +64,11 @@ def report(bot: Bot, update: Update) -> str:
         admin_list = chat.get_administrators()
         message = update.effective_message
 
-        if user.id == reported_user.id:
-            message.reply_text("Uh yeah, Sure.")
-            return ""
 
         if user.id == bot.id:
-            message.reply_text("Nice try.")
+            message.reply_text("Lmao, why would I report myself? Nice try.")
             return ""
 
-        if reported_user.id in REPORT_IMMUNE_USERS:
-            message.reply_text("Uh? You reporting whitelisted users?")
-            return ""
 
         if chat.username and chat.type == Chat.SUPERGROUP:
 

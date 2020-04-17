@@ -19,6 +19,7 @@ def ud(bot: Bot, update: Update):
 
 
 __help__ = """
+A fun dictionary which give's nearly useless meanings to the asked word!
  - /ud <word>: Type the word or expression you want to search use.
 """
 

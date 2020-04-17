@@ -43,7 +43,7 @@ def convert(bot: Bot, update: Update):
 
 __help__ = """
  - /cash : currency converter
- example syntax: /cash 1 USD INR
+ Example: /cash 1 USD INR
 """
 
 CONVERTER_HANDLER = CommandHandler('cash', convert)

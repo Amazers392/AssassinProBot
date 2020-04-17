@@ -8,8 +8,7 @@ from telegram.ext import CommandHandler, MessageHandler, CallbackQueryHandler, F
 from telegram.ext.dispatcher import run_async, DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
-from tg_bot import dispatcher, updater, TOKEN, WEBHOOK, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, \
-    ALLOW_EXCL
+from tg_bot import dispatcher, updater, TOKEN, WEBHOOK, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, ALLOW_EXCL SUPPORT_CHANNEL, SUPPORT_GROUP
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from tg_bot.modules import ALL_MODULES
@@ -22,9 +21,9 @@ Click Help button to find out more about how to use me, so you can get helped!
 
 For more commands click /help...
 
-Join [Support Channel](https://t.me/DraXRoBots) if you you want to check bot status!
+Join [Support Channel](https://t.me/{}) if you you want to check bot status!
 Want to add me to your group? [Click here!](t.me/{}?startgroup=true)
-""".format(dispatcher.bot.first_name, dispatcher.bot.username)
+""".format(dispatcher.bot.first_name, SUPPORT_CHANNEL, dispatcher.bot.username)
 
 HELP_STRINGS = """
 Hey There! My name is *{}*.
@@ -48,7 +47,7 @@ And the following:
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 {} is hosted on Heroku Free Servers and it would be really helpful if you can donate \
-You can donate by contacting him! [Skuzzy xD](t.me/SkuzzyBot)
+You can donate by contacting him! [Skuzzy_xD](t.me/SkuzzyBot)
 """.format(dispatcher.bot.first_name)
 
 IMPORTED = {}
@@ -107,15 +106,6 @@ def send_help(chat_id, text, keyboard=None):
                                 parse_mode=ParseMode.MARKDOWN,
                                 reply_markup=keyboard)
 
-
-@run_async
-def test(bot: Bot, update: Update):
-    # pprint(eval(str(update)))
-    # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
-    update.effective_message.reply_text("This person edited a message")
-    print(update.effective_message)
-
-
 @run_async
 def start(bot: Bot, update: Update, args: List[str]):
     if update.effective_chat.type == "private":
@@ -136,13 +126,13 @@ def start(bot: Bot, update: Update, args: List[str]):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/DraXRobots"), InlineKeyboardButton(text="Support Group", url="http://t.me/DraXRobotsSupport")]]
+            keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/{}".format(SUPPORT_CHANNEL)), InlineKeyboardButton(text="Support Group", url="http://t.me/{}").format(SUPPORT_GROUP)]]
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
             keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/SkuzzyBot")]]
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(PM_START_TEXT, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
-        update.effective_message.reply_text("Wassup? I'm here")
+        update.effective_message.reply_text("Yup?")
 
 
 # for test purposes
@@ -157,7 +147,6 @@ def error_callback(bot, update, error):
         print("no nono2")
         print("BadRequest caught")
         print(error)
-
         # handle malformed requests - read more below!
     except TimedOut:
         print("no nono3")
@@ -233,10 +222,7 @@ def get_help(bot: Bot, update: Update):
     if chat.type != chat.PRIVATE:
 
         update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
-                                            reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Help",
-                                                                       url="t.me/{}?start=help".format(
-                                                                           bot.username))]]))
+                                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Help", url="t.me/{}?start=help".format(bot.username))]]))
         return
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
@@ -375,7 +361,6 @@ def donate(bot: Bot, update: Update):
             update.effective_message.reply_text("You can also donate to the person currently running me "
                                                 "[here]({})".format(DONATION_LINK),
                                                 parse_mode=ParseMode.MARKDOWN)
-
     else:
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)

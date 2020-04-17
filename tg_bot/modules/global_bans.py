@@ -11,7 +11,7 @@ from telegram.utils.helpers import mention_html
 
 import tg_bot.modules.sql.global_bans_sql as sql
 from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, DEV_USERS, SUPPORT_USERS, WHITELIST_USERS, STRICT_GBAN, GBAN_LOGS
-from tg_bot.modules.helper_funcs.chat_status import user_admin, is_user_admin, support_plus, dev_plus
+from tg_bot.modules.helper_funcs.chat_status import user_admin, is_user_admin, support_plus, dev_plus, sudo_plus
 from tg_bot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from tg_bot.modules.helper_funcs.misc import send_to_list
 from tg_bot.modules.sql.users_sql import get_all_chats
@@ -191,10 +191,17 @@ def gban(bot: Bot, update: Update, args: List[str]):
         message.reply_text(f"Done! This gban affected {gbanned_chats} chats, Took {gban_time} sec")
 
     try:
-        bot.send_message(user_id,
-                         "You have been globally banned from all groups where I have administrative permissions."
-                         "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport",
-                         parse_mode=ParseMode.HTML)
+        if reason:
+            bot.send_message(user_id,
+                             "You have been globally banned from all groups where I have administrative permissions."
+                             "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport"
+                             f"<b>Reason for Ban:</b> {reason}",
+                             parse_mode=ParseMode.HTML)
+        else:
+            bot.send_message(user_id,
+                             "You have been globally banned from all groups where I have administrative permissions."
+                             "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport",
+                             parse_mode=ParseMode.HTML)
     except:
         pass  # bot probably blocked by user
 
@@ -294,10 +301,16 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         message.reply_text(f"Person has been un-gbanned. Took {ungban_time} min")
     else:
         message.reply_text(f"Person has been un-gbanned. Took {ungban_time} sec")
+    try:
+        bot.send_message(user_id,
+                        "You have been globally unbanned from all groups where I have administrative permissions.",
+                        parse_mode=ParseMode.HTML)
+    except:
+        pass
 
 
 @run_async
-@dev_plus
+@sudo_plus
 def gbanlist(bot: Bot, update: Update):
     banned_users = sql.get_gban_list()
 
@@ -322,14 +335,14 @@ def check_and_ban(update, user_id, should_message=True):
     if sql.is_user_gbanned(user_id):
         update.effective_chat.kick_member(user_id)
         if should_message:
-            update.effective_message.reply_text("Alert: This user is globally banned.\n"
-                                                "*bans them from here*.\n"
+            update.effective_message.reply_text("Alert: This user is banned in Anti-Spam Security!\n"
+                                                "*bans them from here too*.\n"
                                                 "Appeal chat: @DraXRobotsSupport")
 
 
 @run_async
 def enforce_gban(bot: Bot, update: Update):
-    # Not using @restrict handler to avoid spamming - just ignore if cant gban.
+    # Not using @restrict handler to avoid spamming - just ignore if can't gban.
     if sql.does_chat_gban(update.effective_chat.id) and update.effective_chat.get_member(bot.id).can_restrict_members:
         user = update.effective_user
         chat = update.effective_chat

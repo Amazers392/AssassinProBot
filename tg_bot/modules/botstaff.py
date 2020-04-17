@@ -336,6 +336,54 @@ def supportlist(bot: Bot, update: Update):
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
+@run_async
+@dev_plus
+def botstaff(bot: Bot, update: Update):
+    its_owner = OWNER_USERNAME
+    reply = "<b>Owner:</b>\n"
+    user_id = int(each_user)
+    try:
+        user = bot.get_chat(user_id)
+        reply += f"> {mention_html(user_id, user.first_name)}\n"
+    except TelegramError:
+        pass
+    true_dev = list(set(DEV_USERS) - {OWNER_ID})
+    reply = "<b>Developers ⚡️:</b>\n"
+    for each_user in true_dev:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
+    reply = "<b>Sudo Users 🐉:</b>\n"
+    for each_user in true_sudo:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    reply = "<b>Support Users 👹:</b>\n"
+    for each_user in SUPPORT_USERS:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    reply = "<b>Whitelisted Users 🐺:</b>\n"
+    for each_user in WHITELIST_USERS:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
+
 
 @run_async
 @dev_plus
@@ -387,6 +435,7 @@ WHITELISTLIST_HANDLER = CommandHandler("whitelist", whitelistlist)
 SUPPORTLIST_HANDLER = CommandHandler("supportlist", supportlist)
 SUDOLIST_HANDLER = CommandHandler("slist", sudolist)
 DEVLIST_HANDLER = CommandHandler("devs", devlist)
+BOTSTAFF_HANDLER = CommandHandler("botstaff", botstaff)
 
 dispatcher.add_handler(SUDO_HANDLER)
 dispatcher.add_handler(SUPPORT_HANDLER)
@@ -399,8 +448,9 @@ dispatcher.add_handler(WHITELISTLIST_HANDLER)
 dispatcher.add_handler(SUPPORTLIST_HANDLER)
 dispatcher.add_handler(SUDOLIST_HANDLER)
 dispatcher.add_handler(DEVLIST_HANDLER)
+dispatcher.add_handler(BOTSTAFF_HANDLER)
 
 __mod_name__ = "Bot Staff"
 __handlers__ = [SUDO_HANDLER, SUPPORT_HANDLER, WHITELIST_HANDLER,
                 UNSUDO_HANDLER, UNSUPPORT_HANDLER, UNWHITELIST_HANDLER,
-                WHITELISTLIST_HANDLER, SUPPORTLIST_HANDLER, SUDOLIST_HANDLER, DEVLIST_HANDLER]
+                WHITELISTLIST_HANDLER, SUPPORTLIST_HANDLER, SUDOLIST_HANDLER, DEVLIST_HANDLER, BOTSTAFF_HANDLER]

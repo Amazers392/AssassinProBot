@@ -25,6 +25,8 @@ MESSAGES = (
     "Happy day of birthing ",
     "Sadn't deathn't-day ",
     "Oof, you were born today ",
+    "Your mother gave you birth today!!",
+    "A legend was born today!"
 )
 
 @run_async

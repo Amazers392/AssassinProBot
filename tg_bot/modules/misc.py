@@ -13,7 +13,7 @@ from telegram.utils.helpers import mention_html
 from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, DEV_USERS, WHITELIST_USERS, StartTime
 from tg_bot.__main__ import STATS, USER_INFO, TOKEN
 from tg_bot.modules.disable import DisableAbleCommandHandler
-from tg_bot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
+from tg_bot.modules.helper_funcs.chat_status import dev_plus, sudo_plus, support_plus
 from tg_bot.modules.helper_funcs.extraction import extract_user
 
 MARKDOWN_HELP = f"""
@@ -90,7 +90,7 @@ def gifid(bot: Bot, update: Update):
         update.effective_message.reply_text("Please reply to a gif to get its ID.")
 
 @run_async
-@dev_plus
+@sudo_plus
 def uptime(bot: Bot, update: Update):
     uptime = get_readable_time((time.time() - StartTime))
     reply_msg = ("<b>Service uptime:</b> <code>{}</code>".format(uptime))
@@ -177,15 +177,15 @@ def info(bot: Bot, update: Update, args: List[str]):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\nThis person is 'God', which means this is my Owner💥"
+        text += "\nThis person is my 'God', which means this is my Owner💥"
     elif user.id in DEV_USERS:
         text += "\nThis member is one of my Developers ⚡️"
     elif user.id in SUDO_USERS:
         text += "\nThe Power level of this person is 'Sudo'."
     elif user.id in SUPPORT_USERS:
-        text += "\nThe Power level of this person is 'Support User', he can give you a gban."
+        text += "\nThhis person is 'Support User', he can give you a gban."
     elif user.id in WHITELIST_USERS:
-        text += "\nThe Power level of this person is 'Whhitelist User', they cannot be banned!"
+        text += "\nThis person is 'Whitelist User', they cannot be banned!"
 
     user_member = chat.get_member(user.id)
     if user_member.status == 'administrator':
@@ -207,7 +207,7 @@ def info(bot: Bot, update: Update, args: List[str]):
 
 
 @run_async
-@sudo_plus
+@support_plus
 def echo(bot: Bot, update: Update):
     args = update.effective_message.text.split(None, 1)
     message = update.effective_message

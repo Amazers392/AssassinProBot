@@ -78,6 +78,7 @@ def gettime(bot: Bot, update: Update):
 
 __help__ = """
  - /time <query> : Gives information about a timezone.
+Example: /time Kolkata
 
 Available queries : Country Code/Country Name/Timezone Name
 """

@@ -35,7 +35,7 @@
          "description": "Your postgres sql db, empty this field if you dont have one.",
          "required": false,
          "value": "sqldbtype://username:pw@hostname:port/db_name"
-      },      
+      },
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
          "value": "792109647"
@@ -101,13 +101,6 @@
          "value": ""
       }
    },
-   "keywords": [
-      "telegram",
-      "weeb",
-      "group",
-      "manager",
-      "Saitama"
-   ],
    "name": "Saitama Robot",
    "repository": "https://github.com/AnimeKaizoku/SaitamaRobot"
 }

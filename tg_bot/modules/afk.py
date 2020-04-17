@@ -27,9 +27,9 @@ def afk(bot: Bot, update: Update):
 
     sql.set_afk(update.effective_user.id, reason)
     fname = update.effective_user.first_name
-    update.effective_message.reply_text("{} is now away!".format(fname))
+    update.effective_message.reply_text("{} is now away... from keyboard!".format(fname))
 
-    
+
 @run_async
 def no_longer_afk(bot: Bot, update: Update):
     user = update.effective_user  # type: Optional[User]
@@ -44,7 +44,7 @@ def no_longer_afk(bot: Bot, update: Update):
         if message.new_chat_members:  #dont say msg
             return
         firstname = update.effective_user.first_name
-        try:        
+        try:
             options = [
             '{} is here!',
             '{} is back!',
@@ -80,14 +80,14 @@ def reply_afk(bot: Bot, update: Update):
                 if user_id in chk_users:
                     return
                 chk_users.append(user_id)
-                
+
             if ent.type == MessageEntity.MENTION:
                 user_id = get_user_id(message.text[ent.offset:ent.offset +
                                                    ent.length])
                 if not user_id:
                     # Should never happen, since for a user to become AFK they must have spoken. Maybe changed username?
                     return
-                
+
                 if user_id in chk_users:
                     return
                 chk_users.append(user_id)
@@ -104,7 +104,7 @@ def reply_afk(bot: Bot, update: Update):
                 return
 
             check_afk(bot, update, user_id, fst_name, userc_id)
-            
+
     elif message.reply_to_message:
         user_id = message.reply_to_message.from_user.id
         fst_name = message.reply_to_message.from_user.first_name
@@ -123,7 +123,7 @@ def check_afk(bot, update, user_id, fst_name, userc_id):
         else:
             if int(userc_id) == int(user_id):
                 return
-            res = "{} is afk.\nReason: {}".format(fst_name, user.reason)
+            res = "{} is afk because {}".format(fst_name, user.reason)
             update.effective_message.reply_text(res)
 
 

@@ -78,6 +78,58 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
 
     return log_message
 
+@run_async
+@connection_status
+@bot_admin
+@can_restrict
+@user_admin
+@loggable
+def sban(bot: Bot, update: Update, args: List[str]) -> str:
+    chat = update.effective_chat
+    user = update.effective_user
+    message = update.effective_message
+    log_message = ""
+
+    user_id, reason = extract_user_and_text(message, args)
+
+    if not user_id:
+        return log_message
+
+    try:
+        member = chat.get_member(user_id)
+    except BadRequest as excp:
+        if excp.message == "User not found":
+            return log_message
+        else:
+            raise
+
+    if user_id == bot.id:
+        return log_message
+    # dev users to bypass whitelist protection incase of abuse
+    if is_user_ban_protected(chat, user_id, member) and user not in DEV_USERS:
+        return log_message
+
+    log = (f"<b>{html.escape(chat.title)}:</b>\n"
+           f"#BANNED\n"
+           f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+           f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}")
+    if reason:
+        log += "\n<b>Reason:</b> {}".format(reason)
+
+    try:
+        chat.kick_member(user_id)
+        return log
+
+    except BadRequest as excp:
+        if excp.message == "Reply message not found":
+            return log
+        else:
+            LOGGER.warning(update)
+            LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
+                             excp.message)
+            message.reply_text("Uhm...that didn't work...")
+
+    return log_message
 
 @run_async
 @connection_status
@@ -193,13 +245,13 @@ def punch(bot: Bot, update: Update, args: List[str]) -> str:
         return log_message
 
     if is_user_ban_protected(chat, user_id):
-        message.reply_text("I really wish I could punch this user....")
+        message.reply_text("I really wish I could kick this user....\nHe's protected by my Owner")
         return log_message
 
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
         # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        bot.sendMessage(chat.id, f"One Punched! {mention_html(member.user.id, member.user.first_name)}.",
+        bot.sendMessage(chat.id, f"Bowled! {mention_html(member.user.id, member.user.first_name)}.",
                         parse_mode=ParseMode.HTML)
         log = (f"<b>{html.escape(chat.title)}:</b>\n"
                f"#KICKED\n"
@@ -209,10 +261,8 @@ def punch(bot: Bot, update: Update, args: List[str]) -> str:
             log += f"\n<b>Reason:</b> {reason}"
 
         return log
-
     else:
         message.reply_text("Well damn, I can't punch that user.")
-
     return log_message
 
 
@@ -337,15 +387,15 @@ BAN_HANDLER = CommandHandler("ban", ban, pass_args=True)
 TEMPBAN_HANDLER = CommandHandler(["tban", "tempban"], temp_ban, pass_args=True)
 PUNCH_HANDLER = CommandHandler(["punch", "kick"], punch, pass_args=True)
 UNBAN_HANDLER = CommandHandler("unban", unban, pass_args=True)
-ROAR_HANDLER = CommandHandler("roar", selfunban, pass_args=True)
+SELFUNBAN_HANDLER = CommandHandler("selfunban", selfunban, pass_args=True)
 PUNCHME_HANDLER = DisableAbleCommandHandler(["punchme", "kickme"], punchme, filters=Filters.group)
 
 dispatcher.add_handler(BAN_HANDLER)
 dispatcher.add_handler(TEMPBAN_HANDLER)
 dispatcher.add_handler(PUNCH_HANDLER)
 dispatcher.add_handler(UNBAN_HANDLER)
-dispatcher.add_handler(ROAR_HANDLER)
+dispatcher.add_handler(SELFUNBAN_HANDLER)
 dispatcher.add_handler(PUNCHME_HANDLER)
 
 __mod_name__ = "Bans"
-__handlers__ = [BAN_HANDLER, TEMPBAN_HANDLER, PUNCH_HANDLER, UNBAN_HANDLER, ROAR_HANDLER, PUNCHME_HANDLER]
+__handlers__ = [BAN_HANDLER, TEMPBAN_HANDLER, PUNCH_HANDLER, UNBAN_HANDLER, SELFUNBAN_HANDLER, PUNCHME_HANDLER]
