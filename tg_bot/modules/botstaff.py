@@ -349,8 +349,8 @@ def botstaff(bot: Bot, update: Update):
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
     reply = "<b>Developers ⚡️:</b>\n"
-    for each_user in true_dev:
-        user_id = int(each_user)
+    for a in true_dev:
+        user_id = int(a)
         try:
             user = bot.get_chat(user_id)
             reply += f"• {mention_html(user_id, user.first_name)}\n"
@@ -358,24 +358,24 @@ def botstaff(bot: Bot, update: Update):
             pass
     true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
     reply = "<b>Sudo Users 🐉:</b>\n"
-    for each_user in true_sudo:
-        user_id = int(each_user)
+    for b in true_sudo:
+        user_id = int(b)
         try:
             user = bot.get_chat(user_id)
             reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     reply = "<b>Support Users 👹:</b>\n"
-    for each_user in SUPPORT_USERS:
-        user_id = int(each_user)
+    for c in SUPPORT_USERS:
+        user_id = int(c)
         try:
             user = bot.get_chat(user_id)
             reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     reply = "<b>Whitelisted Users 🐺:</b>\n"
-    for each_user in WHITELIST_USERS:
-        user_id = int(each_user)
+    for d in WHITELIST_USERS:
+        user_id = int(d)
         try:
             user = bot.get_chat(user_id)
 
