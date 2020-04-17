@@ -8,7 +8,7 @@ from telegram import Bot, Update, ParseMode, TelegramError
 from telegram.ext import CommandHandler, run_async
 from telegram.utils.helpers import mention_html
 
-from tg_bot import dispatcher, WHITELIST_USERS, SUPPORT_USERS, SUDO_USERS, DEV_USERS, OWNER_ID
+from tg_bot import dispatcher, WHITELIST_USERS, SUPPORT_USERS, SUDO_USERS, DEV_USERS, OWNER_ID, OWNER_USERNAME
 from tg_bot.modules.helper_funcs.chat_status import whitelist_plus, dev_plus
 from tg_bot.modules.helper_funcs.extraction import extract_user
 from tg_bot.modules.log_channel import gloggable
