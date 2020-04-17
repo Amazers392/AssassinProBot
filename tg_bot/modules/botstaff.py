@@ -341,7 +341,7 @@ def supportlist(bot: Bot, update: Update):
 def botstaff(bot: Bot, update: Update):
     its_owner = OWNER_USERNAME
     try:
-        reply = f"<b>Owner:</b> {its_owner}\n"
+        reply = f"<b>Owner:</b> @{its_owner}\n"
     except TelegramError:
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
