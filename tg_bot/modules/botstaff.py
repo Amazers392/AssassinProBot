@@ -340,14 +340,12 @@ def supportlist(bot: Bot, update: Update):
 @dev_plus
 def botstaff(bot: Bot, update: Update):
     its_owner = OWNER_USERNAME
-    reply = f"<b>Owner:</b> {OWNER_USERNAME}\n"
     try:
-        user = bot.get_chat(user_id)
-        reply += f"> {mention_html(user_id, user.first_name)}\n"
+        reply = f"<b>Owner:</b> {its_owner}\n"
     except TelegramError:
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
-    reply = "\n<b>Developers ⚡️:</b>\n"
+    reply += "\n<b>Developers ⚡️:</b>\n"
     for each_user in true_dev:
         user_id = int(each_user)
         try:
@@ -356,7 +354,7 @@ def botstaff(bot: Bot, update: Update):
         except TelegramError:
             pass
     true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
-    reply = "\n<b>Sudo Users 🐉:</b>\n"
+    reply += "\n<b>Sudo Users 🐉:</b>\n"
     for each_user in true_sudo:
         user_id = int(each_user)
         try:
@@ -364,7 +362,7 @@ def botstaff(bot: Bot, update: Update):
             reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
-    reply = "\n<b>Support Users 👹:</b>\n"
+    reply += "\n<b>Support Users 👹:</b>\n"
     for each_user in SUPPORT_USERS:
         user_id = int(each_user)
         try:
@@ -372,7 +370,7 @@ def botstaff(bot: Bot, update: Update):
             reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
-    reply = "\n<b>Whitelisted Users 🐺:</b>\n"
+    reply += "\n<b>Whitelisted Users 🐺:</b>\n"
     for each_user in WHITELIST_USERS:
         user_id = int(each_user)
         try:
