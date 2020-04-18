@@ -8,7 +8,7 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler, run_async, Filters
 
 import tg_bot.modules.sql.notes_sql as sql
-from tg_bot import dispatcher, LOGGER, OWNER_ID, SUDO_USERS, MESSAGE_DUMP
+from tg_bot import dispatcher, LOGGER, OWNER_ID, MESSAGE_DUMP, DEV_USERS
 from tg_bot.__main__ import DATA_IMPORT
 from tg_bot.modules.helper_funcs.chat_status import user_admin
 from tg_bot.modules.helper_funcs.misc import build_keyboard, revert_buttons
@@ -61,7 +61,7 @@ def import_data(bot: Bot, update):
 
         # only import one group
         if len(data) > 1 and str(chat.id) not in data:
-            msg.reply_text("There are more than one group in this file and the chat.id is not same! How am i supposed to import it?")
+            msg.reply_text("There are more than one group in this file and the chat.id is not same! How am I supposed to import it?")
             return
 
         # Check if backup is this chat
@@ -141,10 +141,10 @@ def export_data(bot: Bot, update: Update, chat_data):
             update.effective_message.reply_text("You can only backup once a day!\nYou can backup again in about `{}`\nThis has been limited to prevent bot servers from being flooded!".format(timeformatt), parse_mode=ParseMode.MARKDOWN)
             return
         else:
-            if user.id != OWNER_ID:
+            if user.id not in DEV_USERS:
                 put_chat(chat_id, new_jam, chat_data)
     else:
-        if user.id != OWNER_ID:
+        if user.id not in DEV_USERS:
             put_chat(chat_id, new_jam, chat_data)
 
     note_list = sql.get_all_chat_notes(chat_id)
@@ -285,8 +285,8 @@ def export_data(bot: Bot, update: Update, chat_data):
         bot.sendMessage(MESSAGE_DUMP, "*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(chat.title, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
     except BadRequest:
         pass
-    bot.sendDocument(current_chat_id, document=open('{}Bk{}.backup'.format(dispather.bot.username ,chat_id), 'rb'), caption="*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `Backup File` is specially made for notes.".format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
-    os.remove("{}Bk{}.backup".format(dispather.bot.username ,chat_id)) # Cleaning file
+    bot.sendDocument(current_chat_id, document=open('{}Bk{}.backup'.format(dispatcher.bot.username ,chat_id), 'rb'), caption="*Successfully exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `Backup File` is specially made for notes.".format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
+    os.remove("{}Bk{}.backup".format(dispatcher.bot.username ,chat_id)) # Cleaning file
 
 
 # Temporary data

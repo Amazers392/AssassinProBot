@@ -22,11 +22,6 @@
          "description": "Set this to True if you want to delete command messages from users who don't have the perms to run that command.",
          "value": "True"
       },
-      "DONATION_LINK": {
-         "description": "Optional: link where you would like to receive donations.",
-         "required": false,
-         "value": "https://www.paypal.me/PaulSonOfLars"
-      },
       "ENV": {
          "description": "Setting this to ANYTHING will enable environment variables.",
          "value": "ANYTHING"

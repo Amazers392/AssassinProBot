@@ -98,7 +98,7 @@ def add_bluetext_ignore(bot: Bot, update: Update, args: List[str]):
         else:
             reply = "Command is already ignored."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
-        
+
     else:
         reply = "No command supplied to be ignored."
         message.reply_text(reply)
@@ -119,7 +119,7 @@ def remove_bluetext_ignore(bot: Bot, update: Update, args: List[str]):
         else:
             reply = "Command isn't ignored currently."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
-        
+
     else:
         reply = "No command supplied to be unignored."
         message.reply_text(reply)
@@ -139,7 +139,7 @@ def add_bluetext_ignore_global(bot: Bot, update: Update, args: List[str]):
         else:
             reply = "Command is already ignored."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
-        
+
     else:
         reply = "No command supplied to be ignored."
         message.reply_text(reply)
@@ -159,7 +159,7 @@ def remove_bluetext_ignore_global(bot: Bot, update: Update, args: List[str]):
         else:
             reply = "Command isn't ignored currently."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
-        
+
     else:
         reply = "No command supplied to be unignored."
         message.reply_text(reply)
@@ -201,10 +201,6 @@ __help__ = """
  - /ignoreblue <word> - prevent auto cleaning of the command
  - /unignoreblue <word> - remove prevent auto cleaning of the command
  - /listblue - list currently whitelisted commands
- 
- Following are Disasters only commands, admins cannot use these:
-  - /gignoreblue <word> - globally ignore bluetext cleaning of saved word across Saitama.
- - /ungignoreblue <word> - remove said command from global cleaning list
 """
 
 SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("cleanblue", set_blue_text_must_click, pass_args=True)

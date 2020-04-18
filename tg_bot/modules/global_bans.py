@@ -111,7 +111,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
         return
 
-    message.reply_text(f"Okay!\nOne gban coming right up for {user_chat.first_name}.")
+    message.reply_text(f"Okay!\nOne gban coming right up for {mention_html(user.first_name)}")
 
     start_time = time.time()
     datetime_fmt = "%H:%M - %d-%m-%Y"

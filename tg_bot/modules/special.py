@@ -18,16 +18,7 @@ from tg_bot.modules.helper_funcs.filters import CustomFilters
 from tg_bot.modules.disable import DisableAbleCommandHandler
 USERS_GROUP = 4
 
-MESSAGES = (
-    "Happy birthday ",
-    "Heppi burfdey ",
-    "Hep burf ",
-    "Happy day of birthing ",
-    "Sadn't deathn't-day ",
-    "Oof, you were born today ",
-    "Your mother gave you birth today!!",
-    "A legend was born today!"
-)
+
 
 @run_async
 @dev_plus
@@ -115,29 +106,12 @@ def getlink(bot: Bot, update: Update, args: List[int]):
         except TelegramError as excp:
                 update.effective_message.reply_text(excp.message + " " + str(chat_id))
 
-@run_async
-@user_admin
-def birthday(bot: Bot, update: Update, args: List[str]):
-    if args:
-        username = str(",".join(args))
-    bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
-    for i in range(5):
-        bdaymessage = random.choice(MESSAGES)
-        update.effective_message.reply_text(bdaymessage + username)
-
-__help__ = """
-*Admin only:*
-- /birthday *@username*: Spam user with birthday wishes.
-"""
-
 SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True)
 BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True)
 GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True)
-BIRTHDAY_HANDLER = DisableAbleCommandHandler("birthday", birthday)
 QUICKSCOPE_HANDLER = CommandHandler("quickscope", quickscope, pass_args=True)
 QUICKUNBAN_HANDLER = CommandHandler("quickunban", quickunban, pass_args=True)
 
-dispatcher.add_handler(BIRTHDAY_HANDLER)
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)
 dispatcher.add_handler(QUICKSCOPE_HANDLER)
@@ -145,4 +119,4 @@ dispatcher.add_handler(QUICKUNBAN_HANDLER)
 dispatcher.add_handler(GETLINK_HANDLER)
 
 __mod_name__ = "Special"
-__handlers__ = [BIRTHDAY_HANDLER, SNIPE_HANDLER, GETLINK_HANDLER, QUICKSCOPE_HANDLER, QUICKUNBAN_HANDLER]
+__handlers__ = [SNIPE_HANDLER, GETLINK_HANDLER, QUICKSCOPE_HANDLER, QUICKUNBAN_HANDLER]

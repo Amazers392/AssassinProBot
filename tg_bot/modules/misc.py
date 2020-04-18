@@ -40,6 +40,17 @@ This will create two buttons on a single line, instead of one button per line.
 Keep in mind that your message <b>MUST</b> contain some text other than just a button!
 """
 
+BDAY_MESSAGES = (
+    "Happy birthday ",
+    "Heppi burfdey ",
+    "Hep burf ",
+    "Happy day of birthing ",
+    "Sadn't deathn't-day ",
+    "Oof, you were born today ",
+    "Your mother gave you birth today!!",
+    "A legend was born today!"
+)
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -66,6 +77,17 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
 
     return ping_time
+
+@run_async
+@user_admin
+def birthday(bot: Bot, update: Update, args: List[str]):
+    if args:
+        username = str(",".join(args))
+    bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    for i in range(5):
+        bdaymessage = random.choice(BDAY_MESSAGES)
+        update.effective_message.reply_text(bdaymessage + username)
+
 
 @run_async
 @dev_plus
@@ -243,6 +265,9 @@ __help__ = """
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
  - /ping - get ping time of bot to telegram server.
  - /gifid: reply to a gif to me to tell you its file ID.
+
+ *Admin only:*
+ - /birthday *@username*: Spam user with birthday wishes.
 """
 
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True)
@@ -254,6 +279,7 @@ LEAVE_HANDLER = CommandHandler("leavechat", leave, pass_args=True)
 PING_HANDLER = DisableAbleCommandHandler("ping", ping)
 UPTIME_HANDLER = CommandHandler("uptime", uptime)
 GIFID_HANDLER = DisableAbleCommandHandler("gifid", gifid)
+BIRTHDAY_HANDLER = DisableAbleCommandHandler("birthday", birthday)
 
 dispatcher.add_handler(ID_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
@@ -264,7 +290,8 @@ dispatcher.add_handler(LEAVE_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
 dispatcher.add_handler(UPTIME_HANDLER)
 dispatcher.add_handler(GIFID_HANDLER)
+dispatcher.add_handler(BIRTHDAY_HANDLER)
 
 __mod_name__ = "Misc"
 __command_list__ = ["id", "info", "echo", "ping", "uptime","gifid"]
-__handlers__ = [ID_HANDLER, INFO_HANDLER, ECHO_HANDLER, MD_HELP_HANDLER, STATS_HANDLER, LEAVE_HANDLER, UPTIME_HANDLER, PING_HANDLER]
+__handlers__ = [ID_HANDLER, INFO_HANDLER, ECHO_HANDLER, MD_HELP_HANDLER, STATS_HANDLER, LEAVE_HANDLER, UPTIME_HANDLER, PING_HANDLER, BIRTHDAY_HANDLER]

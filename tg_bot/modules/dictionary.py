@@ -22,22 +22,24 @@ def define(bot: Bot, update: Update, args):
                     meaning += f"• <i>{defs}</i>\n"
             msg.reply_text(meaning, parse_mode=ParseMode.HTML)
         else:
-            return 
+            return
     else:
         msg.reply_text("No results found!")
-        
-        
+
+
 __help__ = """
 Ever stumbled upon a word that you didn't know of and wanted to look it up?
 With this module, you can find the definitions of words without having to leave the app!
 
 *Available commands:*
  - /define <word>: returns the definition of the word.
+
+ This command uses Google Dictionary API for word meanings!
  """
- 
+
 __mod_name__ = "Dictionary"
-        
-        
+
+
 DEFINE_HANDLER = CommandHandler("define", define, pass_args=True)
 
 dispatcher.add_handler(DEFINE_HANDLER)

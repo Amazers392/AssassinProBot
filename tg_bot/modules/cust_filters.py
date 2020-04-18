@@ -36,7 +36,7 @@ def list_handlers(bot: Bot, update: Update):
 
     if not all_handlers:
         if update_chat_title == message_chat_title:
-            update.effective_message.reply_text("No filters are active here!")
+            update.effective_message.reply_text("No filters are currently active here!")
         else:
             update.effective_message.reply_text(f"No filters are active in <b>{update_chat_title}</b>!",
                                                 parse_mode=telegram.ParseMode.HTML)
@@ -128,7 +128,7 @@ def filters(bot: Bot, update: Update):
     sql.add_filter(chat.id, keyword, content, is_sticker, is_document, is_image, is_audio, is_voice, is_video,
                    buttons)
 
-    msg.reply_text("Handler '{}' added!".format(keyword))
+    msg.reply_text("Filter '{}' added!".format(keyword))
     raise DispatcherHandlerStop
 
 
@@ -152,7 +152,7 @@ def stop_filter(bot: Bot, update: Update):
     for keyword in chat_filters:
         if keyword == args[1]:
             sql.remove_filter(chat.id, args[1])
-            msg.reply_text("Yep, I'll stop replying to that.")
+            msg.reply_text("Yep, I'll remove that filter.")
             raise DispatcherHandlerStop
 
     msg.reply_text("That's not a current filter - run /filters for all active filters.")

@@ -335,8 +335,8 @@ def supportlist(bot: Bot, update: Update):
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
-    
-    
+
+
 @run_async
 @dev_plus
 def sudolist(bot: Bot, update: Update):
@@ -376,49 +376,54 @@ def botstaff(bot: Bot, update: Update):
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
     reply += "\n<b>Developers⚡️:</b>\n"
-    for each_user in true_dev:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
+    if true_dev = []:
+        reply += "No Dev Users"
+    else:
+        for each_user in true_dev:
+            user_id = int(each_user)
+            try:
+                user = bot.get_chat(user_id)
+                reply += f"• {mention_html(user_id, user.first_name)}\n"
+            except TelegramError:
+                pass
     true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
     reply += "\n<b>Sudo Users🐉:</b>\n"
-    for each_user in true_sudo:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
+    if true_sudo = []:
+        reply += "No Sudo Users"
+    else:
+        for each_user in true_sudo:
+            user_id = int(each_user)
+            try:
+                user = bot.get_chat(user_id)
+                reply += f"• {mention_html(user_id, user.first_name)}\n"
+            except TelegramError:
+                pass
     reply += "\n<b>Support Users👹:</b>\n"
-    for each_user in SUPPORT_USERS:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
+    if SUPPORT_USERS = []:
+        reply += "No Support Users"
+    else:
+        for each_user in SUPPORT_USERS:
+            user_id = int(each_user)
+            try:
+                user = bot.get_chat(user_id)
+                reply += f"• {mention_html(user_id, user.first_name)}\n"
+            except TelegramError:
+                pass
     reply += "\n<b>Whitelisted Users🐺:</b>\n"
-    for each_user in WHITELIST_USERS:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
+    if WHITELIST_USERS = []:
+        reply += "No Whitelisted Users"
+    else:
+        for each_user in WHITELIST_USERS:
+            user_id = int(each_user)
+            try:
+                user = bot.get_chat(user_id)
 
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
+                reply += f"• {mention_html(user_id, user.first_name)}\n"
+            except TelegramError:
+                pass
+    reply += "\nFor seprate lists, use\n/slist for Sudo Users\n/supportlist for Support Users\n/whitelist for Whitelisted Users\n/devs for Developers"
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-'''
-__help__ = """
- - /whitelistlist - List whitelisted users.
- - /supportlist - List support users.
- - /sudolist - List sudo users.
- - /devlist - List dev users.
-"""
-'''
 
 SUDO_HANDLER = CommandHandler("addsudo", addsudo, pass_args=True)
 SUPPORT_HANDLER = CommandHandler("addsupport", addsupport, pass_args=True)

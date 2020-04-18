@@ -148,7 +148,7 @@ RM_BLACKLIST_URL_HANDLER = CommandHandler(
     "delurl", rm_blacklist_url, filters=Filters.group)
 
 GET_BLACKLISTED_URLS = CommandHandler(
-    "geturl",
+    "getblockedurl",
     get_blacklisted_urls,
     filters=Filters.group)
 
@@ -165,14 +165,12 @@ Domain blacklisting is used to stop certain domains from being mentioned in a gr
 the message will immediately be deleted.
 
 *NOTE:* domain blacklisting do not affect group admins.
-
-- /geturl: View the current blacklisted urls
+- /getblockedurl: View the current blacklisted urls
 
 *Admin only:*
 
 - /addurl <urls>: Add a domain to the blacklist. The bot will automatically parse the url.
 - /delurl <urls>: Remove urls from the blacklist
-
 """
 
 dispatcher.add_handler(URL_BLACKLIST_HANDLER)

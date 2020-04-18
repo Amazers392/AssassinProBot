@@ -40,11 +40,11 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
         return log_message
 
     if user_member.status == 'creator':
-        message.reply_text("Do you really thin that you can promote creator?\nDon't mess with him, he'll kick your ass!")
+        message.reply_text("Do you really think that you will promote creator?Lmao\nDon't mess with him, he'll kick your ass!")
         return log_message
 
     if user_member.status == 'administrator' :
-        message.reply_text("How dumb are you, the person is already an admin!")
+        message.reply_text("The person is already an admin!")
         return log_message
 
     if user_id == bot.id:
@@ -106,15 +106,15 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
         return log_message
 
     if user_member.status == 'creator':
-        message.reply_text("This person CREATED the chat, how can I demote them?")
+        message.reply_text("This person is Creator of this chat, how could I demote them?")
         return log_message
 
     if not user_member.status == 'administrator':
-        message.reply_text("Can't demote what wasn't promoted!")
+        message.reply_text("The person is not an admin\nCan't demote what wasn't promoted!")
         return log_message
 
     if user_id == bot.id:
-        message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        message.reply_text("Why would I demote myself?")
         return log_message
 
     try:
@@ -180,7 +180,7 @@ def set_title(bot: Bot, update: Update, args: List[str]):
         return
 
     if len(title) > 16:
-        message.reply_text("The Title for the User is longer than 16 characters.\nTruncating it to 16 characters.")
+        message.reply_text("The Title for the User is longer than 16 characters.\nShortening Title to 16 characters.")
 
     result = requests.post(f"https://api.telegram.org/bot{TOKEN}/setChatAdministratorCustomTitle"
                            f"?chat_id={chat.id}"
