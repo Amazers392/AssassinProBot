@@ -376,7 +376,7 @@ def botstaff(bot: Bot, update: Update):
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
     reply += "\n<b>Developers⚡️:</b>\n"
-    if true_dev = []:
+    if true_dev == []:
         reply += "No Dev Users"
     else:
         for each_user in true_dev:
@@ -388,7 +388,7 @@ def botstaff(bot: Bot, update: Update):
                 pass
     true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
     reply += "\n<b>Sudo Users🐉:</b>\n"
-    if true_sudo = []:
+    if true_sudo == []:
         reply += "No Sudo Users"
     else:
         for each_user in true_sudo:
@@ -399,7 +399,7 @@ def botstaff(bot: Bot, update: Update):
             except TelegramError:
                 pass
     reply += "\n<b>Support Users👹:</b>\n"
-    if SUPPORT_USERS = []:
+    if SUPPORT_USERS == []:
         reply += "No Support Users"
     else:
         for each_user in SUPPORT_USERS:
@@ -410,7 +410,7 @@ def botstaff(bot: Bot, update: Update):
             except TelegramError:
                 pass
     reply += "\n<b>Whitelisted Users🐺:</b>\n"
-    if WHITELIST_USERS = []:
+    if WHITELIST_USERS == []:
         reply += "No Whitelisted Users"
     else:
         for each_user in WHITELIST_USERS:

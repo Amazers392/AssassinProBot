@@ -16,16 +16,14 @@ from tg_bot.modules import ALL_MODULES
 from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
-DONATE_URL = "http://t.me/{}".format(OWNER_USERNAME)
-
 PM_START_TEXT = """
 Hi, my name is {}! - I'm here to help you manage your groups!
 Click Help button to find out more about how to use me, so you can get helped!
 
 For more commands click /help...
 
-If you like my work, kindly donate me at @{}
-""".format(dispatcher.bot.first_name, OWNER_USERNAME)
+If you like my work, kindly donate me at @Skuzzy
+""".format(dispatcher.bot.first_name)
 
 HELP_STRINGS = """
 Hey There! My name is *{}*.
@@ -49,8 +47,8 @@ And the following:
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 {} is hosted on Heroku Free Servers and it would be really helpful if you can donate my owner to upgrade the server for faster performance \
-You can donate by contacting him! [Skuzzy xD]({})"
-""".format(dispatcher.bot.first_name, DONATE_URL)
+You can donate by contacting him! [Skuzzy xD](https://t.me/Skuzzy_xD)"
+""".format(dispatcher.bot.first_name)
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -130,13 +128,13 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/DraXRobots"), InlineKeyboardButton(text="Support Group", url="http://t.me/DraXRobotsSupport")]]
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
-            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url=DONATE_URL)]]
+            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/Skuzzy_xD")]]
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(PM_START_TEXT, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
-        update.effective_message.reply_text("Yup? I'm on...")
+        update.effective_message.reply_text("Yup? I'm on and on...")
 
-
+'''
 # for test purposes
 def error_callback(bot, update, error):
     try:
@@ -163,7 +161,7 @@ def error_callback(bot, update, error):
     except TelegramError:
         print(error)
         # handle all other telegram related errors
-
+'''
 
 @run_async
 def help_button(bot: Bot, update: Update):
