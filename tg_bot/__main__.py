@@ -106,6 +106,7 @@ def send_help(chat_id, text, keyboard=None):
                                 parse_mode=ParseMode.MARKDOWN,
                                 reply_markup=keyboard)
 
+
 @run_async
 def start(bot: Bot, update: Update, args: List[str]):
     if update.effective_chat.type == "private":
@@ -126,12 +127,13 @@ def start(bot: Bot, update: Update, args: List[str]):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/{}".format(SUPPORT_CHANNEL)), InlineKeyboardButton(text="Support Group", url="http://t.me/{}".format(SUPPORT_GROUP))]]
+            keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/DraXRobots"), InlineKeyboardButton(text="Support Group", url="http://t.me/DraXRobotsSupport")]]
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
+            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/SkuzzyBot")]]
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(PM_START_TEXT, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
-        update.effective_message.reply_text("Yup?")
+        update.effective_message.reply_text("Wassup? I'm here")
 
 
 # for test purposes
