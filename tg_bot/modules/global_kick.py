@@ -76,7 +76,7 @@ def gkick(bot: Bot, update: Update, args: List[str]):
                 f"<b>Banned User:</b> {mention_html(user_chat.id, user_chat.first_name)}\n"
                 f"<b>Banned User ID:</b> {user_chat.id}\n"
                 f"<b>Event Stamp:</b> {current_time}")
-     bot.send_message(MESSAGE_DUMP, log_msg, parse_mode=ParseMode.HTML)
+    bot.send_message(MESSAGE_DUMP, log_msg, parse_mode=ParseMode.HTML)
 
     if user_chat.username:
         message.reply_text("Globally kicking user @{} ({})".format(user_chat.username, user_chat.user_id))
