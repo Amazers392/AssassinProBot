@@ -9,7 +9,7 @@ from telegram.ext.dispatcher import run_async, DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
 from tg_bot import dispatcher, updater, TOKEN, WEBHOOK, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, \
-    ALLOW_EXCL, SUPPORT_CHANNEL, SUPPORT_GROUP
+    ALLOW_EXCL, SUPPORT_CHANNEL, SUPPORT_GROUP, OWNER_USERNAME
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from tg_bot.modules import ALL_MODULES
@@ -22,8 +22,7 @@ Click Help button to find out more about how to use me, so you can get helped!
 
 For more commands click /help...
 
-Join [Support Channel](https://t.me/{}) if you you want to check bot status!
-Want to add me to your group? [Click here!](t.me/{}?startgroup=true)
+If you like my work, kindly donate me at @Skuzzy_xD
 """.format(dispatcher.bot.first_name, SUPPORT_CHANNEL, dispatcher.bot.username)
 
 HELP_STRINGS = """
@@ -48,8 +47,8 @@ And the following:
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 {} is hosted on Heroku Free Servers and it would be really helpful if you can donate \
-You can donate by contacting him! [Skuzzy_xD](t.me/SkuzzyBot)
-""".format(dispatcher.bot.first_name)
+You can donate by contacting him! [Skuzzy xD](t.me/{})
+""".format(dispatcher.bot.first_name, OWNER_USERNAME)
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -129,7 +128,7 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/{}".format(SUPPORT_CHANNEL)), InlineKeyboardButton(text="Support Group", url="http://t.me/{}".format(SUPPORT_GROUP))]]
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
-            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/SkuzzyBot")]]
+            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/{}".format(OWNER_USERNAME)")]]
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(PM_START_TEXT, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
