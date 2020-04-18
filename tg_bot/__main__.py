@@ -128,7 +128,7 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             keyboard = [[InlineKeyboardButton(text="📢 Support Channel", url="https://t.me/{}".format(SUPPORT_CHANNEL)), InlineKeyboardButton(text="Support Group", url="http://t.me/{}".format(SUPPORT_GROUP))]]
             keyboard += [[InlineKeyboardButton(text="🎉 Add me in your Group!", url="t.me/{}?startgroup=true".format(bot.username))]]
-            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://t.me/{}".format(OWNER_USERNAME))]]
+            keyboard += [[InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="Donate", url="http://skuzzers.xyz/donation")]]
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(PM_START_TEXT, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
