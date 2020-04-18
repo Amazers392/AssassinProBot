@@ -8,7 +8,7 @@ from telegram import Bot, Update, ParseMode, TelegramError
 from telegram.ext import CommandHandler, run_async
 from telegram.utils.helpers import mention_html
 
-from tg_bot import dispatcher, WHITELIST_USERS, SUPPORT_USERS, SUDO_USERS, DEV_USERS, OWNER_ID, OWNER_USERNAME
+from tg_bot import dispatcher, WHITELIST_USERS, SUPPORT_USERS, SUDO_USERS, DEV_USERS, OWNER_ID
 from tg_bot.modules.helper_funcs.chat_status import whitelist_plus, dev_plus
 from tg_bot.modules.helper_funcs.extraction import extract_user
 from tg_bot.modules.log_channel import gloggable
@@ -335,53 +335,8 @@ def supportlist(bot: Bot, update: Update):
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
-
-@run_async
-@dev_plus
-def botstaff(bot: Bot, update: Update):
-    its_owner = OWNER_USERNAME
-    try:
-        reply = f"<b>Owner:</b> @{its_owner}\n"
-    except TelegramError:
-        pass
-    true_dev = list(set(DEV_USERS) - {OWNER_ID})
-    reply += "\n<b>Developers ⚡️:</b>\n"
-    for each_user in true_dev:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
-    true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
-    reply += "\n<b>Sudo Users 🐉:</b>\n"
-    for each_user in true_sudo:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
-    reply += "\n<b>Support Users 👹:</b>\n"
-    for each_user in SUPPORT_USERS:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
-    reply += "\n<b>Whitelisted Users 🐺:</b>\n"
-    for each_user in WHITELIST_USERS:
-        user_id = int(each_user)
-        try:
-            user = bot.get_chat(user_id)
-
-            reply += f"• {mention_html(user_id, user.first_name)}\n"
-        except TelegramError:
-            pass
-    update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
-
-
+    
+    
 @run_async
 @dev_plus
 def sudolist(bot: Bot, update: Update):
@@ -411,6 +366,50 @@ def devlist(bot: Bot, update: Update):
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
+@run_async
+@dev_plus
+def botstaff(bot: Bot, update: Update):
+    try:
+        owner_bot = bot.get_chat(int(OWNER_ID))
+        reply = f"<b>Owner:</b> {mention_html(owner_bot_id, owner_bot.first_name)}\n"
+    except TelegramError:
+        pass
+    true_dev = list(set(DEV_USERS) - {OWNER_ID})
+    reply += "\n<b>Developers⚡️:</b>\n"
+    for each_user in true_dev:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    true_sudo = list(set(SUDO_USERS) - set(DEV_USERS))
+    reply += "\n<b>Sudo Users🐉:</b>\n"
+    for each_user in true_sudo:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    reply += "\n<b>Support Users👹:</b>\n"
+    for each_user in SUPPORT_USERS:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    reply += "\n<b>Whitelisted Users🐺:</b>\n"
+    for each_user in WHITELIST_USERS:
+        user_id = int(each_user)
+        try:
+            user = bot.get_chat(user_id)
+
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
+        except TelegramError:
+            pass
+    update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 '''
 __help__ = """

@@ -426,7 +426,8 @@ def main():
     else:
         LOGGER.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4)
-        LOGGER.info("Group Bot Started Successfull ;)/nPlease wait upto 2 minutes for bot to work.")
+        LOGGER.info("Group Bot Started Successfull ;)")
+        LOGGER.info("Please wait upto 2 minutes for bot to work.")
     updater.idle()
 
 if __name__ == '__main__':
