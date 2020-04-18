@@ -1,5 +1,0 @@
-*.pyc
-tg_bot/__pycache__/
-tg_bot/modules/__pycache__/
-tg_bot/modules/helper_funcs/__pycache__/
-tg_bot/modules/sql/__pycache__/
