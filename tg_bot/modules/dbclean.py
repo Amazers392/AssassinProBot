@@ -165,14 +165,14 @@ def dbclean_callback(bot: Bot, update: Update):
             muted_chat_count = get_muted_chats(bot, update)
             reply = f"Muted Chats - {muted_chat_count}"
 
-            if muted_chat_count > 0:
+            if invalid_chat_count > 0:
                 buttons = [
                     [InlineKeyboardButton("Leave Muted Chats", callback_data=f"db_clean_muted_chats")]
                 ]
 
                 update.effective_message.reply_text(reply, reply_markup=InlineKeyboardMarkup(buttons))
             else:
-                reply_clear = "I'm not muted in any Chats."
+                reply_clear = "No invalid chats or gban."
                 update.effective_message.reply_text(reply_clear)
 
         #Invalid Gbans
@@ -181,7 +181,7 @@ def dbclean_callback(bot: Bot, update: Update):
             invalid_gban_count = get_invalid_gban(bot, update)
             reply = f"Invalid Gbans - {invalid_gban_count}"
 
-            if invalid_gban_count > 0:
+            if invalid_chat_count > 0:
                 buttons = [
                     [InlineKeyboardButton("Remove Invalid Gbans", callback_data=f"db_clean_invalid_gbans")]
                 ]
