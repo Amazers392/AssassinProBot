@@ -34,7 +34,7 @@ def speedtestxyz_callback(bot: Bot, update: Update):
 
         if query.data == 'speedtest_image':
             speedtest_image = speed.results.share()
-            update.effective_message.reply_photo(photo=speedtest_image, caption=replymsg)
+            update.effective_message.reply_photo(photo=speedtest_image, caption=speedtest)
             msg.delete()
 
         elif query.data == 'speedtest_text':
@@ -42,7 +42,7 @@ def speedtestxyz_callback(bot: Bot, update: Update):
             replymsg += f"\nDownload: `{convert(result['download'])}Mb/s`\nUpload: `{convert(result['upload'])}Mb/s`\nPing: `{result['ping']}`"
             update.effective_message.edit_text(replymsg, parse_mode=ParseMode.MARKDOWN)
     else:
-        query.answer("You are required to join Heroes Association to use this command.")
+        query.answer("You are not allowed to use this command.")
 
 
 SPEED_TEST_HANDLER = DisableAbleCommandHandler("speedtest", speedtestxyz)

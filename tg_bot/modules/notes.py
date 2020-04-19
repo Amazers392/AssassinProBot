@@ -150,7 +150,7 @@ def save(bot: Bot, update: Update):
                            "\nI'll save all the text I can, but if you want more, you'll have to "
                            "forward the message yourself, and then save it.")
         else:
-            msg.reply_text("Bots are kinda handicapped by telegram, making it hard for bots to "
+            msg.reply_text("Bots are kinda handicapped by Telegram, making it hard for bots to "
                            "interact with other bots, so I can't save this message "
                            "like I usually would - do you mind forwarding it and "
                            "then saving that new message? Thanks!")

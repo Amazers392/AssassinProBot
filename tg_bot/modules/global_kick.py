@@ -6,7 +6,7 @@ from typing import List, Optional
 from telegram.error import BadRequest, TelegramError
 from telegram.ext import run_async, CommandHandler, MessageHandler, Filters
 from telegram.utils.helpers import mention_html
-from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, STRICT_GBAN, WHITELIST_USERS
+from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, STRICT_GBAN, WHITELIST_USERS, DEV_USERS, MESSAGE_DUMP
 from tg_bot.modules.helper_funcs.chat_status import user_admin, is_user_admin, sudo_plus
 from tg_bot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from tg_bot.modules.helper_funcs.filters import CustomFilters
@@ -51,6 +51,9 @@ def gkick(bot: Bot, update: Update, args: List[str]):
     if not user_id:
         message.reply_text("You do not seems to be referring to a user")
         return
+    if int(user_id) in DEV_USERS:
+        message.reply_text("OHHH! Someone's trying to gkick a Dev user! *Grabs Popcorn*")
+        return
     if int(user_id) in SUDO_USERS or int(user_id) in SUPPORT_USERS:
         message.reply_text("OHHH! Someone's trying to gkick a sudo/support user! *Grabs Popcorn*")
         return
@@ -63,7 +66,6 @@ def gkick(bot: Bot, update: Update, args: List[str]):
     if int(user_id) in WHITELIST_USERS:
         message.reply_text("OHHH! Someone's trying to gkick a whitelisted user! *Grabs Peanuts*")
         return
-    chats = get_all_chats()
 
     start_time = time.time()
     datetime_fmt = "%H:%M - %d-%m-%Y"
@@ -72,19 +74,16 @@ def gkick(bot: Bot, update: Update, args: List[str]):
         chat_origin = "<b>{} ({})</b>\n".format(html.escape(chat.title), chat.id)
     else:
         chat_origin = "<b>{}</b>\n".format(chat.id)
-    log_msg = (f"#GKICKED\n"
+    log_msg = (f"#GKICK\n"
                 f"<b>Originated from:</b> {chat_origin}\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<b>Banned User:</b> {mention_html(user_chat.id, user_chat.first_name)}\n"
-                f"<b>Banned User ID:</b> {user_chat.id}\n"
+                f"<b>Kicked User:</b> {mention_html(user_chat.id, user_chat.first_name)}\n"
+                f"<b>Kicked User ID:</b> {user_chat.id}\n"
                 f"<b>Event Stamp:</b> {current_time}")
     bot.send_message(MESSAGE_DUMP, log_msg, parse_mode=ParseMode.HTML)
+    message.reply_text(f"Globally kicking user {mention_html(user_chat.id, user_chat.first_name)}\nUser ID: {user_chat.id}", parse_mode=ParseMode.HTML)
 
-    if user_chat.username:
-        message.reply_text("Globally kicking user @{} ({})".format(user_chat.username, user_chat.user_id))
-    else:
-        message.reply_text("Globally kicking user with User ID {}".format(user_chat.user_id))
-
+    chats = get_all_chats()
     for chat in chats:
         try:
              bot.unban_chat_member(chat.chat_id, user_id)  # Unban_member = kick (and not ban)
@@ -97,7 +96,7 @@ def gkick(bot: Bot, update: Update, args: List[str]):
         except TelegramError:
             pass
 
-GKICK_HANDLER = CommandHandler("gkick", gkick, pass_args=True)
+GKICK_HANDLER = CommandHandler(["gkick", "globalkick"], gkick, pass_args=True)
 dispatcher.add_handler(GKICK_HANDLER)
 
 __mod_name__ = "Global Kick"

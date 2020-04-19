@@ -115,7 +115,7 @@ def bl_users(bot: Bot, update: Update):
 
     message = "<b>Blacklisted Users</b>\n"
     if not users:
-        message += "Noone is being ignored as of yet."
+        message += "No-one is being ignored as of yet."
     else:
         message += '\n'.join(users)
 

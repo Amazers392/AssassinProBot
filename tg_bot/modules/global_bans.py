@@ -220,6 +220,14 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         message.reply_text("You don't seem to be referring to a user.")
         return
 
+    if int(user_id) in DEV_USERS or int(user_id) in SUDO_USERS or int(user_id) in SUPPORT_USERS or int(user_id) in WHITELIST_USERS:
+        message.reply_text("Cannot ungban which couldn't be gbanned")
+        return
+
+    if user_id == bot.id:
+        message.reply_text("LMAO, you can't ban me, so you won't be able to even ungban me!")
+        return
+
     user_chat = bot.get_chat(user_id)
     if user_chat.type != 'private':
         message.reply_text("That's not a user!")
@@ -418,8 +426,8 @@ you and your groups by removing spam flooders as quickly as possible. They can b
 Note: You can appeal Antispam Bans or ask Antispam Bans at @DraXRobotsSupport
 """
 
-GBAN_HANDLER = CommandHandler("gban", gban, pass_args=True)
-UNGBAN_HANDLER = CommandHandler("ungban", ungban, pass_args=True)
+GBAN_HANDLER = CommandHandler(["gban", "globalban"], gban, pass_args=True)
+UNGBAN_HANDLER = CommandHandler(["ungban", "unglobalban", "gunban"], ungban, pass_args=True)
 GBAN_LIST = CommandHandler("gbanlist", gbanlist)
 
 GBAN_STATUS = CommandHandler(["gbanstat", "antispam"], gbanstat, pass_args=True, filters=Filters.group)

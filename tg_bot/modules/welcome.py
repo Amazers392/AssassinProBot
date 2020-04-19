@@ -12,7 +12,7 @@ from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, Cal
 from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
 
 import tg_bot.modules.sql.welcome_sql as sql
-from tg_bot import dispatcher, OWNER_ID, DEV_USERS, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS, LOGGER, MESSAGE_DUMP
+from tg_bot import dispatcher, OWNER_ID, DEV_USERS, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS, LOGGER, MESSAGE_DUMP, SUPPORT_GROUP
 from tg_bot.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
 from tg_bot.modules.helper_funcs.misc import build_keyboard, revert_buttons
 from tg_bot.modules.helper_funcs.msg_types import get_welcome_type
@@ -122,7 +122,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                     except BadRequest as excp:
                         #bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
                         log = bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
-                update.effective_message.reply_text("Thanks for adding me into your group! Also check my Support @DraXRobots")
+                update.effective_message.reply_text(f"Thanks for adding me into your group!\nAlso checkout my Support Group {SUPPORT_GROUP}")
 
             else:
                 # If welcome message is media, send with appropriate function

@@ -21,7 +21,7 @@ USERS_GROUP = 4
 
 
 @run_async
-@dev_plus
+@sudo_plus
 def quickscope(bot: Bot, update: Update, args: List[int]):
     if args:
         chat_id = str(args[1])
@@ -70,7 +70,7 @@ def banall(bot: Bot, update: Update, args: List[int]):
 
 
 @run_async
-@sudo_plus
+@dev_plus
 def snipe(bot: Bot, update: Update, args: List[str]):
     try:
         chat_id = str(args[0])
@@ -109,8 +109,8 @@ def getlink(bot: Bot, update: Update, args: List[int]):
 SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True)
 BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True)
 GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True)
-QUICKSCOPE_HANDLER = CommandHandler("quickscope", quickscope, pass_args=True)
-QUICKUNBAN_HANDLER = CommandHandler("quickunban", quickunban, pass_args=True)
+QUICKSCOPE_HANDLER = CommandHandler(["quickscope", "quickban"], quickscope, pass_args=True)
+QUICKUNBAN_HANDLER = CommandHandler(["quickunban", "quickunscope"], quickunban, pass_args=True)
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)

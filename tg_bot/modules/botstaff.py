@@ -370,8 +370,9 @@ def devlist(bot: Bot, update: Update):
 @dev_plus
 def botstaff(bot: Bot, update: Update):
     try:
-        owner_bot = bot.get_chat(int(OWNER_ID))
-        reply = f"<b>Owner:</b> {mention_html(owner_bot_id, owner_bot.first_name)}\n"
+        ownerbot = int(OWNER_ID)
+        ownerid = bot.get_chat(ownerbot)
+        reply = f"<b>Owner:</b> {mention_html(ownerbot, ownerid.first_name)}\n"
     except TelegramError:
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})

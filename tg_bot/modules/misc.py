@@ -97,7 +97,7 @@ def leave(bot: Bot, update: Update, args: List[str]):
         try:
             bot.leave_chat(int(chat_id))
             update.effective_message.reply_text("Beep boop, I left that soup!.")
-        except TelegramError:
+        except:
             update.effective_message.reply_text("Beep boop, I could not leave that group(dunno why tho).")
     else:
         update.effective_message.reply_text("Send a valid chat ID")
