@@ -111,7 +111,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
         return
 
-    message.reply_text(f"Okay!\nOne gban coming right up for (user_chat.first_name)")
+    message.reply_text(f"Okay!\nGbanning {mention_html(user_chat.id, user_chat.first_name)}\nUser ID: {user_chat.id}", parse_mode=ParseMode.HTML}")
 
     start_time = time.time()
     datetime_fmt = "%H:%M - %d-%m-%Y"
@@ -237,7 +237,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         message.reply_text("This user is not gbanned!")
         return
 
-    message.reply_text(f"I'll give {user_chat.first_name} a second chance, globally.")
+    message.reply_text(f"I'll shall ungban {user_chat.first_name} last time...")
 
     start_time = time.time()
     datetime_fmt = "%H:%M - %d-%m-%Y"
