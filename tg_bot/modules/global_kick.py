@@ -82,11 +82,17 @@ def gkick(bot: Bot, update: Update, args: List[str]):
                 f"<b>Event Stamp:</b> {current_time}")
     bot.send_message(MESSAGE_DUMP, log_msg, parse_mode=ParseMode.HTML)
     message.reply_text(f"Globally kicking user {mention_html(user_chat.id, user_chat.first_name)}\nUser ID: {user_chat.id}", parse_mode=ParseMode.HTML)
-
+    
+    start_time = time.time()
+    datetime_fmt = "%H:%M - %d-%m-%Y"
+    current_time = datetime.utcnow().strftime(datetime_fmt)
+    
     chats = get_all_chats()
+    gkicked_chats = 0
     for chat in chats:
         try:
              bot.unban_chat_member(chat.chat_id, user_id)  # Unban_member = kick (and not ban)
+                gkicked_chats += 1
         except BadRequest as excp:
             if excp.message in GKICK_ERRORS:
                 pass
@@ -96,6 +102,19 @@ def gkick(bot: Bot, update: Update, args: List[str]):
         except TelegramError:
             pass
 
+    if MESSAGE_DUMP:
+        log.edit_text(log_message + f"\n<b>Chats affected:</b> {gkicked_chats}", parse_mode=ParseMode.HTML)
+
+    end_time = time.time()
+    gkick_time = round((end_time - start_time), 2)
+
+    if gkick_time > 60:
+        gban_time = round((gkick_time / 60), 2)
+        message.reply_text(f"Done! This Gkick affected {gkicked_chats} chats, Took {gkick_time} min")
+    else:
+        message.reply_text(f"Done! This Gkick affected {gkicked_chats} chats, Took {gkick_time} sec")
+
+        
 GKICK_HANDLER = CommandHandler(["gkick", "globalkick"], gkick, pass_args=True)
 dispatcher.add_handler(GKICK_HANDLER)
 
