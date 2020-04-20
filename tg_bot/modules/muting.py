@@ -78,42 +78,7 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     return ""
 
-@run_async
-@connection_status
-@bot_admin
-@user_admin
-@loggable
-def smute(bot: Bot, update: Update, args: List[str]) -> str:
-    chat = update.effective_chat
-    user = update.effective_user
-    message = update.effective_message
-
-    user_id, reason = extract_user_and_text(message, args)
-    reply = check_user(user_id, bot, chat)
-
-    if reply:
-        message.reply_text(reply)
-        return ""
-
-    member = chat.get_member(user_id)
-
-    log = (f"<b>{html.escape(chat.title)}:</b>\n"
-           f"#MUTE\n"
-           f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-           f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}")
-
-    if reason:
-        log += f"\n<b>Reason:</b> {reason}"
-
-    if member.can_send_messages is None or member.can_send_messages:
-        bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
-        return log
-
-    else:
-        message.reply_text("This user is already muted!")
-
-    return ""
-
+  
 @run_async
 @connection_status
 @bot_admin
@@ -229,18 +194,15 @@ __help__ = """
  - /mute <userhandle>: silences a user. Can also be used as a reply, muting the replied to user.
  - /tmute <userhandle> x(m/h/d): mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
  - /unmute <userhandle>: unmutes a user. Can also be used as a reply, muting the replied to user.
- - /smute <userhandle>: silences a user, without sedning message in chat.
 """
 
 MUTE_HANDLER = CommandHandler("mute", mute, pass_args=True)
-SMUTE_HANDLER = CommandHandler("smute", smute, pass_args=True)
 UNMUTE_HANDLER = CommandHandler("unmute", unmute, pass_args=True)
 TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"], temp_mute, pass_args=True)
 
 dispatcher.add_handler(MUTE_HANDLER)
-dispatcher.add_handler(SMUTE_HANDLER)
 dispatcher.add_handler(UNMUTE_HANDLER)
 dispatcher.add_handler(TEMPMUTE_HANDLER)
 
 __mod_name__ = "Muting"
-__handlers__ = [MUTE_HANDLER, UNMUTE_HANDLER, TEMPMUTE_HANDLER, SMUTE_HANDLER]
+__handlers__ = [MUTE_HANDLER, UNMUTE_HANDLER, TEMPMUTE_HANDLER]
