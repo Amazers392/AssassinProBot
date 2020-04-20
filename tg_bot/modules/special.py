@@ -180,7 +180,6 @@ def info(bot: Bot, update: Update, args: List[str]):
         [MessageEntity.TEXT_MENTION]))):
         message.reply_text("I can't extract a user from this.")
         return
-
     else:
         return
 
@@ -292,6 +291,6 @@ dispatcher.add_handler(UPTIME_HANDLER)
 dispatcher.add_handler(GIFID_HANDLER)
 dispatcher.add_handler(BIRTHDAY_HANDLER)
 
-__mod_name__ = "Misc"
-__command_list__ = ["id", "info", "echo", "ping", "uptime","gifid"]
+__mod_name__ = "🌟Special🌟"
+__command_list__ = ["id", "info", "echo", "ping", "uptime", "gifid"]
 __handlers__ = [ID_HANDLER, INFO_HANDLER, ECHO_HANDLER, MD_HELP_HANDLER, STATS_HANDLER, LEAVE_HANDLER, UPTIME_HANDLER, PING_HANDLER, BIRTHDAY_HANDLER]

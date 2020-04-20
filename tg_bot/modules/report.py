@@ -64,21 +64,16 @@ def report(bot: Bot, update: Update) -> str:
         admin_list = chat.get_administrators()
         message = update.effective_message
 
-
         if user.id == bot.id:
             message.reply_text("Lmao, why would I report myself? Nice try.")
             return ""
 
-
         if chat.username and chat.type == Chat.SUPERGROUP:
-
             reported = f"{mention_html(user.id, user.first_name)} reported {mention_html(reported_user.id, reported_user.first_name)} to the admins!"
-
             msg = (f"<b>{html.escape(chat.title)}:</b>\n"
                    f"<b>Reported user:</b> {mention_html(reported_user.id, reported_user.first_name)} (<code>{reported_user.id}</code>)\n"
                    f"<b>Reported by:</b> {mention_html(user.id, user.first_name)} (<code>{user.id}</code>)")
             link = f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_id}">click here</a>'
-
             should_forward = False
         else:
             reported = f"{mention_html(user.id, user.first_name)} reported " \
@@ -91,29 +86,21 @@ def report(bot: Bot, update: Update) -> str:
         message.reply_text(reported, parse_mode=ParseMode.HTML)
 
         for admin in admin_list:
-
             if admin.user.is_bot:  # can't message bots
                 continue
-
             if sql.user_should_report(admin.user.id):
-
                 try:
                     bot.send_message(admin.user.id, msg + link, parse_mode=ParseMode.HTML)
-
                     if should_forward:
                         message.reply_to_message.forward(admin.user.id)
 
                         if len(message.text.split()) > 1:  # If user is giving a reason, send his message too
                             message.forward(admin.user.id)
-
                 except Unauthorized:
                     pass
-
                 except BadRequest:  # TODO: cleanup exceptions
                     LOGGER.exception("Exception while reporting user")
-
         return msg
-
     return ""
 
 

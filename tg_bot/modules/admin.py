@@ -172,7 +172,7 @@ def set_title(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't set my own title myself! Get the one who made me admin to do it for me.")
+        message.reply_text("I can't set my own title myself! Get the one who promoted me to do it for me.")
         return
 
     if not title:

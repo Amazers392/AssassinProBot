@@ -118,5 +118,5 @@ dispatcher.add_handler(QUICKSCOPE_HANDLER)
 dispatcher.add_handler(QUICKUNBAN_HANDLER)
 dispatcher.add_handler(GETLINK_HANDLER)
 
-__mod_name__ = "Special"
+__mod_name__ = "Support Team Special"
 __handlers__ = [SNIPE_HANDLER, GETLINK_HANDLER, QUICKSCOPE_HANDLER, QUICKUNBAN_HANDLER]

@@ -149,18 +149,14 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
     chats = get_all_chats()
     gbanned_chats = 0
-
     for chat in chats:
         chat_id = chat.chat_id
-
         # Check if this group has disabled gbans
         if not sql.does_chat_gban(chat_id):
             continue
-
         try:
             bot.kick_chat_member(chat_id, user_id)
             gbanned_chats += 1
-
         except BadRequest as excp:
             if excp.message in GBAN_ERRORS:
                 pass

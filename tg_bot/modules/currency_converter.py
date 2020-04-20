@@ -42,6 +42,10 @@ def convert(bot: Bot, update: Update):
 
 
 __help__ = """
+Every wanted to convert without leaving the chat? Use this plugin to \
+easily convert one currency to another. This module uses AlphaVantage to \
+convert the currency.
+
  - /cash : currency converter
  Example: /cash 1 USD INR
 """

@@ -93,7 +93,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("Oh, Genos? Let's get this moving.\nMy owner joined🎉")
+                update.effective_message.reply_text("Oh, Yea! Let's get this moving.\nMy owner joined🎉")
                 welcome_log = (f"{html.escape(chat.title)}\n"
                                f"#USER_JOINED\n"
                                f"Bot Owner just joined the chat")
@@ -120,9 +120,8 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                     try:
                         bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id), parse_mode=ParseMode.HTML)
                     except BadRequest as excp:
-                        #bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
                         log = bot.send_message(MESSAGE_DUMP, "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id) + "\n\nFormatting has been disabled due to an unexpected error.")
-                update.effective_message.reply_text(f"Thanks for adding me into your group!\nAlso checkout my Support Group {SUPPORT_GROUP}")
+                update.effective_message.reply_text(f"Thanks for adding me into your group!\nAlso checkout my Support Group @{SUPPORT_GROUP}")
 
             else:
                 # If welcome message is media, send with appropriate function
@@ -136,7 +135,6 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                 if cust_welcome:
                     if cust_welcome == sql.DEFAULT_WELCOME:
                         cust_welcome = random.choice(sql.DEFAULT_WELCOME_MESSAGES).format(first=escape_markdown(first_name))
-
                     if new_mem.last_name:
                         fullname = escape_markdown(f"{first_name} {new_mem.last_name}")
                     else:
@@ -199,7 +197,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                         }
                     })
                     new_join_mem = f"[{escape_markdown(new_mem.first_name)}](tg://user?id={user.id})"
-                    message = msg.reply_text(f"{new_join_mem}, click the button below to prove you're human.\nYou have 160 seconds.",
+                    message = msg.reply_text(f"{new_join_mem}, Click the button below to prove you're human.\nYou have 160 seconds.",
                                              reply_markup=InlineKeyboardMarkup([{InlineKeyboardButton(
                                                  text="Yes, I'm human.",
                                                  callback_data=f"user_join_({new_mem.id})")}]),
@@ -572,7 +570,7 @@ def user_button(bot: Bot, update: Update):
         member_dict = VERIFIED_USER_WAITLIST.pop(user.id)
         member_dict["status"] = True
         VERIFIED_USER_WAITLIST.update({user.id: member_dict})
-        query.answer(text="Yeet! You're a human, unmuted!")
+        query.answer(text="Okay! You're a human, unmuted!")
         bot.restrict_chat_member(chat.id, user.id, can_send_messages=True,
                                  can_send_media_messages=True,
                                  can_send_other_messages=True,
@@ -597,17 +595,17 @@ def user_button(bot: Bot, update: Update):
 
 WELC_HELP_TXT = ("Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages"
                  " to be individually generated, like the default welcome message is, you can use *these* variables:\n"
-                 " - `{{first}}`: this represents the user's *first* name\n"
-                 " - `{{last}}`: this represents the user's *last* name. Defaults to *first name* if user has no "
+                 " - `{first}`: this represents the user's *first* name\n"
+                 " - `{last}`: this represents the user's *last* name. Defaults to *first name* if user has no "
                  "last name.\n"
-                 " - `{{fullname}}`: this represents the user's *full* name. Defaults to *first name* if user has no "
+                 " - `{fullname}`: this represents the user's *full* name. Defaults to *first name* if user has no "
                  "last name.\n"
-                 " - `{{username}}`: this represents the user's *username*. Defaults to a *mention* of the user's "
+                 " - `{username}`: this represents the user's *username*. Defaults to a *mention* of the user's "
                  "first name if has no username.\n"
-                 " - `{{mention}}`: this simply *mentions* a user - tagging them with their first name.\n"
-                 " - `{{id}}`: this represents the user's *id*\n"
-                 " - `{{count}}`: this represents the user's *member number*.\n"
-                 " - `{{chatname}}`: this represents the *current chat name*.\n"
+                 " - `{mention}`: this simply *mentions* a user - tagging them with their first name.\n"
+                 " - `{id}`: this represents the user's *id*\n"
+                 " - `{count}`: this represents the user's *member number*.\n"
+                 " - `{chatname}`: this represents the *current chat name*.\n"
                  "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n"
                  "Welcome messages also support markdown, so you can make any elements bold/italic/code/links. "
                  "Buttons are also supported, so you can make your welcomes look awesome with some nice intro "
@@ -625,7 +623,7 @@ WELC_MUTE_HELP_TXT = (
     "- `/welcomemute soft`: restricts new members from sending media for 24 hours.\n"
     "- `/welcomemute strong`: mutes new members till they tap on a button thereby verifying they're human.\n"
     "- `/welcomemute off`: turns off welcomemute.\n"
-    "`Note:` Strong mode kicks a user from the chat if they dont verify in 160seconds. They can always rejoin though"
+    "`Note:` Strong mode kicks a user from the chat if they dont verify in 160 seconds. They can always rejoin though"
                      )
 
 @run_async

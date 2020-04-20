@@ -134,35 +134,6 @@ def start(bot: Bot, update: Update, args: List[str]):
     else:
         update.effective_message.reply_text("Yup? I'm on and on...")
 
-'''
-# for test purposes
-def error_callback(bot, update, error):
-    try:
-        raise error
-    except Unauthorized:
-        print("no nono1")
-        print(error)
-        # remove update.message.chat_id from conversation list
-    except BadRequest:
-        print("no nono2")
-        print("BadRequest caught")
-        print(error)
-        # handle malformed requests - read more below!
-    except TimedOut:
-        print("no nono3")
-        # handle slow connection problems
-    except NetworkError:
-        print("no nono4")
-        # handle other connection problems
-    except ChatMigrated as err:
-        print("no nono5")
-        print(err)
-        # the chat_id of a group has changed, use e.new_chat_id instead
-    except TelegramError:
-        print(error)
-        # handle all other telegram related errors
-'''
-
 @run_async
 def help_button(bot: Bot, update: Update):
     query = update.callback_query
@@ -220,7 +191,6 @@ def get_help(bot: Bot, update: Update):
 
     # ONLY send help in PM
     if chat.type != chat.PRIVATE:
-
         update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Help", url="t.me/{}?start=help".format(bot.username))]]))
         return
@@ -359,7 +329,7 @@ def donate(bot: Bot, update: Update):
     else:
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-            update.effective_message.reply_text("I've PM'ed you about donating to my creator!")
+            update.effective_message.reply_text("I've messaged you about donating to my creator!")
         except Unauthorized:
             update.effective_message.reply_text("Contact me in PM first to get donation information.")
 

@@ -13,15 +13,16 @@ class Config(object):
     API_KEY = "750944856:AAHc-0wVffY0LKDGJydOkr6IQ4so6bZ19aA"
     OWNER_ID = "716243352"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "Skuzzy_xD"
-    SUPPORT_GROUP = "DraXRoBotsSupport"
-    SUPPORT_CHANNEL = "DraXRoBots"
+    SUPPORT_GROUP = "DraXRobotsSupport"
+    SUPPORT_CHANNEL = "DraXRobots"
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:zN3ate2ltVBqClVXG3M2M17SoxdlFYA8@motty.db.elephantsql.com:5432/dxcucqwe'
+    #SQLALCHEMY_DATABASE_URI = 'postgres://botuser:botuser@localhost:5432/botdb' #loacl db
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
-    GBAN_LOGS = MESSAGE_DUMP #Gba logs same as MESSAGE_DUMP
+    GBAN_LOGS = MESSAGE_DUMP #Gban logs same as MESSAGE_DUMP
     LOAD = []
-    NO_LOAD = ['connection', 'cleaner', 'feds', 'dev', 'shout', 'speedtest', 'dbcleanup', 'dbclean']
+    NO_LOAD = ['connection', 'cleaner', 'feds', 'dev', 'speedtest', 'dbcleanup', 'dbclean']
     WEBHOOK = False
     URL = None
     MAPS_API = ""
@@ -46,9 +47,6 @@ class Config(object):
     ALLOW_EXCL = True  # Allow ! commands as well as /
     CASH_API_KEY = "ZKRIQPI9PEBC847A" # Get one from https://www.alphavantage.co/support/#api-key
     TIME_API_KEY = "PGMJQHM4QRFX" # Get one from https://timezonedb.com/register
-    HEROKU_API_KEY = "6e1388d2-f432-483f-8af1-a9a77a384987"
-    HEROKU_APP_NAME = "agent47bot"
-
 
 class Production(Config):
     LOGGER = True

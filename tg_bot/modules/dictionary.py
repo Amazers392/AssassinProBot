@@ -34,7 +34,7 @@ With this module, you can find the definitions of words without having to leave 
 *Available commands:*
  - /define <word>: returns the definition of the word.
 
- This command uses Google Dictionary API for word meanings!
+ This command uses Google Dictionary API to find word meanings!
  """
 
 __mod_name__ = "Dictionary"

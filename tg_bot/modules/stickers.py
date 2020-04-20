@@ -91,7 +91,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
                            f"Emoji is:" + " " + sticker_emoji,
                            parse_mode=ParseMode.MARKDOWN)
         except OSError as e:
-            msg.reply_text("I can only kang images m8.")
+            msg.reply_text("I can only kang images for now buddy.")
             print(e)
             return
         except TelegramError as e:
@@ -150,7 +150,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
                 f"Emoji is: {sticker_emoji}",
                 parse_mode=ParseMode.MARKDOWN)
         except OSError as e:
-            msg.reply_text("I can only kang images m8.")
+            msg.reply_text("I can only kang images buddy.")
             print(e)
             return
         except TelegramError as e:

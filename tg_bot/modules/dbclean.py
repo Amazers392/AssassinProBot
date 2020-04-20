@@ -138,11 +138,8 @@ def dbcleanxyz(bot: Bot, update: Update):
 def dbclean_callback(bot: Bot, update: Update):
     msg = update.effective_message
     query = update.callback_query
-
     if query.from_user.id in DEV_USERS:
         pass
-
-        #Invalid Chats
         if query.data == 'dbclean_invalidchats':
             msg.reply_text("Getting Invalid Chat Count ...")
             invalid_chat_count = get_invalid_chats(bot, update)
@@ -165,14 +162,14 @@ def dbclean_callback(bot: Bot, update: Update):
             muted_chat_count = get_muted_chats(bot, update)
             reply = f"Muted Chats - {muted_chat_count}"
 
-            if invalid_chat_count > 0:
+            if muted_chat_count > 0:
                 buttons = [
                     [InlineKeyboardButton("Leave Muted Chats", callback_data=f"db_clean_muted_chats")]
                 ]
 
                 update.effective_message.reply_text(reply, reply_markup=InlineKeyboardMarkup(buttons))
             else:
-                reply_clear = "No invalid chats or gban."
+                reply_clear = "I'm not muted in any Chats."
                 update.effective_message.reply_text(reply_clear)
 
         #Invalid Gbans
@@ -181,7 +178,7 @@ def dbclean_callback(bot: Bot, update: Update):
             invalid_gban_count = get_invalid_gban(bot, update)
             reply = f"Invalid Gbans - {invalid_gban_count}"
 
-            if invalid_chat_count > 0:
+            if invalid_gban_count > 0:
                 buttons = [
                     [InlineKeyboardButton("Remove Invalid Gbans", callback_data=f"db_clean_invalid_gbans")]
                 ]
@@ -239,5 +236,5 @@ dispatcher.add_handler(DBCLEAN_HANDLER)
 dispatcher.add_handler(DBCLEAN_CALLBACKHANDLER)
 dispatcher.add_handler(CLEANER_HANDLER)
 
-__mod_name__ = "DBClean"
+__mod_name__ = "DB Clean"
 __handlers__ = [DBCLEAN_HANDLER, DBCLEAN_CALLBACKHANDLER, CLEANER_HANDLER]
