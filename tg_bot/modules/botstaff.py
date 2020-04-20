@@ -422,7 +422,7 @@ def botstaff(bot: Bot, update: Update):
                 reply += f"• {mention_html(user_id, user.first_name)}\n"
             except TelegramError:
                 pass
-    reply += "\nFor seprate lists, use\n/slist for Sudo Users\n/supportlist for Support Users\n/whitelist for Whitelisted Users\n/devs for Developers"
+    reply += "\n\nFor seprate lists, use\n/slist for Sudo Users\n/supportlist for Support Users\n/whitelist for Whitelisted Users\n/devs for Developers"
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
