@@ -17,7 +17,7 @@ class Config(object):
     SUPPORT_CHANNEL = "DraXRobots"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:zN3ate2ltVBqClVXG3M2M17SoxdlFYA8@motty.db.elephantsql.com:5432/dxcucqwe'
+    SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:o8CUqlQTRlVLqAxaqoKItNqe5t6T5KhO@motty.db.elephantsql.com:5432/dxcucqwe'
     #SQLALCHEMY_DATABASE_URI = 'postgres://botuser:botuser@localhost:5432/botdb' #loacl db
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP #Gban logs same as MESSAGE_DUMP
