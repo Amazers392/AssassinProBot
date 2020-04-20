@@ -92,7 +92,7 @@ def gkick(bot: Bot, update: Update, args: List[str]):
     for chat in chats:
         try:
              bot.unban_chat_member(chat.chat_id, user_id)  # Unban_member = kick (and not ban)
-                gkicked_chats += 1
+             gkicked_chats += 1
         except BadRequest as excp:
             if excp.message in GKICK_ERRORS:
                 pass
