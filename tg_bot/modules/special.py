@@ -52,6 +52,9 @@ BDAY_MESSAGES = (
     "Oof, you were born today ",
     "Your mother gave you birth today!!",
     "A legend was born today!"
+    "Happy Birthday bero",
+    "Your Birthday is today!",
+    "Oof, you were bought into this world today!"
 )
 
 def get_readable_time(seconds: int) -> str:
