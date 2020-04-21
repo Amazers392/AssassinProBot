@@ -47,7 +47,7 @@ def remove_chat(bot: Bot, update: Update):
         
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
-    if message.text.lower() == "maruyama":
+    if message.text.lower() == "agent":
         return True
     if reply_msg:
         if reply_msg.from_user.id == bot.get_me().id:
@@ -89,9 +89,9 @@ def chatbot(bot: Bot, update: Update):
 
 __mod_name__ = "Chatbot"
 
-__help__ = """
-Chatbot utilizes the CoffeeHouse API and allows Maruyama to talk back making your chat more interactive.
-This is an ongoing upgrade and is only available in your chats if you reach out to @inime and ask for it. 
+__help__ = f"""
+Chatbot utilizes the CoffeeHouse API and allows {dispatcher.bot.first_name} to talk back making your chat more interactive.
+This is an ongoing upgrade and is only available in some chats. 
 
 In future we might make it open for any chat and controllable by group admins.
 
