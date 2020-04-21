@@ -1,7 +1,12 @@
 @echo off
-TITLE Group Bot
-rem This next line removes any fban csv files if they exist in root when bot restarts.
+TITLE Saitama Robot
+rem This next line removes any fban csv files if they exist in root when bot restarts. 
 del *.csv
-python -m tg_bot
+py -3.7 --version
+IF "%ERRORLEVEL%" == "0" (
+    py -3.7 -m tg_bot
+) ELSE (
+    py -m tg_bot
+)
 
 pause
