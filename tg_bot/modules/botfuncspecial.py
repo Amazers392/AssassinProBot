@@ -1,3 +1,5 @@
+import socket
+import random
 from io import BytesIO
 from time import sleep
 from typing import Optional, List
@@ -9,16 +11,20 @@ from telegram.ext import MessageHandler, Filters, CommandHandler
 from telegram.ext.dispatcher import run_async
 from telegram.utils.helpers import escape_markdown
 from tg_bot.modules.helper_funcs.chat_status import is_user_ban_protected, user_admin, bot_admin, dev_plus, sudo_plus
-
-import random
-import telegram
 import tg_bot.modules.sql.users_sql as sql
 from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, LOGGER, DEV_USERS
 from tg_bot.modules.helper_funcs.filters import CustomFilters
 from tg_bot.modules.disable import DisableAbleCommandHandler
+
 USERS_GROUP = 4
 
-
+@run_async
+@dev_plus
+def botip(bot, update):
+    ip_list = socket.gethostbyname_ex(socket.gethostname())
+    ips = ip_list[2]
+    textmsg = f"<b>Bot IP Information</b>\n\n<b>Hostname:</b> {ip_list[0]}\n<b>IP 1</b>: {ips[0]}\n<b>IP 2:</b> {ips[1]}"
+    bot.send_message(chat_id=update.message.chat_id, text=textmsg, parse_mode=ParseMode.HTML)
 
 @run_async
 @sudo_plus
@@ -106,17 +112,20 @@ def getlink(bot: Bot, update: Update, args: List[int]):
         except TelegramError as excp:
                 update.effective_message.reply_text(excp.message + " " + str(chat_id))
 
+
 SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True)
 BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True)
 GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True)
 QUICKSCOPE_HANDLER = CommandHandler(["quickscope", "quickban"], quickscope, pass_args=True)
 QUICKUNBAN_HANDLER = CommandHandler(["quickunban", "quickunscope"], quickunban, pass_args=True)
+BOTIP_HANDLER = CommandHandler("botip", botip)
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)
 dispatcher.add_handler(QUICKSCOPE_HANDLER)
 dispatcher.add_handler(QUICKUNBAN_HANDLER)
 dispatcher.add_handler(GETLINK_HANDLER)
+dispatcher.add_handler(BOTIP_HANDLER)
 
-__mod_name__ = "Team Special"
-__handlers__ = [SNIPE_HANDLER, GETLINK_HANDLER, QUICKSCOPE_HANDLER, QUICKUNBAN_HANDLER]
+__mod_name__ = "Bot Staff Special"
+__handlers__ = [SNIPE_HANDLER, GETLINK_HANDLER, QUICKSCOPE_HANDLER, QUICKUNBAN_HANDLER, BOTIP_HANDLER]

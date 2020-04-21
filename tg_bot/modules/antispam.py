@@ -189,14 +189,14 @@ def gban(bot: Bot, update: Update, args: List[str]):
     try:
         if reason:
             bot.send_message(user_id,
-                             "You have been globally banned from all groups where I have administrative permissions."
-                             "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport"
-                             f"<b>Reason for Ban:</b> {reason}",
+                             f"""You have been globally banned from all groups where I have administrative permissions.
+                             \nIf you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport
+                             \n<b>Reason for Ban:</b> {reason}""",
                              parse_mode=ParseMode.HTML)
         else:
             bot.send_message(user_id,
-                             "You have been globally banned from all groups where I have administrative permissions."
-                             "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport",
+                             """You have been globally banned from all groups where I have administrative permissions.
+                             \nIf you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport""",
                              parse_mode=ParseMode.HTML)
     except:
         pass  #bot probably blocked by user

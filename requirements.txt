@@ -21,5 +21,13 @@ speedtest-cli
 coffeehouse
 tldextract
 gitpython
-heroku3
 PyGithub
+asn1crypto
+certifi
+cffi
+cryptography
+idna
+pycparser
+setuptools
+six
+wheel
