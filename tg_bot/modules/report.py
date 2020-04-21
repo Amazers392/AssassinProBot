@@ -73,7 +73,7 @@ def report(bot: Bot, update: Update) -> str:
             msg = (f"<b>{html.escape(chat.title)}:</b>\n"
                    f"<b>Reported user:</b> {mention_html(reported_user.id, reported_user.first_name)} (<code>{reported_user.id}</code>)\n"
                    f"<b>Reported by:</b> {mention_html(user.id, user.first_name)} (<code>{user.id}</code>)")
-            link = f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_id}">click here</a>'
+            link = f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_id}">Click Here</a>'
             should_forward = False
         else:
             reported = f"{mention_html(user.id, user.first_name)} reported " \

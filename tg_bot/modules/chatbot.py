@@ -8,7 +8,7 @@ from coffeehouse.exception import CoffeeHouseError as CFError
 from telegram import Message, Chat, User, Update, Bot
 from telegram.ext import CommandHandler, MessageHandler, Filters, run_async
 
-from tg_bot import dispatcher, AI_API_KEY, OWNER_ID, SUPPORT_GROUP
+from tg_bot import dispatcher, AI_API_KEY, OWNER_ID, SUPPORT_GROUP, MESSAGE_DUMP
 import tg_bot.modules.sql.chatbot_sql as sql
 from tg_bot.modules.helper_funcs.filters import CustomFilters
 
@@ -31,8 +31,8 @@ def add_chat(bot: Bot, update: Update):
         msg.reply_text("AI successfully enabled for this chat!")
     else:
         msg.reply_text("AI is already enabled for this chat!")
-        
-        
+
+
 @run_async
 def remove_chat(bot: Bot, update: Update):
     msg = update.effective_message
@@ -43,19 +43,22 @@ def remove_chat(bot: Bot, update: Update):
     else:
         sql.rem_chat(chat_id)
         msg.reply_text("AI disabled successfully!")
-        
-        
+
+
+#Bot name is default as normal name
+botname = dispatcher.bot.first_name
+
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
-    if message.text.lower() == "agent 47":
+    if message.text.lower() == botname:
         return True
     if reply_msg:
         if reply_msg.from_user.id == bot.get_me().id:
             return True
     else:
         return False
-                
-        
+
+
 @run_async
 def chatbot(bot: Bot, update: Update):
     global api_client
@@ -84,26 +87,26 @@ def chatbot(bot: Bot, update: Update):
             sleep(0.3)
             msg.reply_text(rep, timeout=60)
         except CFError as e:
-            bot.send_message(OWNER_ID, f"Chatbot error: {e} occurred in {chat_id}!")
-                    
+            bot.send_message(MESSAGE_DUMP, f"Chatbot error: {e} occurred in {chat_id}!")
+
 
 __mod_name__ = "Chatbot"
 
 __help__ = f"""
 Chatbot utilizes the CoffeeHouse API and allows {dispatcher.bot.first_name} to talk back making your chat more interactive.
-This is an ongoing upgrade and is only available in some chats. 
+This is an ongoing upgrade and is only available in some chats.
 
 In future we might make it open for any chat and controllable by group admins.
 
 Powered by **CoffeeHouse** from @Intellivoid
 It's a really Cool!
-Commands: These only work for Staff users, if you want this feature enabled, reach out to @{SUPPORT_GROUP} 
+Commands: These only work for Staff users, if you want this feature enabled, reach out to @{SUPPORT_GROUP}
  - /addchat : Enables Chatbot mode in the chat.
  - /rmchat  : Disables Chatbot mode in the chat.
- 
+
  You can call out {dispatcher.bot.first_name} and the bot will reply you
 """
-                  
+
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat, filters=CustomFilters.dev_filter)
 REMOVE_CHAT_HANDLER = CommandHandler("rmchat", remove_chat, filters=CustomFilters.dev_filter)
 CHATBOT_HANDLER = MessageHandler(Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")

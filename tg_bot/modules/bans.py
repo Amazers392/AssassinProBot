@@ -61,7 +61,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         chat.kick_member(user_id)
         #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        bot.sendMessage(chat.id, "{} banned successfully!".format(mention_html(member.user.id, member.user.first_name)),
+        bot.sendMessage(chat.id, "{} banned successfully!\nReason: {}".format(mention_html(member.user.id, member.user.first_name), reason),
                         parse_mode=ParseMode.HTML)
         return log
 
@@ -87,9 +87,7 @@ def sban(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     message = update.effective_message  # type: Optional[Message]
-
     update.effective_message.delete()
-
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
@@ -303,7 +301,7 @@ def punch(bot: Bot, update: Update, args: List[str]) -> str:
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
         # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        bot.sendMessage(chat.id, f"Bowled! {mention_html(member.user.id, member.user.first_name)}.",
+        bot.sendMessage(chat.id, f"Kicked {mention_html(member.user.id, member.user.first_name)}.",
                         parse_mode=ParseMode.HTML)
         log = (f"<b>{html.escape(chat.title)}:</b>\n"
                f"#KICKED\n"
@@ -311,10 +309,10 @@ def punch(bot: Bot, update: Update, args: List[str]) -> str:
                f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}")
         if reason:
             log += f"\n<b>Reason:</b> {reason}"
-
         return log
+
     else:
-        message.reply_text("Well damn, I can't punch that user.")
+        message.reply_text("Well damn, I can't kick that user.")
     return log_message
 
 
@@ -430,7 +428,7 @@ __help__ = """
 
 *Admin only:*
  - /ban <userhandle>: bans a user. (via handle, or reply)
- - /sban <userhandle>: bans a user silently (via handle, or reply) and delete the message.
+ - /sban <userhandle>: bans a user silently (via handle, or reply) and delete the message. *[still in beta!]*
  - /tban <userhandle> x(m/h/d): bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
  - /unban <userhandle>: unbans a user. (via handle, or reply)
  - /kick <userhandle>: Kicks a user out of the group, (via handle, or reply)

@@ -131,7 +131,7 @@ def dbcleanxyz(bot: Bot, update: Update):
     buttons = [[InlineKeyboardButton("Invalid Chats", callback_data="dbclean_invalidchats")]]
     buttons+= [[InlineKeyboardButton("Muted Chats", callback_data="dbclean_mutedchats")]]
     buttons+= [[InlineKeyboardButton("Gbanned Users", callback_data="dbclean_gbans")]]
-    update.effective_message.reply_text("Select Cleanup Mode",
+    update.effective_message.reply_text("What do you want to clean?",
                                     reply_markup=InlineKeyboardMarkup(buttons))
 
 @run_async

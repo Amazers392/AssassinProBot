@@ -64,12 +64,14 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
 
     elif rules:
         keyboard = InlineKeyboardMarkup(
-            [{InlineKeyboardButton("Remove warn ❌", callback_data="rm_warn({})".format(user.id)), InlineKeyboardButton(text="Read Rules", url="t.me/{}?start={}".format(bot.username, chat.id))}])
+            [{InlineKeyboardButton(text="⚠️Read Rules", url="t.me/{}?start={}".format(bot.username, chat.id)), InlineKeyboardButton("Remove warn ❌", callback_data="rm_warn({})".format(user.id))}])
 
         reply = f"{mention_html(user.id, user.first_name)} has {num_warns}/{limit} warnings... watch out!"
 
         if reason:
             reply += "\nReason for last warn:\n{}".format(html.escape(reason))
+        else:
+            reply += "\nRemember to read rules!"
 
         log_reason = "<b>{}:</b>" \
                      "\n#WARN" \
@@ -406,10 +408,10 @@ __help__ = """
 
 *Admin only:*
  - /warn <userhandle>: warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
- - /resetwarn <userhandle>: reset the warnings for a user. Can also be used as a reply.
+ - /resetwarns <userhandle>: reset the warnings for a user. Can also be used as a reply.
  - /addwarn <keyword> <reply message>: set a warning filter on a certain keyword. If you want your keyword to \
 be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
- - /nowarn <keyword>: stop a warning filter
+ - /nowarn or /stopwarn <keyword>: stop a warning filter
  - /warnlimit <num>: set the warning limit
  - /strongwarn <on/yes/off/no>: If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
 """

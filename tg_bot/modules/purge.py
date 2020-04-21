@@ -92,7 +92,7 @@ def del_message(bot: Bot, update: Update) -> str:
                     f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
                     f"Message deleted.")
     else:
-        update.effective_message.reply_text("Whadya want to delete?")
+        update.effective_message.reply_text("What do you want to delete?")
 
     return ""
 

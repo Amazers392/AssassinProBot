@@ -34,7 +34,7 @@ def check_flood(bot: Bot, update: Update) -> str:
 
     try:
         bot.restrict_chat_member(chat.id, user.id, can_send_messages=False)
-        msg.reply_text(f"*mutes chu {mention_html(user.id, user.first_name)} permanently*\nStop flooding the group!", parse_mode=ParseMode.HTML)
+        msg.reply_text(f"*mutes chu <b>{mention_html(user.id, user.first_name)}</b> permanently*\nStop flooding the group!", parse_mode=ParseMode.HTML)
         log_message = (f"<b>{html.escape(chat.title)}:</b>\n"
                        f"#MUTED\n"
                        f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
@@ -43,7 +43,7 @@ def check_flood(bot: Bot, update: Update) -> str:
         return log_message
 
     except BadRequest:
-        msg.reply_text("I can't kick people here, give me permissions first! I've disable antiflood till then.")
+        msg.reply_text("I can't kick people here, give me permissions first! I'll disable antiflood untill then.")
         sql.set_flood(chat.id, 0)
         log_message = ("<b>{chat.title}:</b>\n"
                        "#INFO\n"
@@ -152,6 +152,7 @@ __help__ = """
  - /setflood <int/'no'/'off'>: enables or disables flood control
  Example: /setflood 10
  This will mute users if they send more than 10 messages in a row, bots are ignored.
+ Note: minimum number of messages should be greater than 4.
 """
 
 FLOOD_BAN_HANDLER = MessageHandler(Filters.all & ~Filters.status_update & Filters.group, check_flood)

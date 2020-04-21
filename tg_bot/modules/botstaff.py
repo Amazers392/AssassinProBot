@@ -372,7 +372,7 @@ def botstaff(bot: Bot, update: Update):
     try:
         ownerbot = int(OWNER_ID)
         ownerid = bot.get_chat(ownerbot)
-        reply = f"<b>Owner:</b> {mention_html(ownerbot, ownerid.first_name)}\n"
+        reply = f"<b>🌟 Owner:</b> {mention_html(ownerbot, ownerid.first_name)}\n"
     except TelegramError:
         pass
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
@@ -422,7 +422,7 @@ def botstaff(bot: Bot, update: Update):
                 reply += f"• {mention_html(user_id, user.first_name)}\n"
             except TelegramError:
                 pass
-    reply += "\n\nFor Seprate lists, use\n/slist for Sudo Users\n/supportlist for Support Users\n/whitelist for Whitelisted Users\n/devs for Developers"
+    reply += "\n\nFor Seprate lists:\n/slist - Sudo Users\n/supportlist - Support Users\n/whitelist - Whitelisted Users\n/devs - Developers\nAbove commands only available for devs"
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 

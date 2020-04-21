@@ -31,7 +31,7 @@ RUN_STRINGS = (
     "Unlike Harry Potter, your parents can't protect you from me.",
     "Fear leads to anger. Anger leads to hate. Hate leads to suffering. If you keep running in fear, you might "
     "be the next Vader.",
-    "Multiple calculations later, I have decided my interest in your shenanigans is exactly 0.",
+    "Multiple calculations later, I have decided my interest in you is exactly 0.",
     "Legend has it, they're still running.",
     "Keep it up, not sure we want you here anyway.",
     "You're a wiza- Oh. Wait. You're not Harry, keep moving.",
@@ -52,11 +52,11 @@ RUN_STRINGS = (
 
 SLAP_SAITAMA_TEMPLATES = (
     "Slap me one more time and I'll mute you.",
-    "Stop slapping me. REEEEEEEEEEEEEE.",
+    "Stop slapping me.",
     [
         "I am muting you for a minute.",  # normal reply
-        "Stop slapping me just because I can't mute you. REEEEEEEEEE.",  # reply to admin
-        "tmute"  # command
+        "Stop slapping me just because I can't mute you.",  # reply to admin
+        "tmute 5m"  # command
     ]
 )
 

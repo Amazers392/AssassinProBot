@@ -94,7 +94,7 @@ def unbl_user(bot: Bot, update: Update, args: List[str]) -> str:
         return log_message
 
     else:
-        message.reply_text("I am not ignoring them at all though!")
+        message.reply_text("I am not ignoring them though!")
         return ""
 
 
@@ -140,7 +140,7 @@ def __user_info__(user_id):
 
 BL_HANDLER = CommandHandler("ignore", bl_user, pass_args=True)
 UNBL_HANDLER = CommandHandler("notice", unbl_user, pass_args=True)
-BLUSERS_HANDLER = CommandHandler("ignoredlist", bl_users)
+BLUSERS_HANDLER = CommandHandler(["ignoredlist", "blusers"], bl_users)
 
 dispatcher.add_handler(BL_HANDLER)
 dispatcher.add_handler(UNBL_HANDLER)

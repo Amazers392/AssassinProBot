@@ -21,8 +21,9 @@ Hi, my name is {}! - I'm here to help you manage your groups!
 Click Help button to find out more about how to use me, so you can get helped!
 
 For more commands click /help...
+Bot maintained by: @Skuzzy\_xD
 
-If you like my work🙂, kindly donate me at @Skuzzy\_xD
+If you like my work🙂, kindly donate me.
 """.format(dispatcher.bot.first_name)
 
 HELP_STRINGS = """
@@ -46,7 +47,8 @@ And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 DONATE_STRING = """Heya, glad to hear you wanna donate!
-{} is hosted on Heroku Free Servers and it would be really helpful if you can donate my owner to upgrade the server for faster performance \
+{} is hosted on Heroku Free Servers and it would be really helpful if \
+you can donate my owner to upgrade the server for faster performance \
 You can donate by contacting him! [Skuzzy xD](https://t.me/Skuzzy_xD)"
 """.format(dispatcher.bot.first_name)
 

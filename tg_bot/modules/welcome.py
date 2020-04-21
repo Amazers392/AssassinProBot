@@ -198,7 +198,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                         }
                     })
                     new_join_mem = f"[{escape_markdown(new_mem.first_name)}](tg://user?id={user.id})"
-                    message = msg.reply_text(f"{new_join_mem}, Click the button below to prove you're human.\nYou have 160 seconds.",
+                    message = msg.reply_text(f"{new_join_mem}, Click the button below to prove you're human.\nYou have 120 seconds.",
                                              reply_markup=InlineKeyboardMarkup([{InlineKeyboardButton(
                                                  text="Yes, I'm human.",
                                                  callback_data=f"user_join_({new_mem.id})")}]),
@@ -212,7 +212,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                     job_queue.run_once(
                         partial(
                             check_not_bot, new_mem, chat.id, message.message_id
-                        ), 160, name="welcomemute"
+                        ), 120, name="welcomemute"
                     )
 
         if welcome_bool:
@@ -270,7 +270,7 @@ def left_member(bot: Bot, update: Update):
             # Dont say goodbyes to gbanned users
             if gban_sql.is_user_gbanned(left_mem.id):
                 return
-              
+
             # Ignore bot being kicked
             if left_mem.id == bot.id:
                 return

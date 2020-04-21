@@ -80,7 +80,7 @@ def gkick(bot: Bot, update: Update, args: List[str]):
                 f"<b>Kicked User:</b> {mention_html(user_chat.id, user_chat.first_name)}\n"
                 f"<b>Kicked User ID:</b> {user_chat.id}\n"
                 f"<b>Event Stamp:</b> {current_time}")
-    bot.send_message(MESSAGE_DUMP, log_msg, parse_mode=ParseMode.HTML)
+    log = bot.send_message(MESSAGE_DUMP, log_msg, parse_mode=ParseMode.HTML)
     message.reply_text(f"Globally kicking user {mention_html(user_chat.id, user_chat.first_name)}\nUser ID: {user_chat.id}", parse_mode=ParseMode.HTML)
 
     start_time = time.time()
@@ -118,5 +118,5 @@ def gkick(bot: Bot, update: Update, args: List[str]):
 GKICK_HANDLER = CommandHandler(["gkick", "globalkick"], gkick, pass_args=True)
 dispatcher.add_handler(GKICK_HANDLER)
 
-__mod_name__ = "Global Kick"
+__mod_name__ = "Global Kicks"
 __handlers__ = [GKICK_HANDLER]

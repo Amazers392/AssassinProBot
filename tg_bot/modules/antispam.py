@@ -199,7 +199,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
                              "If you think that this was a mistake, you may appeal your ban here: @DraXRobotsSupport",
                              parse_mode=ParseMode.HTML)
     except:
-        pass  # bot probably blocked by user
+        pass  #bot probably blocked by user
 
 
 @run_async
@@ -221,7 +221,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_id == bot.id:
-        message.reply_text("LMAO, you can't ban me, so you won't be able to even ungban me!")
+        message.reply_text("LMAO, you can't gban me, so you won't be able to even ungban me!")
         return
 
     user_chat = bot.get_chat(user_id)
@@ -387,7 +387,7 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
 
 
 def __stats__():
-    return f"{sql.num_gbanned_users()} gbanned users."
+    return f"Gbanned Users: {sql.num_gbanned_users()}"
 
 
 def __user_info__(user_id):
@@ -410,7 +410,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(chat_id, user_id):
-    return f"This chat is enforcing *gbans*: `{sql.does_chat_gban(chat_id)}`."
+    return f"This chat is enforcing *Anti-spam Security*: `{sql.does_chat_gban(chat_id)}`."
 
 
 __help__ = """

@@ -221,7 +221,7 @@ def del_lockables(bot: Bot, update: Update):
                             return
 
                         chat.kick_member(new_mem.id)
-                        message.reply_text("Only admins are allowed to add bots to this chat! Behave or I'll punch you.")
+                        message.reply_text("Only admins are allowed to add bots to this chat! Behave or I'll ban you.")
             else:
                 try:
                     message.delete()

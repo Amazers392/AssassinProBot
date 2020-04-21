@@ -70,7 +70,7 @@ def banall(bot: Bot, update: Update, args: List[int]):
 
 
 @run_async
-@dev_plus
+@sudo_plus
 def snipe(bot: Bot, update: Update, args: List[str]):
     try:
         chat_id = str(args[0])
@@ -118,5 +118,5 @@ dispatcher.add_handler(QUICKSCOPE_HANDLER)
 dispatcher.add_handler(QUICKUNBAN_HANDLER)
 dispatcher.add_handler(GETLINK_HANDLER)
 
-__mod_name__ = "Support Team Special"
+__mod_name__ = "Team Special"
 __handlers__ = [SNIPE_HANDLER, GETLINK_HANDLER, QUICKSCOPE_HANDLER, QUICKUNBAN_HANDLER]
