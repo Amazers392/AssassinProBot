@@ -12,6 +12,7 @@ from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, Cal
 from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
 
 import tg_bot.modules.sql.welcome_sql as sql
+import tg_bot.modules.sql.global_bans_sql as gban_sql
 from tg_bot import dispatcher, OWNER_ID, DEV_USERS, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS, LOGGER, MESSAGE_DUMP, SUPPORT_GROUP
 from tg_bot.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
 from tg_bot.modules.helper_funcs.misc import build_keyboard, revert_buttons
@@ -267,8 +268,8 @@ def left_member(bot: Bot, update: Update):
         left_mem = update.effective_message.left_chat_member
         if left_mem:
             # Dont say goodbyes to gbanned users
-            '''if is_user_gbanned(left_mem.id):
-                return'''
+            if gban_sql.is_user_gbanned(left_mem.id):
+                return
               
             # Ignore bot being kicked
             if left_mem.id == bot.id:
