@@ -16,6 +16,8 @@ from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import dev_plus, sudo_plus, support_plus, user_admin
 from tg_bot.modules.helper_funcs.extraction import extract_user
 
+nameofmod = "🌟{} Special🌟".format(dispatcher.bot.first_name)
+
 MARKDOWN_HELP = f"""
 Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that \
 saved messages are correctly parsed, and to allow you to create buttons.
@@ -208,13 +210,16 @@ def info(bot: Bot, update: Update, args: List[str]):
     elif user.id in WHITELIST_USERS:
         text += "\nThis person is 'Whitelist User', they cannot be banned!"
 
-    user_member = chat.get_member(user.id)
-    if user_member.status == 'administrator':
-        result = requests.post(f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}")
-        result = result.json()["result"]
-        if "custom_title" in result.keys():
-            custom_title = result['custom_title']
-            text += f"\n\nThis user holds the title <b>{custom_title}</b> here."
+    try:
+        user_member = chat.get_member(user.id)
+        if user_member.status == 'administrator':
+            result = requests.post(f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}")
+            result = result.json()["result"]
+            if "custom_title" in result.keys():
+                custom_title = result['custom_title']
+                text += f"\n\nThis user holds the title <b>{custom_title}</b> here."
+    except BadRequest:
+        pass
 
     for mod in USER_INFO:
         try:
@@ -291,6 +296,6 @@ dispatcher.add_handler(UPTIME_HANDLER)
 dispatcher.add_handler(GIFID_HANDLER)
 dispatcher.add_handler(BIRTHDAY_HANDLER)
 
-__mod_name__ = "🌟Special🌟"
+__mod_name__ = nameofmod
 __command_list__ = ["id", "info", "echo", "ping", "uptime", "gifid"]
 __handlers__ = [ID_HANDLER, INFO_HANDLER, ECHO_HANDLER, MD_HELP_HANDLER, STATS_HANDLER, LEAVE_HANDLER, UPTIME_HANDLER, PING_HANDLER, BIRTHDAY_HANDLER]
