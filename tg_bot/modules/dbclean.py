@@ -141,7 +141,7 @@ def dbclean_callback(bot: Bot, update: Update):
     if query.from_user.id in DEV_USERS:
         pass
         if query.data == 'dbclean_invalidchats':
-            msg.reply_text("Getting Invalid Chat Count ...")
+            msg.edit_text("Getting Invalid Chat Count ...")
             invalid_chat_count = get_invalid_chats(bot, update)
             reply = f"Total invalid chats - {invalid_chat_count}"
 
@@ -158,7 +158,7 @@ def dbclean_callback(bot: Bot, update: Update):
 
         #Muted Chats
         if query.data == 'dbclean_mutedchats':
-            msg.reply_text("Getting Muted Chat Count ...")
+            msg.edit_text("Getting Muted Chat Count ...")
             muted_chat_count = get_muted_chats(bot, update)
             reply = f"Muted Chats - {muted_chat_count}"
 
@@ -174,7 +174,7 @@ def dbclean_callback(bot: Bot, update: Update):
 
         #Invalid Gbans
         if query.data == 'dbclean_gbans':
-            msg.reply_text("Getting Invalid Gban Count ...")
+            msg.edit_text("Getting Invalid Gban Count ...")
             invalid_gban_count = get_invalid_gban(bot, update)
             reply = f"Invalid Gbans - {invalid_gban_count}"
 
@@ -199,7 +199,7 @@ def callback_button(bot: Bot, update: Update):
     query_type = query.data
 
     admin_list = [OWNER_ID] + DEV_USERS
-
+    msg.delete()
     bot.answer_callback_query(query.id)
 
     if query_type == "db_clean_muted_chats":

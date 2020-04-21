@@ -13,9 +13,8 @@ def convert(speed):
 @dev_plus
 @run_async
 def speedtestxyz(bot: Bot, update: Update):
-    buttons = [
-        [InlineKeyboardButton("Image", callback_data="speedtest_image"), InlineKeyboardButton("Text", callback_data="speedtest_text")]
-    ]
+    buttons = [[InlineKeyboardButton("Image Format", callback_data="speedtest_image")]]
+    buttons += [[InlineKeyboardButton("Text Format", callback_data="speedtest_text")]]
     update.effective_message.reply_text("Select SpeedTest Mode",
                                         reply_markup=InlineKeyboardMarkup(buttons))
 
