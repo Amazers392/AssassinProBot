@@ -199,7 +199,6 @@ def callback_button(bot: Bot, update: Update):
     query_type = query.data
 
     admin_list = [OWNER_ID] + DEV_USERS
-    msg.delete()
     bot.answer_callback_query(query.id)
 
     if query_type == "db_clean_muted_chats":
