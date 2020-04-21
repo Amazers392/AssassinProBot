@@ -11,6 +11,7 @@ from tg_bot import dispatcher, OWNER_ID, LOGGER, DEV_USERS, MESSAGE_DUMP
 from tg_bot.modules.helper_funcs.chat_status import sudo_plus, dev_plus
 
 USERS_GROUP = 4
+CHAT_GROUP = 5
 DEV_AND_MORE = DEV_USERS.append(int(OWNER_ID))
 
 
@@ -110,6 +111,10 @@ def chats(bot: Bot, update: Update):
         output.name = "chatlist.txt"
         update.effective_message.reply_document(document=output, filename="chatlist.txt", caption="Here is the list of chats in my Hit List.")
 
+@run_async
+def chat_checker(bot: Bot, update: Update):
+  if update.effective_message.chat.get_member(bot.id).can_send_messages == False:
+    bot.leaveChat(update.effective_message.chat.id)
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
