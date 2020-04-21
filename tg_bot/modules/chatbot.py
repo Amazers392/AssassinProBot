@@ -45,12 +45,9 @@ def remove_chat(bot: Bot, update: Update):
         msg.reply_text("AI disabled successfully!")
 
 
-#Bot name is default as normal name
-botname = dispatcher.bot.first_name
-
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
-    if message.text.lower() == botname:
+    if message.text.lower() == "hitman" or if message.text.lower() == "agent" or if message.text.lower() == "agent 47":
         return True
     if reply_msg:
         if reply_msg.from_user.id == bot.get_me().id:
@@ -104,7 +101,7 @@ Commands: These only work for Staff users, if you want this feature enabled, rea
  - /addchat : Enables Chatbot mode in the chat.
  - /rmchat  : Disables Chatbot mode in the chat.
 
- You can call out {dispatcher.bot.first_name} and the bot will reply you
+ You can call out {dispatcher.bot.first_name} and the bot will reply you.
 """
 
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat, filters=CustomFilters.dev_filter)

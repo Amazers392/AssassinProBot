@@ -10,15 +10,16 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "750944856:AAHc-0wVffY0LKDGJydOkr6IQ4so6bZ19aA"
+    API_KEY = "750944856:AAHc-0wVffY0LKDGJydOkr6IQ4so6bZ19aA" #Agent 47 Token
+    #API_KEY = "1259352360:AAHzfCBX30PU-8IqQDOhuuTfj0pMVq6ghDA" #Alita token
     OWNER_ID = "716243352"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "Skuzzy_xD"
     SUPPORT_GROUP = "DraXRobotsSupport"
     SUPPORT_CHANNEL = "DraXRobots"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:o8CUqlQTRlVLqAxaqoKItNqe5t6T5KhO@motty.db.elephantsql.com:5432/dxcucqwe'
-    #SQLALCHEMY_DATABASE_URI = 'postgres://botuser:botuser@localhost:5432/botdb' #loacl db
+    SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:o8CUqlQTRlVLqAxaqoKItNqe5t6T5KhO@motty.db.elephantsql.com:5432/dxcucqwe' #Agent 47 db
+    #SQLALCHEMY_DATABASE_URI = 'postgres://alita:alita@localhost:5432/botdb' #loacl db
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP #Gban logs same as MESSAGE_DUMP
     LOAD = []
