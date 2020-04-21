@@ -47,7 +47,7 @@ def remove_chat(bot: Bot, update: Update):
         
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
-    if message.text.lower() == "agent":
+    if message.text.lower() == "agent 47":
         return True
     if reply_msg:
         if reply_msg.from_user.id == bot.get_me().id:
@@ -95,10 +95,13 @@ This is an ongoing upgrade and is only available in some chats.
 
 In future we might make it open for any chat and controllable by group admins.
 
-Powered by [CoffeeHouse](https://coffeehouse.intellivoid.net/) from @Intellivoid
+Powered by **CoffeeHouse** from @Intellivoid
+It's a really Cool!
 Commands: These only work for Staff users, if you want this feature enabled, reach out to @{SUPPORT_GROUP} 
  - /addchat : Enables Chatbot mode in the chat.
  - /rmchat  : Disables Chatbot mode in the chat.
+ 
+ You can call out {dispatcher.bot.first_name} and the bot will reply you
 """
                   
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat, filters=CustomFilters.dev_filter)
