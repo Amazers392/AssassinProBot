@@ -22,10 +22,9 @@ USERS_GROUP = 4
 @dev_plus
 def botip(bot, update):
     ip_list = socket.gethostbyname_ex(socket.gethostname())
-    """ips = ip_list[2]
-    textmsg = f"<b>Bot IP Information</b>\n\n<b>Hostname:</b> {ip_list[0]}\n<b>IP 1</b>: {ips[0]}\n<b>IP 2:</b> {ips[1]}"
-    bot.send_message(chat_id=update.message.chat_id, text=textmsg, parse_mode=ParseMode.HTML)"""
-    bot.send_message(chat_id=update.message.chat_id, text=ip_list)
+    ips = ip_list[2]
+    textmsg = f"<b>Bot IP Information</b>\n\n<b>Hostname:</b> {ip_list[0]}\n<b>IP 1</b>: {ips[0]}"
+    bot.send_message(chat_id=update.message.chat_id, text=textmsg, parse_mode=ParseMode.HTML)
 
 @run_async
 @sudo_plus
