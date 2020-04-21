@@ -27,7 +27,7 @@ class Config(object):
     URL = None
     MAPS_API = ""
     API_OPENWEATHER = ""
-    AI_API_KEY = "2b9f51208687db80b87856204843f498a6e61843bfd32cb99cb68e08850d35eabd0723da"
+    AI_API_KEY = "8117bc4229fb9933d6b5c3f5526b70f9bce6d19ddd388a5f12382c8f7174d1b7a6433c6e359fab81e92df3aea124d1f53ca4c30c0666f382792df65fee9bb753"
     WALL_API = "e7b346f40f069a7fb0df3a8aaf6bac2c"
 
     # OPTIONAL
