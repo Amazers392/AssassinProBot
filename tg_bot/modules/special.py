@@ -7,6 +7,7 @@ import json
 
 import requests
 from telegram import Bot, Update, MessageEntity, ParseMode
+from telegram.error import BadRequest
 from telegram.ext import CommandHandler, run_async, Filters
 from telegram.utils.helpers import mention_html
 
@@ -16,7 +17,7 @@ from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import dev_plus, sudo_plus, support_plus, user_admin
 from tg_bot.modules.helper_funcs.extraction import extract_user
 
-nameofmod = "🌟{} Special🌟".format(dispatcher.bot.first_name)
+nameofmod = "{} Special🌟".format(dispatcher.bot.first_name)
 
 MARKDOWN_HELP = f"""
 Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that \
