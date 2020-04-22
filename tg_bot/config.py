@@ -19,7 +19,7 @@ class Config(object):
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:o8CUqlQTRlVLqAxaqoKItNqe5t6T5KhO@motty.db.elephantsql.com:5432/dxcucqwe' #Agent 47 db
-    SQLALCHEMY_DATABASE_URI = 'postgres://alita:alita@localhost:5432/Alita_localDB' #loacl db
+    #SQLALCHEMY_DATABASE_URI = 'postgres://alita:alita@localhost:5432/botresdb' #loacl db
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP #Gban logs same as MESSAGE_DUMP
     LOAD = []
