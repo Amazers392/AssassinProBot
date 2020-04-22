@@ -216,7 +216,10 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                     )
 
         if welcome_bool:
-            sent = send(update, res, keyboard, backup_message)
+            try:
+                sent = send(update, res, keyboard, backup_message)
+            except:
+                pass
 
             prev_welc = sql.get_clean_pref(chat.id)
             if prev_welc:
