@@ -53,16 +53,15 @@ def report_setting(bot: Bot, update: Update, args: List[str]):
 @user_not_admin
 @loggable
 def report(bot: Bot, update: Update) -> str:
-    message = update.effective_message
-    chat = update.effective_chat
-    user = update.effective_user
+    message = update.effective_message  # type: Optional[Message]
+    chat = update.effective_chat  # type: Optional[Chat]
+    user = update.effective_user  # type: Optional[User]
 
     if chat and message.reply_to_message and sql.chat_should_report(chat.id):
-        reported_user = message.reply_to_message.from_user
+        reported_user = message.reply_to_message.from_user  # type: Optional[User]
         chat_name = chat.title or chat.first or chat.username
         admin_list = chat.get_administrators()
-        message = update.effective_message
-
+        
         if user.id == bot.id:
             message.reply_text("Lmao, why would I report myself? Nice try.")
             return ""
@@ -95,15 +94,12 @@ def report(bot: Bot, update: Update) -> str:
                                       callback_data="report_{}=delete={}={}".format(chat.id, reported_user.id,
                                                                                     message.reply_to_message.message_id))]]
             reply_markup = InlineKeyboardMarkup(keyboard)
-        else:
-            reported = f"{mention_html(user.id, user.first_name)} reported " \
-                       f"{mention_html(reported_user.id, reported_user.first_name)} to the admins!"
 
-            msg = f'{mention_html(user.id, user.first_name)} is calling for admins in "{html.escape(chat_name)}"!'
+        else:
+            msg = "{} is calling for admins in \"{}\"!".format(mention_html(user.id, user.first_name),
+                                                               html.escape(chat_name))
             link = ""
             should_forward = True
-
-        message.reply_text(reported, parse_mode=ParseMode.HTML)
 
         for admin in admin_list:
             if admin.user.is_bot:  # can't message bots
