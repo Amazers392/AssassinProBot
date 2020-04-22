@@ -305,12 +305,6 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         message.reply_text(f"Person has been un-gbanned. Took {ungban_time} min")
     else:
         message.reply_text(f"Person has been un-gbanned. Took {ungban_time} sec")
-    try:
-        bot.send_message(user_id,
-                        "You have been globally unbanned from all groups where I have administrative permissions.",
-                        parse_mode=ParseMode.HTML)
-    except:
-        pass
 
 
 @run_async
@@ -322,7 +316,7 @@ def gbanlist(bot: Bot, update: Update):
         update.effective_message.reply_text("There aren't any gbanned users! You're kinder than I expected...")
         return
 
-    banfile = 'Screw these guys.\n'
+    banfile = "Screw these guys.\nHere's the list of people Gbanned by me\n"
     for user in banned_users:
         banfile += f"[x] {user['name']} - {user['user_id']}\n"
         if user["reason"]:
@@ -330,7 +324,7 @@ def gbanlist(bot: Bot, update: Update):
 
     with BytesIO(str.encode(banfile)) as output:
         output.name = "gbanlist.txt"
-        update.effective_message.reply_document(document=output, filename="gbanlist.txt",
+        update.effective_message.reply_document(document=output, filename="antispamlist.txt",
                                                 caption="Here is the list of currently gbanned users.")
 
 
