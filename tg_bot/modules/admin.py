@@ -72,7 +72,10 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
             message.reply_text("An error occured while promoting.")
             return log_message
 
-    bot.sendMessage(chat.id, f"Sucessfully promoted <b>{user_member.user.first_name or user_id}</b>!",
+    bot.sendMessage(chat.id, f"Admin {} promoted {} in chat <b>{}</b>!".format(
+                    mention_html(user.id, user.first_name),
+                    mention_html(user_member.user.id, user_member.user.first_name),
+                    html.escape(chat.title)),
                     parse_mode=ParseMode.HTML)
 
     log_message += (f"<b>{html.escape(chat.title)}:</b>\n"
@@ -128,8 +131,11 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                               can_pin_messages=False,
                               can_promote_members=False)
 
-        bot.sendMessage(chat.id, f"Sucessfully demoted <b>{user_member.user.first_name or user_id}</b>!",
-                        parse_mode=ParseMode.HTML)
+        bot.sendMessage(chat.id, f"Admin {} demoted {} in chat <b>{}</b>!".format(
+                    mention_html(user.id, user.first_name),
+                    mention_html(user_member.user.id, user_member.user.first_name),
+                    html.escape(chat.title)),
+                    parse_mode=ParseMode.HTML)
 
         log_message += (f"<b>{html.escape(chat.title)}:</b>\n"
                         f"#DEMOTED\n"
