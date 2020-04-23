@@ -318,7 +318,7 @@ __help__ = """
  - /invitelink: gets invitelink
  - /promote: promotes the user replied to
  - /demote: demotes the user replied to
- - /settitle: sets a custom title for an admin that the bot promoted
+ - /title: sets a custom title for an admin that the bot promoted
 """
 
 ADMINLIST_HANDLER = DisableAbleCommandHandler("adminlist", adminlist)
@@ -331,7 +331,7 @@ INVITE_HANDLER = DisableAbleCommandHandler("invitelink", invite, filters=Filters
 PROMOTE_HANDLER = CommandHandler("promote", promote, pass_args=True)
 DEMOTE_HANDLER = CommandHandler("demote", demote, pass_args=True)
 
-SET_TITLE_HANDLER = CommandHandler("settitle", set_title, pass_args=True)
+SET_TITLE_HANDLER = CommandHandler("title", set_title, pass_args=True)
 
 dispatcher.add_handler(ADMINLIST_HANDLER)
 dispatcher.add_handler(PIN_HANDLER)

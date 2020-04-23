@@ -10,7 +10,7 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "1259352360:AAHzfCBX30PU-8IqQDOhuuTfj0pMVq6ghDA" #Alita token
+    API_KEY = "1233784639:AAHef3bn7R_5iKOIFYRxkuSV7ksP5NVqbXo" #Alita token
     OWNER_ID = "716243352"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "Skuzzy_xD"
     SUPPORT_GROUP = "DraXRobotsSupport"
@@ -21,13 +21,12 @@ class Config(object):
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP #Gban logs same as MESSAGE_DUMP
     LOAD = []
-    NO_LOAD = ['connection', 'cleaner', 'feds', 'dev', 'speedtest', 'dbcleanup', 'dbclean']
+    NO_LOAD = ['connection', 'cleaner', 'feds', 'dev', 'dbcleanup', 'dbclean']
     WEBHOOK = False
     URL = None
     MAPS_API = ""
     API_OPENWEATHER = ""
     AI_API_KEY = "8117bc4229fb9933d6b5c3f5526b70f9bce6d19ddd388a5f12382c8f7174d1b7a6433c6e359fab81e92df3aea124d1f53ca4c30c0666f382792df65fee9bb753"
-    WALL_API = "e7b346f40f069a7fb0df3a8aaf6bac2c"
 
     # OPTIONAL
     #ID Seperation format [1,2,3,4]

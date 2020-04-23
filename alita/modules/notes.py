@@ -191,20 +191,27 @@ def list_notes(bot: Bot, update: Update):
         msg += "\nYou can retrieve these notes by using `/get notename`, or `#notename`"
         update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
-@user_admin
 @run_async
-def clearall_notes(bot :Bot, update: Update):
-    chat_id = update.effective_chat.id
-    note_list = sql.get_all_chat_notes(chat_id)
+@user_admin
+def remove_all_notes(bot: Bot, update: Update):
     chat = update.effective_chat
-    chat_name = chat.title
-    if len(note_list) == 0:
-        msg = "No notes in {chat_name}".format(chat_name=chat_name)
+    user = update.effective_user
+    message = update.effective_message
+
+    if chat.type == "private":
+        pass
     else:
-        for note in note_list:
-            sql.rm_note(chat_id, note)
-        msg = "Cleared all notes in {chat_name}".format(chat_name=chat_name)
-    update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
+        owner = chat.get_member(user.id)
+        if owner.status != 'creator':
+            message.reply_text(chat.id, "You must be owner to clear all notes at once!")
+            return
+    note_list = sql.get_all_chat_notes(chat.id)
+    x = 0
+    for notename in note_list:
+        x += 1
+        note = notename.name.lower()
+        sql.rm_note(chat.id, note)
+    message.reply_text("{} notes from this chat have been removed.".format(x), parse_mode=ParseMode.HTML)
 
 def __import_data__(chat_id, data):
     failures = []
@@ -255,6 +262,7 @@ A button can be added to a note by using standard markdown link syntax - the lin
 `buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. Check /markdownhelp for more info.
  - /save <notename>: save the replied message as a note with name notename
  - /clear <notename>: clear note with this name
+ - /clearall: clear all the notes in the chat (can be only used by Group Owner)
  Note: Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
 """
 
@@ -265,7 +273,7 @@ HASH_GET_HANDLER = RegexHandler(r"^#[^\s]+", hash_get)
 
 SAVE_HANDLER = CommandHandler("save", save)
 DELETE_HANDLER = CommandHandler("clear", clear, pass_args=True)
-CLEARALL_HANDLER = CommandHandler("clearall", clearall_notes, pass_args=False)
+CLEARALL_HANDLER = CommandHandler("clearall", remove_all_notes, pass_args=False)
 
 LIST_HANDLER = DisableAbleCommandHandler(["notes", "saved"], list_notes, admin_ok=True)
 

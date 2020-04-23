@@ -31,3 +31,5 @@ pycparser
 setuptools
 six
 wheel
+pyyaml
+hurry.filesize

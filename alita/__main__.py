@@ -29,7 +29,7 @@ If you like my work🙂, kindly donate me.
 HELP_STRINGS = """
 Hey There! My name is *{}*.
 I'm here to help you manage your groups! \
-Click Help button to find out more about how to use me, so you can get helped! \
+Click Help button to find out more about how to use me. \
 Have a look at the following for an idea of some of \
 the things I can help you with.
 
