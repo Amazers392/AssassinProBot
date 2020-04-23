@@ -190,6 +190,23 @@ def list_notes(bot: Bot, update: Update):
     elif len(msg) != 0:
         update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
+@user_admin
+@run_async
+def clearall_notes(bot :Bot, update: Update):
+    chat_id = update.effective_chat.id
+    note_list = sql.get_all_chat_notes(chat_id)
+    chat = update.effective_chat
+    chat_name = chat.title
+    if len(note_list) == 0:
+        msg = "No notes in {chat_name}".format(chat_name=chat_name)
+    else:
+        try:
+            for note in note_list:
+                sql.rm_note(chat_id, note)
+            msg = "Cleared all notes in {chat_name}".format(chat_name=chat_name)
+        except:
+            msg = "Could not clear notes! Report the issue in @DraXRobotsSupport".format(chat_name=chat_name)
+    update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 def __import_data__(chat_id, data):
     failures = []
@@ -241,6 +258,7 @@ A button can be added to a note by using standard markdown link syntax - the lin
  - /save <notename>: save the replied message as a note with name notename
  - /clear <notename>: clear note with this name
  Note: Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
+ - /clearall: clears all the notes in a chat.
 """
 
 __mod_name__ = "Notes"
@@ -250,6 +268,7 @@ HASH_GET_HANDLER = RegexHandler(r"^#[^\s]+", hash_get)
 
 SAVE_HANDLER = CommandHandler("save", save)
 DELETE_HANDLER = CommandHandler("clear", clear, pass_args=True)
+CLEARALL_HANDLER = CommandHandler("clearall", clearall_notes, pass_args=False)
 
 LIST_HANDLER = DisableAbleCommandHandler(["notes", "saved"], list_notes, admin_ok=True)
 
@@ -258,3 +277,4 @@ dispatcher.add_handler(SAVE_HANDLER)
 dispatcher.add_handler(LIST_HANDLER)
 dispatcher.add_handler(DELETE_HANDLER)
 dispatcher.add_handler(HASH_GET_HANDLER)
+dispatcher.add_handler(CLEARALL_HANDLER)
