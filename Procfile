@@ -1,2 +1,2 @@
-worker: python3 -m tg_bot
+worker: python3 -m akita
 #ps:scale worker=1

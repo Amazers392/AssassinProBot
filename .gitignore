@@ -1,13 +1,13 @@
-tg_bot/*.session
-tg_bot/*.session-journal
-tg_bot/config.ini
+akita/*.session
+akita/*.session-journal
+akita/config.ini
 *.pyc
 .idea/
 .project
 .pydevproject
 .directory
 .vscode
-tg_bot/modules/helper_funcs/temp.txt
+akita/modules/helper_funcs/temp.txt
 start-3.6.bat
 *.session
 kangsticker.png
