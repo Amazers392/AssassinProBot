@@ -47,7 +47,7 @@ def remove_chat(bot: Bot, update: Update):
 
 def check_message(bot: Bot, message):
     reply_msg = message.reply_to_message
-    if message.text.lower() == "hitman" or message.text.lower() == "agent" or message.text.lower() == "agent 47":
+    if message.text.lower() == "alita":
         return True
     if reply_msg:
         if reply_msg.from_user.id == bot.get_me().id:
