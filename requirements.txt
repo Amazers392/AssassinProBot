@@ -31,4 +31,3 @@ pycparser
 setuptools
 six
 wheel
-urllib
