@@ -2,8 +2,8 @@
 # Default owners for everything in the repo, unless a later match takes precedence
 
 # Phoenix owns the files under blacklist thingies
-/akita/modules/blacklistusers.py @rsktg
-/akita/modules/sql/blacklistusers_sql.py @rsktg
+/alita/modules/blacklistusers.py @rsktg
+/alita/modules/sql/blacklistusers_sql.py @rsktg
 #pep8-ing the code doesn't change maker
-/akita/modules/paste.py @DragSama
+/alita/modules/paste.py @DragSama
 /tg_bit/modules/speed_test.py @DragSama

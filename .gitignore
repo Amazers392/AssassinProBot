@@ -1,13 +1,13 @@
-akita/*.session
-akita/*.session-journal
-akita/config.ini
+alita/*.session
+alita/*.session-journal
+alita/config.ini
 *.pyc
 .idea/
 .project
 .pydevproject
 .directory
 .vscode
-akita/modules/helper_funcs/temp.txt
+alita/modules/helper_funcs/temp.txt
 start-3.6.bat
 *.session
 kangsticker.png
