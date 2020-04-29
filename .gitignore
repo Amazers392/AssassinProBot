@@ -1,4 +1,4 @@
-haruka/config.py
+assassin/config.py
 *.pyc
 .idea/
 logfile
