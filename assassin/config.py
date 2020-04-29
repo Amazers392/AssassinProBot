@@ -2,12 +2,12 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "1125785992:AAGJdlLPPBB27kUzdEquB5kqZ7LFahaL1EU"
+    API_KEY = "1226476591:AAEUPrq3iM-z-hPXdDHk65LJAFecf-srcS0"
     OWNER_ID = "1031840046"
     OWNER_USERNAME = "Amazers_xD"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://itydknou:TItgiEgHW_2b8IUCLGuc1Lu0tK4dyC0x@rajje.db.elephantsql.com:5432/itydknou'
+    SQLALCHEMY_DATABASE_URI = 'postgres://uxpxnmxd:zRqmAB...@drona.db.elephantsql.com:5432/uxpxnmxd'
     MESSAGE_DUMP = -489941031
     SUPPORT_GROUP = "AssassinRoBotSupport"
     SUPPORT_CHANNEL = "AssassinUpdates"
