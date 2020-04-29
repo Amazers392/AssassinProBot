@@ -7,7 +7,7 @@ class Config(object):
     OWNER_USERNAME = "Amazers_xD"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://uxpxnmxd:zRqmAB...@drona.db.elephantsql.com:5432/uxpxnmxd'
+    SQLALCHEMY_DATABASE_URI = 'postgres://uxpxnmxd:zRqmABZehDGWfd76RqyjJ-Teq1n97f6Y@drona.db.elephantsql.com:5432/uxpxnmxd'
     MESSAGE_DUMP = -489941031
     SUPPORT_GROUP = "AssassinRoBotSupport"
     SUPPORT_CHANNEL = "AssassinUpdates"
