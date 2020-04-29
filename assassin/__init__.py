@@ -93,7 +93,7 @@ SUPPORT_USERS = list(SUPPORT_USERS)
 SPAMMERS = list(SPAMMERS)
 
 # Load at end to ensure all prev variables have been set
-from haruka.modules.helper_funcs.handlers import CustomCommandHandler, CustomRegexHandler
+from assassin.modules.helper_funcs.handlers import CustomCommandHandler, CustomRegexHandler
 
 # make sure the regex handler can take extra kwargs
 tg.RegexHandler = CustomRegexHandler
@@ -103,7 +103,7 @@ if ALLOW_EXCL:
     
 # Disable this (line 151) if you dont have a antispam script
 try:
-	from haruka.antispam import antispam_restrict_user, antispam_cek_user, detect_user
+	from assassin.antispam import antispam_restrict_user, antispam_cek_user, detect_user
 	antispam_module = True
 except ModuleNotFoundError:
 	antispam_module = False
