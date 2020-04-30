@@ -244,6 +244,31 @@ def reply_filter(bot: Bot, update: Update):
             break
 
 
+@run_async
+@user_admin
+def stop_all_filters(bot: Bot, update: Update):
+    chat = update.effective_chat
+    user = update.effective_user
+    message = update.effective_message
+
+    if chat.type == "private":
+        pass
+    else:
+        owner = chat.get_member(user.id)
+        if owner.status != 'creator':
+            message.reply_text(tld(chat.id, "notes_must_be_creator"))
+            return
+
+    filters_list = sql.get_chat_triggers(chat.id)
+
+    x = 0
+    for filter in filters_list:
+        x += 1
+        sql.remove_filter(chat.id, filter)
+
+    message.reply_text(tld(chat.id, "cust_filters_cleanup_success").format(x))
+            
+            
 def __stats__():
     return "{} filters, across {} chats.".format(sql.num_filters(), sql.num_chats())
 
@@ -271,6 +296,7 @@ Filters are case insensitive; every time someone says your trigger words, {} wil
 *Admin only:*
  - /filter <keyword> <reply message>: Every time someone says "word", the bot will reply with "sentence". For multiple word filters, quote the first word.
  - /stop <filter keyword>: stop that filter.
+ - /stopall: Stop all filters, must be chat owner to do so. Only use this when you know what you're doing.
  
  An example of how to set a filter would be via:
 `/filter hello Hello there! How are you?`
@@ -285,10 +311,12 @@ __mod_name__ = "Filters"
 
 FILTER_HANDLER = DisableAbleCommandHandler("filter", filters)
 STOP_HANDLER = DisableAbleCommandHandler("stop", stop_filter)
+STOPALL_HANDLER = DisableAbleCommandHandler("stopall", stop_all_filters)
 LIST_HANDLER = DisableAbleCommandHandler("filters", list_handlers, admin_ok=True)
 CUST_FILTER_HANDLER = MessageHandler(CustomFilters.has_text, reply_filter)
 
 dispatcher.add_handler(FILTER_HANDLER)
 dispatcher.add_handler(STOP_HANDLER)
+dispatcher.add_handler(STOPALL_HANDLER)
 dispatcher.add_handler(LIST_HANDLER)
 dispatcher.add_handler(CUST_FILTER_HANDLER, HANDLER_GROUP)
