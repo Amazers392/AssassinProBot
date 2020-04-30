@@ -336,7 +336,32 @@ def __import_data__(chat_id, data):
 												 "from another bot. This is a telegram API restriction, and can't "
 												 "be avoided. Sorry for the inconvenience!")
 
+@run_async
+@user_admin
+def remove_all_notes(bot: Bot, update: Update):
+    chat = update.effective_chat
+    user = update.effective_user
+    message = update.effective_message
 
+    if chat.type == "private":
+        pass
+    else:
+        owner = chat.get_member(user.id)
+        if owner.status != 'creator':
+            message.reply_text(tld(chat.id, "notes_must_be_creator"))
+            return
+
+    note_list = sql.get_all_chat_notes(chat.id)
+    x = 0
+    for notename in note_list:
+        x += 1
+        note = notename.name.lower()
+        sql.rm_note(chat.id, note)
+
+    message.reply_text(tld(chat.id, "notes_cleanup_success").format(x))
+
+			
+			
 def __stats__():
 	return "{} notes, accross {} chats.".format(sql.num_notes(), sql.num_chats())
 
@@ -358,6 +383,7 @@ Available commands are:
  - /get <word>: get the note registered to that word.
  - #<word>: same as /get word
  - /clear <word>: delete the note called "word"
+ - /clearall: Clean all notes in your group, only use this if you know what you're doing
  - /notes: List all notes in the current chat
  - /saved: same as /notes
 An example of how to save a note would be via:
@@ -376,6 +402,7 @@ HASH_GET_HANDLER = RegexHandler(r"^#[^\s]+", hash_get)
 
 SAVE_HANDLER = CommandHandler("save", save)
 DELETE_HANDLER = CommandHandler("clear", clear, pass_args=True)
+REMOVE_ALL_NOTES_HANDLER = CommandHandler("clearall", remove_all_notes)
 
 LIST_HANDLER = DisableAbleCommandHandler(["notes", "saved"], list_notes, admin_ok=True)
 
@@ -383,4 +410,5 @@ dispatcher.add_handler(GET_HANDLER)
 dispatcher.add_handler(SAVE_HANDLER)
 dispatcher.add_handler(LIST_HANDLER)
 dispatcher.add_handler(DELETE_HANDLER)
+dispatcher.add_handler(REMOVE_ALL_NOTES_HANDLER)
 dispatcher.add_handler(HASH_GET_HANDLER)
