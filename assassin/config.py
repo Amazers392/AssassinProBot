@@ -2,7 +2,7 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "1226476591:AAEUPrq3iM-z-hPXdDHk65LJAFecf-srcS0"
+    API_KEY = "1125785992:AAHphtKgsAxUy5Lu_uhV3d4vbupl_IYTcHI"
     OWNER_ID = "1031840046"
     OWNER_USERNAME = "Amazers_xD"
 
