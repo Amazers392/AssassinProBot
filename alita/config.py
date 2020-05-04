@@ -17,7 +17,7 @@ class Config(object):
     SUPPORT_CHANNEL = "LuciferUpdates"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:o8CUqlQTRlVLqAxaqoKItNqe5t6T5KhO@motty.db.elephantsql.com:5432/dxcucqwe' #alita db
+    SQLALCHEMY_DATABASE_URI = 'postgres://uxpxnmxd:zRqmABZehDGWfd76RqyjJ-Teq1n97f6Y@drona.db.elephantsql.com:5432/uxpxnmxd' #alita db
     MESSAGE_DUMP = -1001451926178  # needed to make sure 'save from' messages persist
     GBAN_LOGS = MESSAGE_DUMP #Gban logs same as MESSAGE_DUMP
     LOAD = []
