@@ -82,7 +82,7 @@ for module_name in ALL_MODULES:
 @run_async
 def start(bot: Bot, update: Update):
     keyboard = [[InlineKeyboardButton(text="🎉 Add Lucifer to your Group!", url="t.me/Lucifer_Probot?startgroup=true")]]
-    update.effective_message.reply_text("This bot has been deprecated, use new bot @Alita\_RoBot\nThe new bot has all your prevoius data saved!", reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+    update.effective_message.reply_text("This bot has been deprecated, use new bot @Lucifer\_ProBot\nThe new bot has all your prevoius data saved!", reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
 def main():
