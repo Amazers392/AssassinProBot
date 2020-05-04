@@ -10,11 +10,11 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "750944856:AAHc-0wVffY0LKDGJydOkr6IQ4so6bZ19aA" #Alita token
-    OWNER_ID = "716243352"  # If you dont know, run the bot and do /id in your private chat with it
-    OWNER_USERNAME = "Skuzzy_xD"
-    SUPPORT_GROUP = "DraXRobotsSupport"
-    SUPPORT_CHANNEL = "DraXRobots"
+    API_KEY = "1125785992:AAHphtKgsAxUy5Lu_uhV3d4vbupl_IYTcHI" #Alita token
+    OWNER_ID = "1031840046"  # If you dont know, run the bot and do /id in your private chat with it
+    OWNER_USERNAME = "Amazers_xD"
+    SUPPORT_GROUP = "LuciferProBotSupport"
+    SUPPORT_CHANNEL = "LuciferUpdates"
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'postgres://dxcucqwe:o8CUqlQTRlVLqAxaqoKItNqe5t6T5KhO@motty.db.elephantsql.com:5432/dxcucqwe' #alita db
