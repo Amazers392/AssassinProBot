@@ -17,13 +17,13 @@ from alita.modules.helper_funcs.chat_status import is_user_admin
 from alita.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-This Bot has been shfted to @Alita\_RoBot
+This Bot has been shfted to @Lucifer\_ProBot
 Click here to add the bot to your groups!
 Add new bot by clicking button below
 """
 
 HELP_STRINGS = """
-This Bot has been shfted to @Alita\_RoBot
+This Bot has been shfted to @Lucifer\_ProBot
 Click here to add the bot to your groups!
 Add new bot by clicking button below
 """
@@ -81,7 +81,7 @@ for module_name in ALL_MODULES:
 
 @run_async
 def start(bot: Bot, update: Update):
-    keyboard = [[InlineKeyboardButton(text="🎉 Add Alita to your Group!", url="t.me/Alita_Robot?startgroup=true")]]
+    keyboard = [[InlineKeyboardButton(text="🎉 Add Lucifer to your Group!", url="t.me/Lucifer_Probot?startgroup=true")]]
     update.effective_message.reply_text("This bot has been deprecated, use new bot @Alita\_RoBot\nThe new bot has all your prevoius data saved!", reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
